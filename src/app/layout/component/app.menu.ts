@@ -21,6 +21,13 @@ export class AppMenu {
     ngOnInit() {
         this.model = [
             {
+                label: 'Docteurs',
+                items: [
+                    { label: 'Docteur', icon: 'pi pi-fw pi-user', routerLink: ['/backoffice/doctor'] },
+                    { label: 'Admin', icon: 'pi pi-fw pi-user', routerLink: ['/backoffice/admin'] },
+                ]
+            },
+            {
                 label: 'Home',
                 items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }]
             },
