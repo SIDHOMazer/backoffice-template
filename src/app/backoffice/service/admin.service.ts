@@ -6,14 +6,28 @@ import { Admin } from '../model/admin';
   providedIn: 'root'
 })
 export class AdminService {
-  addAdmin: any;
-  getAdminById: any;
-  updateAdmin: any;
+ 
+  baseUrl = 'http://localhost:8082/api/arsii';
 
   constructor(private httpclient:HttpClient) { }
   getAllAdmins(){
     return this.httpclient.get<Admin[]>(
-      'http://localhost:8082/api/arsii/admin'
+      this.baseUrl + '/admin'
     );
 }
+getAdminById(id : any) {
+    return this.httpclient.get<Admin[]>(
+      this.baseUrl+'/admin/'+id
+    );
+  }
+
+  addAdmin(admin: Admin) {
+    return this.httpclient.post(this.baseUrl + '/admin', admin);
+  }
+
+  updateAdmin(id:any,admin: Admin) {
+    return this.httpclient.put(this.baseUrl + '/admin/'+id, admin);
+  }
 }
+
+

@@ -7,14 +7,25 @@ import { Rendezvous } from '../model/rendezvous';
 })
 export class RendezvousService {
 
-   addRendezvous: any;
-    getRendezvousById: any;
-    updateRendezvous: any;
-  
-    constructor(private httpclient:HttpClient) { }
-    getAllRendezvous(){
-      return this.httpclient.get<Rendezvous[]>(
-        'http://localhost:8082/api/arsii/rendezvous'
-      );
-  }
+   baseUrl = 'http://localhost:8082/api/arsii';
+     
+       constructor(private httpclient:HttpClient) { }
+       getAllRendezvous(){
+         return this.httpclient.get<Rendezvous[]>(
+           this.baseUrl + '/rendezvous'
+         );
+     }
+     getRendezvousById(id : any) {
+         return this.httpclient.get<Rendezvous[]>(
+           this.baseUrl+'/rendezvous/'+id
+         );
+       }
+     
+       addRendezvous(rendezvous: Rendezvous) {
+         return this.httpclient.post(this.baseUrl + '/rendezvous', rendezvous);
+       }
+     
+       updateRendezvous(id:any,rendezvous: Rendezvous) {
+         return this.httpclient.put(this.baseUrl + '/rendezvous/'+id, rendezvous);
+       }
 }

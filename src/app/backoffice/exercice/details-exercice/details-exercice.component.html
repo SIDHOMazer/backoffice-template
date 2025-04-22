@@ -1,0 +1,32 @@
+<div class="container mt-4">
+    <form [formGroup]="exerciceForm" >
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>description</label>
+            <input type="text" class="form-control" formControlName="description" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>file</label>
+            <input type="text" class="form-control" formControlName="file" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>nameExercice</label>
+            <input type="text" class="form-control" formControlName="nameExercice" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>nameDisease</label>
+            <input type="text" class="form-control" formControlName="nameDisease" />
+        </div>
+       
+        
+      
+      </div>
+  
+      <button type="submit" class="btn btn-primary"
+       (click)="onSubmit()" 
+       [disabled]="exerciceForm.invalid"
+       >
+        Save
+      </button>
+    </form>
+  </div>

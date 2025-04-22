@@ -6,14 +6,25 @@ import { Exercice } from '../model/exercice';
   providedIn: 'root'
 })
 export class ExerciceService {
-addExercice: any;
-  getExerciceById: any;
-  updateExercice: any;
-
-  constructor(private httpclient:HttpClient) { }
-  getAllExercices(){
-    return this.httpclient.get<Exercice[]>(
-      'http://localhost:8082/api/arsii/exercice'
-    );
-}
+ baseUrl = 'http://localhost:8082/api/arsii';
+ 
+   constructor(private httpclient:HttpClient) { }
+   getAllExercices(){
+     return this.httpclient.get<Exercice[]>(
+       this.baseUrl + '/exercice'
+     );
+ }
+ getExerciceById(id : any) {
+     return this.httpclient.get<Exercice[]>(
+       this.baseUrl+'/exercice/'+id
+     );
+   }
+ 
+   addExercice(exercice: Exercice) {
+     return this.httpclient.post(this.baseUrl + '/exercice', exercice);
+   }
+ 
+   updateExercice(id:any,exercice: Exercice) {
+     return this.httpclient.put(this.baseUrl + '/exercice/'+id, exercice);
+   }
 }

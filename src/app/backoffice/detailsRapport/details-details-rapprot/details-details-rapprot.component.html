@@ -1,0 +1,38 @@
+<div class="container mt-4">
+  <form [formGroup]="detailsRapportForm" >
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label> Currenty</label>
+          <input type="text" class="form-control" formControlName="Currenty" />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>SurgicalHistory</label>
+          <input type="text" class="form-control" formControlName="SurgicalHistory" />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>TraumaHistory</label>
+          <input type="text" class="form-control" formControlName="TraumaHistory" />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>HealthHistory</label>
+          <input type="text" class="form-control" formControlName="HealthHistory" />
+      </div>
+      <div class="col-md-6 mb-3">
+          <label>FamilyHealthHistory</label>
+          <input type="text" class="form-control" formControlName="FamilyHealthHistory" />
+          </div>
+          <div class="col-md-6 mb-3">
+              <label>Autre</label>
+              <input type="text" class="form-control" formControlName="Autre" />
+              </div>
+     
+    </div>
+
+    <button type="submit" class="btn btn-primary"
+     (click)="onSubmit()" 
+     [disabled]="detailsRapportForm.invalid"
+     >
+      Save
+    </button>
+  </form>
+</div>

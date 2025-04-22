@@ -1,0 +1,40 @@
+<div class="container mt-4">
+    <form [formGroup]="exerciceplanForm" >
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>duree</label>
+            <input type="text" class="form-control" formControlName="duree" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>jour</label>
+            <input type="text" class="form-control" formControlName="jour" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>type</label>
+            <input type="text" class="form-control" formControlName="type" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>seance</label>
+            <input type="text" class="form-control" formControlName="seance" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>muscles</label>
+            <input type="text" class="form-control" formControlName="muscles" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>seriesAndRepetitions</label>
+          <input type="text" class="form-control" formControlName="seriesAndRepetitions" />
+        </div>
+       
+        
+      
+      </div>
+  
+      <button type="submit" class="btn btn-primary"
+       (click)="onSubmit()" 
+       [disabled]="exerciceplanForm.invalid"
+       >
+        Save
+      </button>
+    </form>
+  </div>

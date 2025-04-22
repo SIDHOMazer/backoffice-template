@@ -42,7 +42,6 @@
                     <th scope="col">firstName</th>
                     <th scope="col">specialite</th>
                     <th scope="col">contact</th>
-                    <th scope="col">password</th>
                     <th scope="col">email</th>
                     <th scope="col">adresse</th>
                     <th scope="col">ville</th>
@@ -53,6 +52,64 @@
                     <th scope="col">status</th>
                     <th scope="col">action</th>
                 </tr>
+                <tr>
+                    <th></th>
+                    <th> <p-columnFilter
+                        type="text"
+                        field="lastName"
+                        placeholder="Search by lastName"
+                        ariaLabel="Filter Name"
+                    ></p-columnFilter></th>
+                    <th> <p-columnFilter
+                        type="text"
+                        field="firstName"
+                        placeholder="Search by firstName"
+                        ariaLabel="Filter Name"
+                    ></p-columnFilter></th>
+                    <th> <p-columnFilter
+                        type="text"
+                        field="specialite"
+                        placeholder="Search by specialite"
+                        ariaLabel="Filter Name"
+                    ></p-columnFilter></th>
+                    <th></th>
+                    <th> </th>
+                    <th></th>
+    
+                    <th>
+                       
+                    </th>
+                   
+                    <th></th>
+                    <th></th>
+                    <th> <p-columnFilter
+                        type="text"
+                        field="sexe"
+                        placeholder="Search by sexe"
+                        ariaLabel="Filter Name"
+                    ></p-columnFilter></th> 
+                    <th></th>
+                    <th> <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+                        <ng-template #filter let-value let-filter="filterCallback">
+                            <p-select
+                                [(ngModel)]="statusValue"
+                                [options]="statuses"
+                                (onChange)="filter($event.value)"
+                                placeholder="Select One"
+                                [showClear]="true"
+                                appendTo="body"
+                                [style]="{'min-width': '12rem'}"
+                            >
+                                <ng-template let-option #item>
+                                    <p-tag [value]="option?.value? 'active' : 'desactiver'"
+                                    [severity]="option?.value ? 'success' : 'danger'" 
+                                    styleClass="dark:!bg-surface-900" />
+                                </ng-template>
+                            </p-select>
+                        </ng-template>
+                    </p-columnFilter></th>
+    
+                  </tr>
             </ng-template>
             <ng-template #body let-docteur>
                 <tr>
@@ -63,7 +120,6 @@
                     <td>{{ docteur.adresse }}</td>
                     <td>{{ docteur.ville }}</td>
                     <td>{{ docteur.email }}</td>
-                    <td>{{ docteur.password }}</td>
                     <td>{{ docteur.codePostal }}</td>
                     <td>{{ docteur.contact }}</td>
                     <td>{{ docteur.localisation }}</td>

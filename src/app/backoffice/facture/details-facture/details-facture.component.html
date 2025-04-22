@@ -1,0 +1,52 @@
+<div class="container mt-4">
+    <form [formGroup]="factureForm" >
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>date</label>
+            <input type="text" class="form-control" formControlName="date" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>description</label>
+            <input type="text" class="form-control" formControlName="description" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>price</label>
+            <input type="text" class="form-control" formControlName="price" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>invoice</label>
+            <input type="text" class="form-control" formControlName="invoice" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>subTotal</label>
+            <input type="text" class="form-control" formControlName="subTotal" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>paymentMethod</label>
+            <input type="text" class="form-control" formControlName="paymentMethod" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>tax</label>
+            <input type="text" class="form-control" formControlName="tax" />
+        </div>
+        
+        <div class="col-md-6 mb-3">
+          <label>total</label>
+          <input type="text" class="form-control" formControlName="total" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>qty</label>
+            <input type="text" class="form-control" formControlName="qty" />
+        </div>
+        
+      
+      </div>
+  
+      <button type="submit" class="btn btn-primary"
+       (click)="onSubmit()" 
+       [disabled]="factureForm.invalid"
+       >
+        Save
+      </button>
+    </form>
+  </div>

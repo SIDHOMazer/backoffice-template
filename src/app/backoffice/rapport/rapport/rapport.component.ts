@@ -1,5 +1,3 @@
-import { Docteur } from '../../model/docteur';
-import { DocteurService } from '../../service/docteur.service';
 import { RouterModule } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
@@ -18,8 +16,11 @@ import { RippleModule } from 'primeng/ripple';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
+import { RapportService } from '../../service/rapport.service';
+
 @Component({
-  selector: 'app-docteur',
+  selector: 'app-rapport',
+  templateUrl: './rapport.component.html',
   standalone: true,
   imports: [CommonModule,RouterModule
   ,TableModule,
@@ -38,13 +39,13 @@ import { TagModule } from 'primeng/tag';
           RatingModule,
           RippleModule,
           IconFieldModule],
-            templateUrl: './docteur.component.html',
-  styleUrls: ['./docteur.component.css']
+  styleUrls: ['./rapport.component.css']
 })
-export class DocteurComponent implements OnInit {
-  docteurList: Docteur[] = [];
-  selectedDocteur: any;
-  loading: boolean = true;
+export class RapportComponent  implements OnInit {
+  rapportList: any[] = [];
+  selectedRapport: any;
+reportList: any;
+loading: boolean = true;
   @ViewChild('filter') filter!: ElementRef;
   statusValue!: null | boolean;
 
@@ -52,26 +53,25 @@ export class DocteurComponent implements OnInit {
   statuses = [
     { label: 'Active', value: true },
     { label: 'Desactive', value: false },
-  ];
-  constructor(private docteurservice:DocteurService) { }
+  
+];
+  constructor(private rapportservice:RapportService) { }
 
   ngOnInit(): void {
-    this.displayDocteur();
+    this.displayRapport();
   }
-  
-  displayDocteur() {
-    this.docteurservice.getAllDocteur().subscribe((res)=>{
-      this.docteurList = res;
-      console.log(this.docteurList);
+
+  displayRapport() {
+    this.rapportservice.getAllRapport().subscribe((res:any)=>{
+      this.rapportList = res;
+      console.log(this.rapportList);
       this.loading = false;
     });
   }
 
-  selectDocteur(docteur:any){
-    this.selectedDocteur=docteur;
+  selectRapport(rapport:any){
+    this.selectedRapport=rapport;
  }
-  
- 
  onGlobalFilter(table: Table, event: Event) {
   table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
 }
@@ -80,7 +80,5 @@ clear(table: Table) {
   table.clear();
   this.filter.nativeElement.value = '';
 }
-
-  } 
-
-
+  
+}

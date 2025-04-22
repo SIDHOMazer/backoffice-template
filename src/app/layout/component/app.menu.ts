@@ -25,6 +25,22 @@ export class AppMenu {
                 items: [
                     { label: 'Docteur', icon: 'pi pi-fw pi-user', routerLink: ['/backoffice/doctor'] },
                     { label: 'Admin', icon: 'pi pi-fw pi-user', routerLink: ['/backoffice/admin'] },
+                    { label: 'Patient', icon: 'pi pi-fw pi-user', routerLink: ['/backoffice/patient'] },
+                    { label: 'Rendezvous', icon: 'pi pi-fw pi-pencil', routerLink: ['/backoffice/rendezvous'] },
+                    { label: 'Rapport', icon: 'pi pi-fw pi-pencil', routerLink: ['/backoffice/rapport'] },
+                    { label: 'PlanDeTraitement', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/planDeTraitement'] },
+                    { label: 'DetailsRapport', icon: 'pi pi-fw pi-pencil', routerLink: ['/backoffice/detailsRapport'] },
+                    { label: 'Exercice', icon: 'pi pi-fw pi-user', routerLink: ['/backoffice/exercice'] },
+                    { label: 'ExercicePlan', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/exercicePlan'] },
+                    { label: 'Facture', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/facture'] },
+
+
+
+
+
+
+
+
                 ]
             },
             {

@@ -6,14 +6,29 @@ import { DetailsRapport } from '../model/detailsRaport';
   providedIn: 'root'
 })
 export class DetailsRapportService {
- addDetailsRapport: any;
-  getDetailsRapportById: any;
-  updateDetailsRapport: any;
+  baseUrl = 'http://localhost:8082/api/arsii';
+ 
+   constructor(private httpclient:HttpClient) { }
+   getAllDetailsRapports(){
+     return this.httpclient.get<DetailsRapport[]>(
+       this.baseUrl + '/detailRapport'
+     );
+ }
+ getDetailsRapportById(id : any) {
+     return this.httpclient.get<DetailsRapport[]>(
+       this.baseUrl+'/detailRapport/'+id
+     );
+   }
+ 
+   addDetailsRapport(detailRapport: DetailsRapport) {
+     return this.httpclient.post(this.baseUrl + '/detailRapport', detailRapport);
+   }
+ 
+   updateDetailsRapport(id:any,detailRapport: DetailsRapport) {
+     return this.httpclient.put(this.baseUrl + '/detailRapport/'+id, detailRapport);
+   }
+ }
+ 
+ 
 
-  constructor(private httpclient:HttpClient) { }
-  getAllDetailsRapports(){
-    return this.httpclient.get<DetailsRapport[]>(
-      'http://localhost:8082/api/arsii/detailReport'
-    );
-}
-}
+

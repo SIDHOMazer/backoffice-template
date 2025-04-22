@@ -1,0 +1,36 @@
+<div class="container mt-4">
+    <form [formGroup]="rendezvousForm" >
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>date</label>
+            <input type="text" class="form-control" formControlName="date" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>statut</label>
+            <input type="text" class="form-control" formControlName="statut" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>acceptDate</label>
+            <input type="text" class="form-control" formControlName="acceptDate" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>rejectDate</label>
+            <input type="text" class="form-control" formControlName="rejectDate" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>nameCompany</label>
+            <input type="text" class="form-control" formControlName="nameCompany" />
+         
+        </div>
+          
+      
+      </div>
+  
+      <button type="submit" class="btn btn-primary"
+       (click)="onSubmit()" 
+       [disabled]="rendezvousForm.invalid"
+       >
+        Save
+      </button>
+    </form>
+  </div>

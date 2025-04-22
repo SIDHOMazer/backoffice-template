@@ -1,5 +1,5 @@
-import { Docteur } from '../../model/docteur';
-import { DocteurService } from '../../service/docteur.service';
+import { Exercice } from '../model/exercice';
+import { ExerciceService } from '../service/exercice.service';
 import { RouterModule } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
@@ -18,8 +18,10 @@ import { RippleModule } from 'primeng/ripple';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
+
 @Component({
-  selector: 'app-docteur',
+  selector: 'app-exercice',
+  templateUrl: './exercice.component.html',
   standalone: true,
   imports: [CommonModule,RouterModule
   ,TableModule,
@@ -38,49 +40,47 @@ import { TagModule } from 'primeng/tag';
           RatingModule,
           RippleModule,
           IconFieldModule],
-            templateUrl: './docteur.component.html',
-  styleUrls: ['./docteur.component.css']
+  styleUrls: ['./exercice.component.css']
 })
-export class DocteurComponent implements OnInit {
-  docteurList: Docteur[] = [];
-  selectedDocteur: any;
-  loading: boolean = true;
+export class ExerciceComponent {
+  exerciceList: Exercice[] = [];
+    selectedExercice: any;
+exercice: any;
+loading: boolean = true;
   @ViewChild('filter') filter!: ElementRef;
   statusValue!: null | boolean;
 
 
-  statuses = [
-    { label: 'Active', value: true },
-    { label: 'Desactive', value: false },
-  ];
-  constructor(private docteurservice:DocteurService) { }
-
-  ngOnInit(): void {
-    this.displayDocteur();
+      statuses = [
+        { label: 'Active', value: true },
+        { label: 'Desactive', value: false },
+      
+    ];
+  
+    constructor(private exerciceservice:ExerciceService) { }
+  
+    ngOnInit(): void {
+      this.displayExercice();
+    }
+    
+    displayExercice() {
+      this.exerciceservice.getAllExercices().subscribe((res)=>{
+        this.exerciceList = res;
+        console.log(this.exerciceList);
+        this.loading = false;
+      });
+    }
+  
+    selectExercice(exercice:any){
+      this.selectedExercice=exercice;
+   }
+   onGlobalFilter(table: Table, event: Event) {
+    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
   
-  displayDocteur() {
-    this.docteurservice.getAllDocteur().subscribe((res)=>{
-      this.docteurList = res;
-      console.log(this.docteurList);
-      this.loading = false;
-    });
+  clear(table: Table) {
+    table.clear();
+    this.filter.nativeElement.value = '';
   }
 
-  selectDocteur(docteur:any){
-    this.selectedDocteur=docteur;
- }
-  
- 
- onGlobalFilter(table: Table, event: Event) {
-  table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
 }
-
-clear(table: Table) {
-  table.clear();
-  this.filter.nativeElement.value = '';
-}
-
-  } 
-
-

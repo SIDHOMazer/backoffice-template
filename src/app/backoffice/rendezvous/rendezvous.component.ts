@@ -1,5 +1,5 @@
-import { Docteur } from '../../model/docteur';
-import { DocteurService } from '../../service/docteur.service';
+
+
 import { RouterModule } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
@@ -18,8 +18,11 @@ import { RippleModule } from 'primeng/ripple';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
+import { RendezvousService } from '../service/rendezvous.service';
+import { Rendezvous } from '../model/rendezvous';
+
 @Component({
-  selector: 'app-docteur',
+  selector: 'app-rendezvous',
   standalone: true,
   imports: [CommonModule,RouterModule
   ,TableModule,
@@ -38,49 +41,49 @@ import { TagModule } from 'primeng/tag';
           RatingModule,
           RippleModule,
           IconFieldModule],
-            templateUrl: './docteur.component.html',
-  styleUrls: ['./docteur.component.css']
+  templateUrl: './rendezvous.component.html',
+  styleUrls: ['./rendezvous.component.css']
 })
-export class DocteurComponent implements OnInit {
-  docteurList: Docteur[] = [];
-  selectedDocteur: any;
-  loading: boolean = true;
-  @ViewChild('filter') filter!: ElementRef;
-  statusValue!: null | boolean;
+export class RendezvousComponent implements OnInit {
+  rendezvousList: Rendezvous[] = []
+     
+      selectedRendezvous: any;
+      loading: boolean = true;
+      @ViewChild('filter') filter!: ElementRef;
+      statusValue!: null | boolean;
 
 
-  statuses = [
-    { label: 'Active', value: true },
-    { label: 'Desactive', value: false },
-  ];
-  constructor(private docteurservice:DocteurService) { }
-
-  ngOnInit(): void {
-    this.displayDocteur();
-  }
+      statuses = [
+        { label: 'Active', value: true },
+        { label: 'Desactive', value: false },
+      
+    ];
   
-  displayDocteur() {
-    this.docteurservice.getAllDocteur().subscribe((res)=>{
-      this.docteurList = res;
-      console.log(this.docteurList);
-      this.loading = false;
-    });
-  }
+      constructor(private rendezvousservice:RendezvousService) { }
+    
+      ngOnInit(): void {
+        this.displayRendezvous();
+      }
+      
+      displayRendezvous() {
+        this.rendezvousservice.getAllRendezvous().subscribe((res)=>{
+          this.rendezvousList = res;
+          console.log(this.rendezvousList);
+          this.loading = false;
 
-  selectDocteur(docteur:any){
-    this.selectedDocteur=docteur;
- }
-  
- 
- onGlobalFilter(table: Table, event: Event) {
-  table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+        });
+      }
+    
+      selectRendezvous(rendezvous:any){
+        this.selectedRendezvous=rendezvous;
+     }
+
+     onGlobalFilter(table: Table, event: Event) {
+      table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+    }
+    
+    clear(table: Table) {
+      table.clear();
+      this.filter.nativeElement.value = '';
+    }
 }
-
-clear(table: Table) {
-  table.clear();
-  this.filter.nativeElement.value = '';
-}
-
-  } 
-
-

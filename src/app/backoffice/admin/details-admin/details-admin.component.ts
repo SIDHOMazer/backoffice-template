@@ -65,7 +65,7 @@ export class DetailsAdminComponent {
           .subscribe((res: any) => {
             console.log(res);
             this.adminForm.reset();
-            this.router.navigate(['/admin']);
+            this.router.navigate(['/backoffice/admin']);
           });
       }
     }
@@ -77,7 +77,7 @@ export class DetailsAdminComponent {
       this.adminService.updateAdmin(this.adminId,this.adminForm.value).subscribe((res: any) => {
         console.log(res);
         this.adminForm.reset();
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/backoffice/admin']);
       });
     }
   }

@@ -49,6 +49,19 @@ export class AdminComponent implements OnInit {
 
   selectedAdmin: any;
   loading: boolean = true;
+  statusValue!: null | boolean;
+  villeValue!: null | string;
+
+
+  statuses = [
+    { label: 'Active', value: true },
+    { label: 'Desactive', value: false },
+  
+];
+villes: any[]|undefined;
+
+
+
   constructor(private adminservice: AdminService) { }
 
   ngOnInit(): void {

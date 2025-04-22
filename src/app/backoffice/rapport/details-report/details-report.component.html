@@ -1,0 +1,34 @@
+<div class="container mt-4">
+    <form [formGroup]="rapportForm" >
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>File</label>
+            <input type="text" class="form-control" formControlName="file" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Type</label>
+            <input type="text" class="form-control" formControlName="type" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Date</label>
+            <input type="date" class="form-control" formControlName="date" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Heure</label>
+          <input type="text" class="form-control" formControlName="ville" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>description</label>
+          <input type="text" class="form-control" formControlName="codePostal" />
+        </div>
+        
+        </div>
+  
+      <button type="submit" class="btn btn-primary"
+       (click)="onSubmit()" 
+       [disabled]="rapportForm.invalid"
+       >
+        Save
+      </button>
+    </form>
+  </div>

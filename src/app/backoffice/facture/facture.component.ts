@@ -1,5 +1,6 @@
-import { Docteur } from '../../model/docteur';
-import { DocteurService } from '../../service/docteur.service';
+import { FactureService } from '../service/facture.service';
+import { Facture } from '../model/facture';
+
 import { RouterModule } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
@@ -18,8 +19,10 @@ import { RippleModule } from 'primeng/ripple';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
+
 @Component({
-  selector: 'app-docteur',
+  selector: 'app-facture',
+  templateUrl: './facture.component.html',
   standalone: true,
   imports: [CommonModule,RouterModule
   ,TableModule,
@@ -38,13 +41,12 @@ import { TagModule } from 'primeng/tag';
           RatingModule,
           RippleModule,
           IconFieldModule],
-            templateUrl: './docteur.component.html',
-  styleUrls: ['./docteur.component.css']
+  styleUrls: ['./facture.component.css']
 })
-export class DocteurComponent implements OnInit {
-  docteurList: Docteur[] = [];
-  selectedDocteur: any;
-  loading: boolean = true;
+export class FactureComponent implements OnInit {
+  factureList: Facture[] = [];
+   selectedFacture: any;
+   loading: boolean = true;
   @ViewChild('filter') filter!: ElementRef;
   statusValue!: null | boolean;
 
@@ -52,26 +54,27 @@ export class DocteurComponent implements OnInit {
   statuses = [
     { label: 'Active', value: true },
     { label: 'Desactive', value: false },
-  ];
-  constructor(private docteurservice:DocteurService) { }
-
-  ngOnInit(): void {
-    this.displayDocteur();
-  }
   
-  displayDocteur() {
-    this.docteurservice.getAllDocteur().subscribe((res)=>{
-      this.docteurList = res;
-      console.log(this.docteurList);
-      this.loading = false;
-    });
-  }
+];
 
-  selectDocteur(docteur:any){
-    this.selectedDocteur=docteur;
- }
-  
+   constructor(private  factureservice:FactureService) { }
  
+   ngOnInit(): void {
+     this.displayFacture();
+   }
+   
+   displayFacture() {
+     this. factureservice.getAllFactures().subscribe((res)=>{
+       this. factureList = res;
+       console.log(this. factureList);
+        this.loading = false;
+     });
+   }
+ 
+   selectFacture( facture:any){
+     this.selectedFacture= facture;
+  }
+    
  onGlobalFilter(table: Table, event: Event) {
   table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
 }
@@ -81,6 +84,6 @@ clear(table: Table) {
   this.filter.nativeElement.value = '';
 }
 
-  } 
 
 
+}
