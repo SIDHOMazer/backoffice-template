@@ -6,14 +6,25 @@ import { ExercicePlan } from '../model/exerciceplan';
   providedIn: 'root'
 })
 export class ExerciceplanService {
-addExerciceplan: any;
-  getExerciceplanById: any;
-  updateExerciceplan: any;
+ baseUrl = 'http://localhost:8082/api/arsii';
 
   constructor(private httpclient:HttpClient) { }
   getAllExerciceplans(){
     return this.httpclient.get<ExercicePlan[]>(
-      'http://localhost:8082/api/arsii/exercicePlan'
+      this.baseUrl + '/exercicePlan'
     );
 }
+getExerciceplanById(id : any) {
+    return this.httpclient.get<ExercicePlan[]>(
+      this.baseUrl+'/exercicePlan/'+id
+    );
+  }
+
+  addExerciceplan(exercicePlan: ExercicePlan) {
+    return this.httpclient.post(this.baseUrl + '/exercicePlan', exercicePlan);
+  }
+
+  updateExerciceplan(id:any,exercicePlan: ExercicePlan) {
+    return this.httpclient.put(this.baseUrl + '/exercicePlan/'+id, exercicePlan);
+  }
 }

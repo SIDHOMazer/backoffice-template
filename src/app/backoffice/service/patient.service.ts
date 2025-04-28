@@ -6,16 +6,26 @@ import { Patient } from '../model/patient';
   providedIn: 'root'
 })
 export class PatientService {
-  getPatientById: any;
-  addPatient: any;
-  updatePatient: any;
-
-  constructor(private httpclient:HttpClient) { }
-  getAllPatient(){
-    return this.httpclient.get<Patient[]>(
-      'http://localhost:8082/api/arsii/patient'
-
-    );
-  }
+  baseUrl = 'http://localhost:8082/api/arsii';
+   
+     constructor(private httpclient:HttpClient) { }
+     getAllPatients(){
+       return this.httpclient.get<Patient[]>(
+         this.baseUrl + '/patient'
+       );
+   }
+   getPatientById(id : any) {
+       return this.httpclient.get<Patient[]>(
+         this.baseUrl+'/patient/'+id
+       );
+     }
+   
+     addPatient(patient: Patient) {
+       return this.httpclient.post(this.baseUrl + '/patient', patient);
+     }
+   
+     updatePatient(id:any,patient: Patient) {
+       return this.httpclient.put(this.baseUrl + '/patient/'+id, patient);
+     }
   
 }

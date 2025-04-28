@@ -62,7 +62,7 @@ export class DetailsDoctorComponent {
           .subscribe((res) => {
             console.log(res);
             this.docteurForm.reset();
-            this.router.navigate(['/doctor']);
+            this.router.navigate(['/backoffice/doctor']);
           });
       }
     }
@@ -74,7 +74,7 @@ export class DetailsDoctorComponent {
       this.docteurService.updateDoctor(this.doctorId,this.docteurForm.value).subscribe((res) => {
         console.log(res);
         this.docteurForm.reset();
-        this.router.navigate(['/doctor']);
+        this.router.navigate(['/backoffice/doctor']);
       });
     }
   }

@@ -48,6 +48,43 @@
                 <th scope="col">status</th>
                 <th scope="col">action</th>
               </tr>
+              <tr>
+                  
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+               
+                 
+                <th>
+                    <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+                        <ng-template #filter let-value let-filter="filterCallback">
+                            <p-select
+                                [(ngModel)]="statusValue"
+                                [options]="statuses"
+                                (onChange)="filter($event.value)"
+                                placeholder="Select One"
+                                [showClear]="true"
+                                appendTo="body"
+                                [style]="{'min-width': '12rem'}"
+                            >
+                                <ng-template let-option #item>
+                                    <p-tag [value]="option?.value? 'active' : 'desactiver'"
+                                    [severity]="option?.value ? 'success' : 'danger'" 
+                                    styleClass="dark:!bg-surface-900" />
+                                </ng-template>
+                            </p-select>
+                        </ng-template>
+                    </p-columnFilter>
+                </th>
+                <th></th>
+
+              </tr>
+              
+              
           </ng-template>
           <ng-template #body let-planDeTraitement>
               <tr>
@@ -65,9 +102,11 @@
                  [severity]="planDeTraitement.status ? 'success' : 'danger'" 
                  styleClass="dark:!bg-surface-900" />
                   </td>
-                  <td style="width: 200px">
+                  <td style="width: 200px" class="d-flex justify-content-center gap-2">
+                        <p-button icon="pi pi-pen-to-square" severity="info" [routerLink]="'/backoffice/details-planDeTraitement/' + planDeTraitement.id" />
                       <p-button icon="pi pi-trash" severity="danger" />
                       <p-button icon="pi pi-pen-to-square" severity="warn" [routerLink]="'/backoffice/details-planDeTraitement/' + planDeTraitement.id" />
+
                   </td>
               </tr>
           </ng-template>

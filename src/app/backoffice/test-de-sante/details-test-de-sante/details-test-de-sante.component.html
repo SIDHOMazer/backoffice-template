@@ -1,0 +1,23 @@
+<div class="container mt-4">
+    <form [formGroup]="testDeSanteForm" >
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>testName</label>
+            <input type="text" class="form-control" formControlName="testName" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Description</label>
+            <input type="text" class="form-control" formControlName="Description" />
+        </div>
+       
+      
+      </div>
+  
+      <button type="submit" class="btn btn-primary"
+       (click)="onSubmit()" 
+       [disabled]="testDeSanteForm.invalid"
+       >
+        Save
+      </button>
+    </form>
+  </div>

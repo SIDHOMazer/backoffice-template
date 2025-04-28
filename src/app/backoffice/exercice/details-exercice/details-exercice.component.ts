@@ -56,7 +56,7 @@ export class DetailsExerciceComponent {
             .subscribe((res:any) => {
               console.log(res);
               this.exerciceForm.reset();
-              this.router.navigate(['/exercice']);
+              this.router.navigate(['/backoffice/exercice']);
             });
         }
       }
@@ -68,7 +68,7 @@ export class DetailsExerciceComponent {
         this.exerciceService.updateExercice(this.exerciceId,this.exerciceForm.value).subscribe((res:any) => {
           console.log(res);
           this.exerciceForm.reset();
-          this.router.navigate(['/exercice']);
+          this.router.navigate(['/backoffice/exercice']);
         });
       }
     }

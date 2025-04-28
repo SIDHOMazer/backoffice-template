@@ -12,20 +12,20 @@ export class PlanDeTraitementService {
     constructor(private httpclient:HttpClient) { }
     getAllPlanDeTraitements(){
       return this.httpclient.get<PlanDeTraitement[]>(
-        this.baseUrl + '/planDeTraitement'
+        this.baseUrl + '/plandetraitement'
       );
   }
   getPlanDeTraitementById(id : any) {
       return this.httpclient.get<PlanDeTraitement[]>(
-        this.baseUrl+'/planDeTraitement/'+id
+        this.baseUrl+'/plandetraitement/'+id
       );
     }
   
     addPlanDeTraitement(planDeTraitement: PlanDeTraitement) {
-      return this.httpclient.post(this.baseUrl + '/planDeTraitement', planDeTraitement);
+      return this.httpclient.post(this.baseUrl + '/plandetraitement', planDeTraitement);
     }
   
     updatePlanDeTraitement(id:any,planDeTraitement: PlanDeTraitement) {
-      return this.httpclient.put(this.baseUrl + '/planDeTraitement/'+id, planDeTraitement);
+      return this.httpclient.put(this.baseUrl + '/plandetraitement/'+id, planDeTraitement);
     }
 }

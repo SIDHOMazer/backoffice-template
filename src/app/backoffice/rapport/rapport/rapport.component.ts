@@ -62,7 +62,7 @@ loading: boolean = true;
   }
 
   displayRapport() {
-    this.rapportservice.getAllRapport().subscribe((res:any)=>{
+    this.rapportservice.getAllRapports().subscribe((res:any)=>{
       this.rapportList = res;
       console.log(this.rapportList);
       this.loading = false;

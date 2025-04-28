@@ -1,0 +1,28 @@
+<div class="container mt-4">
+    <form [formGroup]="medicamentForm" >
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>medicament</label>
+            <input type="text" class="form-control" formControlName="medicament" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>file</label>
+            <input type="text" class="form-control" formControlName="file" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>note</label>
+            <input type="text" class="form-control" formControlName="note" />
+        </div>
+       
+        
+      
+      </div>
+  
+      <button type="submit" class="btn btn-primary"
+       (click)="onSubmit()" 
+       [disabled]="medicamentForm.invalid"
+       >
+        Save
+      </button>
+    </form>
+  </div>

@@ -54,7 +54,7 @@ export class DetailsRendezvousComponent {
           .subscribe((res: any) => {
             console.log(res);
             this.rendezvousForm.reset();
-            this.router.navigate(['/rendezvous']);
+            this.router.navigate(['/backoffice/rendezvous']);
           
           });
       }
@@ -68,7 +68,7 @@ export class DetailsRendezvousComponent {
       this.rendezvousService.updateRendezvous(this.rendezvousId, this.rendezvousForm.value).subscribe((res: any) => {
         console.log(res);
         this.rendezvousForm.reset();
-        this.router.navigate(['/rendezvous']);
+        this.router.navigate(['/backoffice/rendezvous']);
       });
     }
   }

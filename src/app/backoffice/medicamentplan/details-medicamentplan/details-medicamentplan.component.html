@@ -1,0 +1,32 @@
+<div class="container mt-4">
+    <form [formGroup]="medicamentplanForm" >
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>dosage</label>
+            <input type="text" class="form-control" formControlName="dosage" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>frequence</label>
+            <input type="text" class="form-control" formControlName="frequence" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>momentoftaking</label>
+            <input type="text" class="form-control" formControlName="momentoftaking" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>checkbok</label>
+          <input type="text" class="form-control" formControlName="checkbok" />
+        </div>
+     
+        
+      
+      </div>
+  
+      <button type="submit" class="btn btn-primary"
+       (click)="onSubmit()" 
+       [disabled]="medicamentplanForm.invalid"
+       >
+        Save
+      </button>
+    </form>
+  </div>

@@ -61,7 +61,7 @@ onSubmit(): void {
         .subscribe((res: any) => {
           console.log(res);
           this.patientForm.reset();
-          this.router.navigate(['/patient']);
+          this.router.navigate(['/backoffice/patient']);
         
         });
     }
@@ -75,7 +75,7 @@ updatePatient() {
     this.patientService.updatePatient(this.patientId, this.patientForm.value).subscribe((res: any) => {
       console.log(res);
       this.patientForm.reset();
-      this.router.navigate(['/patient']);
+      this.router.navigate(['/backoffice/patient']);
     });
   }
 }

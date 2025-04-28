@@ -39,7 +39,7 @@
                 <th scope="col">id</th>
                 <th scope="col">file</th>
                 <th scope="col">patientId</th>
-                <th scope="col">auteur</th>
+                <th scope="col">docteurId</th>
                 <th scope="col">description</th>
                 <th scope="col">type</th>
                 <th scope="col">date</th>
@@ -83,8 +83,8 @@
               <tr>
                   <td>{{ report.id }}</td>
           <td>{{ report.file }}</td>
-          <td>{{ report.patientId }}</td>
-          <td>{{ report.auteur }}</td>
+          <td>{{ report.patient.firstname+' '+report.patient.lastname }}</td>
+         <td>{{ report.docteur.firstname+' '+report.docteur.lastname }}</td>
           <td>{{ report.description }}</td>
           <td>{{ report.type }}</td>
           <td>{{ report.date }}</td>
@@ -95,7 +95,8 @@
                  [severity]="report.status ? 'success' : 'danger'" 
                  styleClass="dark:!bg-surface-900" />
                   </td>
-                  <td style="width: 200px">
+                  <td style="width: 200px" class="d-flex justify-content-center gap-2">
+                      <p-button icon="pi pi-fw pi-file-check" severity="info" [routerLink]="'/backoffice/rapport/detailsRapport/' + report.id" />
                       <p-button icon="pi pi-trash" severity="danger" />
                       <p-button icon="pi pi-pen-to-square" severity="warn" [routerLink]="'/backoffice/details-report/' + report.id" />
                   </td>

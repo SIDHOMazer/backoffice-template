@@ -45,13 +45,18 @@ import { RouterModule } from '@angular/router';
 export class PlanDeTraitementComponent implements OnInit {
   planDeTraitementList: PlanDeTraitement[] = [];
      selectedPlanDeTraitement: any;
+      
+
      loading: boolean = true;
      @ViewChild('filter') filter!: ElementRef;
-   
+statusValue: any;
+statuses: any[]|undefined;
+ 
      constructor(private planDeTraitementservice:PlanDeTraitementService) { }
    
      ngOnInit(): void {
        this.displayPlanDeTraitement();
+       
      }
      
      displayPlanDeTraitement() {

@@ -47,6 +47,7 @@
                 <th scope="col">muscles</th>
                 <th scope="col">seriesAndRepetitions</th>
                 <th scope="col">date</th>
+                <th scope="col">checkbox</th>
     
                 <th scope="col">status</th>
                 <th scope="col">action</th>
@@ -57,8 +58,9 @@
                 <th></th>
                 <th></th>
                 <th></th>
+                
                 <th></th>
-                <th></th>
+               
 
                 <th>
                     <p-columnFilter
@@ -69,6 +71,9 @@
                     ></p-columnFilter>
                 </th>
                
+                <th></th>
+                <th></th>
+
                 <th></th>
                 <th></th>
                 <th>
@@ -107,6 +112,8 @@
                 <td>{{ exercicePlan?.seance }}</td>
                 <td>{{ exercicePlan?.muscles }}</td>
                 <td>{{ exercicePlan?.seriesAndRepetitions }}</td>
+                <td>{{ exercicePlan?.checkbok}}</td>
+
                 <td>{{ exercicePlan?.createdAt | date }}</td>
                   <td>
                       <p-tag [value]="exercicePlan?.status ? 'active' : 'desactiver'"

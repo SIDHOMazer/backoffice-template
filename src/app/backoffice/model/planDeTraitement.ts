@@ -1,6 +1,9 @@
 export interface PlanDeTraitement {
 
     id?: number;
+    exercicePlanId?: number;
+    testDeSantePlanId?: number;
+    medicamentPlanId?: number;
     objectif?: string;
     dateDebut?: string;
     dateFin?: string;

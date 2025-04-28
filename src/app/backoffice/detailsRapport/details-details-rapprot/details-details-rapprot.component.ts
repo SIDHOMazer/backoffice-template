@@ -56,7 +56,7 @@ displayDetaisRapport: any;
           .subscribe((res: any) => {
             console.log(res);
             this.detailsRapportForm.reset();
-            this.router.navigate(['/detailsRapport']);
+            this.router.navigate(['/backoffice/detailsRapport']);
           });
       }
     }
@@ -69,7 +69,7 @@ displayDetaisRapport: any;
       this.detailsRapportService.updateDetailsRapport(this.detailsRapportId,this.detailsRapportForm.value).subscribe((res: any) => {
         console.log(res);
         this.detailsRapportForm.reset();
-        this.router.navigate(['/detailsRapport']);
+        this.router.navigate(['/backoffice/detailsRapport']);
       });
     }
   }

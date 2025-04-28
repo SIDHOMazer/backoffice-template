@@ -62,7 +62,7 @@ export class PatientComponent implements OnInit {
     }
     
     displayPatient() {
-      this.patientservice.getAllPatient().subscribe((res)=>{
+      this.patientservice.getAllPatients().subscribe((res)=>{
         this.patientList = res;
         console.log(this.patientList);
         this.loading = false;

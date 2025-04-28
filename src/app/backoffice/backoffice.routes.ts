@@ -15,10 +15,19 @@ import { DetailsRapportComponent } from './detailsRapport/details-rapport/detail
 import { DetailsDetailsRapprotComponent } from './detailsRapport/details-details-rapprot/details-details-rapprot.component';
 import { DetailsExerciceComponent } from './exercice/details-exercice/details-exercice.component';
 import { ExerciceComponent } from './exercice/exercice.component';
-import { ExerciceplanComponent } from './exerciceplan/exerciceplan.component';
-import { DetailsExerciceplanComponent } from './exerciceplan/details-exerciceplan/details-exerciceplan.component';
 import { FactureComponent } from './facture/facture.component';
 import { DetailsFactureComponent } from './facture/details-facture/details-facture.component';
+import { ExerciceplanComponent } from './exerciceplan/exerciceplan.component';
+import { DetailsExerciceplanComponent } from './exerciceplan/details-exerciceplan/details-exerciceplan.component';
+import { MedicamentComponent } from './medicament/medicament.component';
+import { DetailsMedicamentComponent } from './medicament/details-medicament/details-medicament.component';
+import { MedicamentplanComponent } from './medicamentplan/medicamentplan.component';
+import { DetailsMedicamentplanComponent } from './medicamentplan/details-medicamentplan/details-medicamentplan.component';
+import { TestDeSanteComponent } from './test-de-sante/test-de-sante.component';
+import { DetailsTestDeSanteComponent } from './test-de-sante/details-test-de-sante/details-test-de-sante.component';
+import { TestDeSanteplanComponent } from './test-de-santeplan/test-de-santeplan.component';
+import { DetailsTestDeSanteplanComponent } from './test-de-santeplan/details-test-de-santeplan/details-test-de-santeplan.component';
+import { Login } from './auth/login';
 
 
 export default [
@@ -35,14 +44,14 @@ export default [
     { path: 'rendezvous', data: { breadcrumb: 'rendezvous' }, component: RendezvousComponent },
     { path: 'details-rendezvous/:id', data: { breadcrumb: 'details-rendezvous/:id' }, component: DetailsRendezvousComponent },
 
-    { path: 'rapport', data: { breadcrumb: 'rapport' }, component: RapportComponent },
+    { path: 'rapport/:id', data: { breadcrumb: 'rapport/:id' }, component: RapportComponent },
     { path: 'details-report/:id', data: { breadcrumb: 'details-report/:id' }, component: DetailsReportComponent },
 
     { path: 'planDeTraitement', data: { breadcrumb: 'planDeTraitement' }, component: PlanDeTraitementComponent },
     { path: 'details-planDeTraitement/:id', data: { breadcrumb: 'details-planDeTraitement/:id' }, component: DetailsPlanDeTraitementComponent },
 
-    { path: 'detailRapport', data: { breadcrumb: 'detailRapport' }, component: DetailsRapportComponent },
-    { path: 'detailsRapport/:id', data: { breadcrumb: 'detailsRapport/:id' }, component: DetailsDetailsRapprotComponent },
+    { path: 'rapport/detailsRapport/:report', data: { breadcrumb: 'detailsRapport/:report' }, component: DetailsRapportComponent },
+    { path: 'rapport/detailsRapport/details/:id', data: { breadcrumb: 'detailsRapport/:id' }, component: DetailsDetailsRapprotComponent },
     
     { path: 'exercice', data: { breadcrumb: 'exercice' }, component: ExerciceComponent },
     { path: 'details-exercice/:id', data: { breadcrumb: 'details-exercice/:id' }, component: DetailsExerciceComponent },
@@ -53,8 +62,18 @@ export default [
     { path: 'facture', data: { breadcrumb: 'facture' }, component: FactureComponent },
     { path: 'details-facture/:id', data: { breadcrumb: 'details-facture/:id' }, component: DetailsFactureComponent },
 
+    { path: 'medicament', data: { breadcrumb: 'medicament' }, component: MedicamentComponent },
+    { path: 'details-medicament/:id', data: { breadcrumb: 'details-medicament/:id' }, component: DetailsMedicamentComponent },
+
+    { path: 'medicamentplan', data: { breadcrumb: 'medicamentplan' }, component: MedicamentplanComponent },
+    { path: 'details-medicamentplan/:id', data: { breadcrumb: 'details-medicamentplan/:id' }, component: DetailsMedicamentplanComponent },
+
+    { path: 'testDeSante', data: { breadcrumb: 'testDeSante' }, component: TestDeSanteComponent },
+    { path: 'details-testDeSante/:id', data: { breadcrumb: 'details-testDeSante/:id' }, component: DetailsTestDeSanteComponent },
+
+    { path: 'testDeSanteplan', data: { breadcrumb: 'testDeSanteplan' }, component: TestDeSanteplanComponent },
+    { path: 'details-testDeSanteplan/:id', data: { breadcrumb: 'details-testDeSanteplan/:id' }, component: DetailsTestDeSanteplanComponent },
 
 
-
-  //  { path: '**', redirectTo: '/notfound' }
+   
 ] as Routes;

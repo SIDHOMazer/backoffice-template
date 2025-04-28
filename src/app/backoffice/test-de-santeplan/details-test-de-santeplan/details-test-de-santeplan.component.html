@@ -1,0 +1,29 @@
+<div class="container mt-4">
+    <form [formGroup]="testDeSanteplanForm" >
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label>poids</label>
+            <input type="text" class="form-control" formControlName="poids" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>taille</label>
+            <input type="text" class="form-control" formControlName="taille" />
+        </div>
+       
+          <div class="col-md-6 mb-3">
+            <label>checkbok</label>
+            <input type="text" class="form-control" formControlName="checkbok" />
+          </div>
+       
+        
+      
+      </div>
+  
+      <button type="submit" class="btn btn-primary"
+       (click)="onSubmit()" 
+       [disabled]="testDeSanteplanForm.invalid"
+       >
+        Save
+      </button>
+    </form>
+  </div>

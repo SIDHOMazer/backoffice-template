@@ -11,21 +11,21 @@ export class DetailsRapportService {
    constructor(private httpclient:HttpClient) { }
    getAllDetailsRapports(){
      return this.httpclient.get<DetailsRapport[]>(
-       this.baseUrl + '/detailRapport'
+       this.baseUrl + '/detailReport'
      );
  }
  getDetailsRapportById(id : any) {
      return this.httpclient.get<DetailsRapport[]>(
-       this.baseUrl+'/detailRapport/'+id
+       this.baseUrl+'/detailReport/'+id
      );
    }
  
    addDetailsRapport(detailRapport: DetailsRapport) {
-     return this.httpclient.post(this.baseUrl + '/detailRapport', detailRapport);
+     return this.httpclient.post(this.baseUrl + '/detailReport', detailRapport);
    }
  
    updateDetailsRapport(id:any,detailRapport: DetailsRapport) {
-     return this.httpclient.put(this.baseUrl + '/detailRapport/'+id, detailRapport);
+     return this.httpclient.put(this.baseUrl + '/detailReport/'+id, detailRapport);
    }
  }
  

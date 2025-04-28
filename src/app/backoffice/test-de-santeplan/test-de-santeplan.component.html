@@ -1,0 +1,124 @@
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row p-3">
+                <div class="col-sm-6">
+                    <h2>Gestion des <b>testDeSanteplans</b></h2>
+                </div>
+                <div class="col-sm-6 d-flex justify-content-end">
+                    <p-button label="Ajouter" icon="pi pi-plus"   [routerLink]="'/backoffice/details-testDeSanteplan/null'" />
+                </div>
+            </div>
+        </div>
+  
+        <p-table
+            #dt1
+            [value]="testDeSanteplanList"
+            dataKey="id"
+            [rows]="10"
+            [loading]="loading"
+            [rowHover]="true"
+            [showGridlines]="true"
+            [paginator]="true"
+            [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+            responsiveLayout="scroll"
+        >
+            <ng-template #caption>
+                <div class="flex justify-between items-center flex-column sm:flex-row">
+                    <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                    <p-iconfield iconPosition="left" class="ml-auto">
+                        <p-inputicon>
+                            <i class="pi pi-search"></i>
+                        </p-inputicon>
+                        <input pInputText type="text" (input)="onGlobalFilter(dt1, $event)" placeholder="Search keyword" />
+                    </p-iconfield>
+                </div>
+            </ng-template>
+            <ng-template #header>
+                <tr>
+                  <th scope="col">id</th>
+             
+                  <th scope="col">testDeSanteId</th>
+                  <th scope="col">planDeTraitementId</th>
+                  <th scope="col">poids</th>
+                  <th scope="col">taille</th>
+                 
+                  <th scope="col">checkbok</th>
+                   
+                  <th scope="col">date</th>
+      
+                  <th scope="col">status</th>
+                  <th scope="col">action</th>
+                </tr>
+                <tr>
+                  
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                 
+                   
+                  <th>
+                      <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+                          <ng-template #filter let-value let-filter="filterCallback">
+                              <p-select
+                                  [(ngModel)]="statusValue"
+                                  [options]="statuses"
+                                  (onChange)="filter($event.value)"
+                                  placeholder="Select One"
+                                  [showClear]="true"
+                                  appendTo="body"
+                                  [style]="{'min-width': '12rem'}"
+                              >
+                                  <ng-template let-option #item>
+                                      <p-tag [value]="option?.value? 'active' : 'desactiver'"
+                                      [severity]="option?.value ? 'success' : 'danger'" 
+                                      styleClass="dark:!bg-surface-900" />
+                                  </ng-template>
+                              </p-select>
+                          </ng-template>
+                      </p-columnFilter>
+                  </th>
+                  <th></th>
+  
+                </tr>
+            </ng-template>
+            <ng-template #body let-testDeSanteplan>
+                <tr>
+                 <td>{{ testDeSanteplan?.id }}</td>
+                    <td>{{ testDeSanteplan?.poids }}</td>
+                    <td>{{ testDeSanteplan?.taille }}</td>
+                   
+                    <td>{{ testDeSanteplan?.checkbok }}</td>
+                    <td>{{ testDeSanteplan?.testDeSanteId }}</td>
+                    <td>{{ testDeSanteplan?.planDeTraitementId }}</td>
+
+                  <td>{{ testDeSanteplan?.createdAt | date }}</td>
+                    <td>
+                        <p-tag [value]="testDeSanteplan?.status ? 'active' : 'desactiver'"
+                   [severity]="testDeSanteplan?.status ? 'success' : 'danger'" 
+                   styleClass="dark:!bg-surface-900" />
+                    </td>
+                    <td style="width: 200px">
+                        <p-button icon="pi pi-trash" severity="danger" />
+                        <p-button icon="pi pi-pen-to-square" severity="warn" [routerLink]="'/backoffice/details-testDeSanteplan/' + testDeSanteplan.id" />
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template #emptymessage>
+                <tr>
+                    <td colspan="8">No customers found.</td>
+                </tr>
+            </ng-template>
+            <ng-template #loadingbody>
+                <tr>
+                    <td colspan="8">Loading customers data. Please wait.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+  </div>
+  

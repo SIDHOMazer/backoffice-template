@@ -61,7 +61,7 @@ factureId: any;
           .subscribe((res:any) => {
             console.log(res);
             this.factureForm.reset();
-            this.router.navigate(['/facture']);
+            this.router.navigate(['/backoffice/facture']);
           });
       }
     }
@@ -73,7 +73,7 @@ factureId: any;
       this.factureService.updateFacture(this.factureId,this.factureForm.value).subscribe((res:any) => {
         console.log(res);
         this.factureForm.reset();
-        this.router.navigate(['/facture']);
+        this.router.navigate(['/backoffice/facture']);
       });
     }
   }

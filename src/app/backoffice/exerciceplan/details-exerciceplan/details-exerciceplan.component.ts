@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExerciceplanService } from '../../service/exerciceplan.service';
 import { CommonModule } from '@angular/common';
+import { Checkbox } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-details-exerciceplan',
@@ -31,6 +32,7 @@ export class DetailsExerciceplanComponent {
        seance: [''],
        muscles: [''],
        seriesAndRepetitions: [''],
+       Checkbox: [''],
         
       });
     }
@@ -59,7 +61,7 @@ export class DetailsExerciceplanComponent {
             .subscribe((res:any) => {
               console.log(res);
               this.exerciceplanForm.reset();
-              this.router.navigate(['/exerciceplan']);
+              this.router.navigate(['/backoffice/exerciceplan']);
             });
         }
       }
@@ -71,7 +73,7 @@ export class DetailsExerciceplanComponent {
         this.exerciceplanService.updateExerciceplan(this.exerciceplanId,this.exerciceplanForm.value).subscribe((res:any) => {
           console.log(res);
           this.exerciceplanForm.reset();
-          this.router.navigate(['/exerciceplan']);
+          this.router.navigate(['/backoffice/exerciceplan']);
         });
       }
     }

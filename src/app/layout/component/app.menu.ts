@@ -25,17 +25,19 @@ export class AppMenu {
                 items: [
                     { label: 'Docteur', icon: 'pi pi-fw pi-user', routerLink: ['/backoffice/doctor'] },
                     { label: 'Admin', icon: 'pi pi-fw pi-user', routerLink: ['/backoffice/admin'] },
-                    { label: 'Patient', icon: 'pi pi-fw pi-user', routerLink: ['/backoffice/patient'] },
+                      { label: 'Patient', icon: 'pi pi-fw pi-user', routerLink: ['/backoffice/patient'] },
                     { label: 'Rendezvous', icon: 'pi pi-fw pi-pencil', routerLink: ['/backoffice/rendezvous'] },
-                    { label: 'Rapport', icon: 'pi pi-fw pi-pencil', routerLink: ['/backoffice/rapport'] },
+                  { label: 'Rapport', icon: 'pi pi-fw pi-pencil', routerLink: ['/backoffice/rapport/null'] },
                     { label: 'PlanDeTraitement', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/planDeTraitement'] },
-                    { label: 'DetailsRapport', icon: 'pi pi-fw pi-pencil', routerLink: ['/backoffice/detailsRapport'] },
+               //     { label: 'DetailsRapport', icon: 'pi pi-fw pi-pencil', routerLink: ['/backoffice/detailsRapport'] },
                     { label: 'Exercice', icon: 'pi pi-fw pi-user', routerLink: ['/backoffice/exercice'] },
                     { label: 'ExercicePlan', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/exercicePlan'] },
                     { label: 'Facture', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/facture'] },
-
-
-
+                    { label: 'Medicament', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/medicament'] },
+                    { label: 'Medicamentplan', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/medicamentplan'] },
+                    { label: 'testDeSante', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/testDeSante'] },
+                    { label: 'testDeSanteplan', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/testDeSanteplan'] },
+                    { label: 'auth', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/auth'] },
 
 
 

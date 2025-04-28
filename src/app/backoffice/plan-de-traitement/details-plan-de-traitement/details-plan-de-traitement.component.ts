@@ -16,6 +16,12 @@ import { CommonModule } from '@angular/common';
 export class DetailsPlanDeTraitementComponent {
   planDeTraitementForm: FormGroup;
   planDeTraitementId: any;
+  testDeSanteplanList:any=[]
+  testDeSanteplanservice: any;
+  medicamentplanList:any=[]
+  medicamentplanservice: any;
+  exerciceplanList:any=[]
+  exerciceplanservice: any;
    
  
    constructor(
@@ -33,11 +39,33 @@ export class DetailsPlanDeTraitementComponent {
  
    ngOnInit(): void {
      this.planDeTraitementId = this.route.snapshot.paramMap.get('id');
+      this.displayTestDeSanteplan();
+      this.displayMedicamentplan();
+      this.displayExerciceplan();
      if (this.planDeTraitementId != 'null') {
        this.displayPlanDeTraitement(this.planDeTraitementId);
+
      }
+     
    }
- 
+   displayTestDeSanteplan() {
+    this.testDeSanteplanservice.getAllTestDeSanteplans().subscribe((res:any) => {
+        this.testDeSanteplanList = res;
+        console.log(this.testDeSanteplanList);
+    });
+}
+displayMedicamentplan() {
+  this.medicamentplanservice.getAllMedicamentplans().subscribe((res:any) => {
+      this.medicamentplanList = res;
+      console.log(this.medicamentplanList);
+  });
+}
+displayExerciceplan() {
+  this.exerciceplanservice.getAllExerciceplans().subscribe((res:any) => {
+      this.exerciceplanList = res;
+      console.log(this.exerciceplanList);
+  });
+}
    displayPlanDeTraitement(id: any) {
      this.planDeTraitementService.getPlanDeTraitementById(id).subscribe((res:any) => {
        this.planDeTraitementForm.patchValue(res);
@@ -55,7 +83,7 @@ export class DetailsPlanDeTraitementComponent {
            .subscribe((res:any) => {
              console.log(res);
              this.planDeTraitementForm.reset();
-             this.router.navigate(['/planDeTraitement']);
+             this.router.navigate(['/backoffice/planDeTraitement']);
            });
        }
      }
@@ -67,7 +95,7 @@ export class DetailsPlanDeTraitementComponent {
        this.planDeTraitementService.updatePlanDeTraitement(this.planDeTraitementId,this.planDeTraitementForm.value).subscribe((res:any) => {
          console.log(res);
          this.planDeTraitementForm.reset();
-         this.router.navigate(['/planDeTraitement']);
+         this.router.navigate(['/backoffice/planDeTraitement']);
        });
      }
    }
