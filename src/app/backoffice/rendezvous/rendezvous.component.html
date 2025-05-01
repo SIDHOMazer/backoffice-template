@@ -1,121 +1,130 @@
 <div class="container">
-  <div class="table-wrapper">
-      <div class="table-title">
-          <div class="row p-3">
-              <div class="col-sm-6">
-                  <h2>Gestion des <b>rendezvous</b></h2>
-              </div>
-              <div class="col-sm-6 d-flex justify-content-end">
-                  <p-button label="Ajouter" icon="pi pi-plus"   [routerLink]="'/backoffice/details-rendezvous/null'" />
-              </div>
-          </div>
-      </div>
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row p-3">
+                <div class="col-sm-6">
+                    <h2>Gestion des <b>rendezvous</b></h2>
+                </div>
+                <div class="col-sm-6 d-flex justify-content-end">
+                    <p-button label="Ajouter" icon="pi pi-plus" [routerLink]="'/backoffice/details-rendezvous/null'" />
+                </div>
+            </div>
+        </div>
 
-      <p-table
-          #dt1
-          [value]="rendezvousList"
-          dataKey="id"
-          [rows]="10"
-          [loading]="loading"
-          [rowHover]="true"
-          [showGridlines]="true"
-          [paginator]="true"
-          [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
-          responsiveLayout="scroll"
-      >
-          <ng-template #caption>
-              <div class="flex justify-between items-center flex-column sm:flex-row">
-                  <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
-                  <p-iconfield iconPosition="left" class="ml-auto">
-                      <p-inputicon>
-                          <i class="pi pi-search"></i>
-                      </p-inputicon>
-                      <input pInputText type="text" (input)="onGlobalFilter(dt1, $event)" placeholder="Search keyword" />
-                  </p-iconfield>
-              </div>
-          </ng-template>
-          <ng-template #header>
-              <tr>
-                <th scope="col">id</th>
-                <th scope="col">date</th>
-        
-                <th scope="col">patientId</th>
-                <th scope="col">doctorId</th>
-                <th scope="col">acceptDate</th>
-                <th scope="col">rejectDate</th>
-                <th scope="col">nameCompany</th>  
-
-                <th scope="col">status</th>
-
-                <th scope="col">action</th>
-            </tr>
+        <p-table
+            #dt1
+            [value]="rendezvousList"
+            dataKey="id"
+            [rows]="10"
+            [loading]="loading"
+            [rowHover]="true"
+            [showGridlines]="true"
+            [paginator]="true"
+            [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+            responsiveLayout="scroll"
+        >
+            <ng-template #caption>
+                <div class="flex justify-between items-center flex-column sm:flex-row">
+                    <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                    <p-iconfield iconPosition="left" class="ml-auto">
+                        <p-inputicon>
+                            <i class="pi pi-search"></i>
+                        </p-inputicon>
+                        <input pInputText type="text" (input)="onGlobalFilter(dt1, $event)" placeholder="Search keyword" />
+                    </p-iconfield>
+                </div>
+            </ng-template>
+            <ng-template #header>
                 <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                
-                <th>
-                    <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
-                        <ng-template #filter let-value let-filter="filterCallback">
-                            <p-select
-                                [(ngModel)]="statusValue"
-                                [options]="statuses"
-                                (onChange)="filter($event.value)"
-                                placeholder="Select One"
-                                [showClear]="true"
-                                appendTo="body"
-                                [style]="{'min-width': '12rem'}"
-                            >
-                                <ng-template let-option #item>
-                                    <p-tag [value]="option?.value? 'active' : 'desactiver'"
-                                    [severity]="option?.value ? 'success' : 'danger'" 
-                                    styleClass="dark:!bg-surface-900" />
-                                </ng-template>
-                            </p-select>
-                        </ng-template>
-                    </p-columnFilter>
-                </th>
-              </tr>
+                    <th scope="col">date</th>
+                    <th scope="col">patient</th>
+                    <th scope="col">doctor</th>
+                    <th scope="col">acceptDate</th>
+                    <th scope="col">rejectDate</th>
 
-          </ng-template>
-          <ng-template #body let-rendezvous>
-              <tr>
-                <td>{{rendezvous.id}}</td>
-    <td>{{rendezvous.date }}</td>
-    <td>{{rendezvous.acceptDate }}</td>
-    <td>{{rendezvous.rejectDate}}</td>
-    <td>{{rendezvous.nameCompany}}</td>
-    <td>{{rendezvous.status}}</td>
+                    <th scope="col">date de création</th>
+                    <th scope="col">status</th>
 
-    <td>{{ rendezvous.createdAt | date}}</td>
-    
-                
+                    <th scope="col">action</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
 
-                  <td>
-                      <p-tag [value]="rendezvous.status ? 'active' : 'desactiver'"
-                 [severity]="rendezvous.status ? 'success' : 'danger'" 
-                 styleClass="dark:!bg-surface-900" />
-                  </td>
-                  <td style="width: 200px">
-                      <p-button icon="pi pi-trash" severity="danger" />
-                      <p-button icon="pi pi-pen-to-square" severity="warn" [routerLink]="'/backoffice/details-rendezvous/' + rendezvous.id" />
-                  </td>
-              </tr>
-          </ng-template>
-          <ng-template #emptymessage>
-              <tr>
-                  <td colspan="8">No customers found.</td>
-              </tr>
-          </ng-template>
-          <ng-template #loadingbody>
-              <tr>
-                  <td colspan="8">Loading customers data. Please wait.</td>
-              </tr>
-          </ng-template>
-      </p-table>
-  </div>
+                    <th>
+                        <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+                            <ng-template #filter let-value let-filter="filterCallback">
+                                <p-select [(ngModel)]="statusValue" [options]="statuses" (onChange)="filter($event.value)" placeholder="Select One" [showClear]="true" appendTo="body" [style]="{ 'min-width': '12rem' }">
+                                    <ng-template let-option #item>
+                                        <p-tag [value]="option?.value ? 'active' : 'desactiver'" [severity]="option?.value ? 'success' : 'danger'" styleClass="dark:!bg-surface-900" />
+                                    </ng-template>
+                                </p-select>
+                            </ng-template>
+                        </p-columnFilter>
+                    </th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-rendezvous>
+                <tr>
+                    <td>{{ (rendezvous.date | date :'dd/MM/yyyy HH:mm') ||'---' }}</td>
+                    <td>{{ rendezvous.patient.firstname + ' ' + rendezvous.patient.lastname }}</td>
+                    <td>{{ rendezvous.docteur.firstname + ' ' + rendezvous.docteur.lastname }}</td>
+                    <td>{{ (rendezvous?.acceptDate | date :'dd/MM/yyyy HH:mm') ||'---' }}</td>
+
+                    <td>{{ (rendezvous?.rejectDate | date :'dd/MM/yyyy HH:mm') ||'---'  }}</td>
+
+                    <td>{{ rendezvous.createdAt | date }}</td>
+
+                    <td>
+
+                        @if(rendezvous.rejectDate){
+                            <p-tag [value]="'Annuler'" [severity]="'danger'" styleClass="dark:!bg-surface-900" />
+                        } @else if(rendezvous.acceptDate) {
+                            <p-tag [value]="'Accepter'" [severity]="'success'" styleClass="dark:!bg-surface-900" />
+                        }
+                        @else {
+                            <p-tag [value]="'En attente'" [severity]="'warn'" styleClass="dark:!bg-surface-900" />
+                        }
+                    </td>
+                    <td class="d-flex gap-2" style="width: 200px">
+                        <p-button icon="pi pi-pen-to-square" severity="warn"  (onClick)="reportDate(rendezvous)"/>
+                        <p-button icon="pi pi-fw pi-check" severity="success" (onClick)="changeStatusApointment(rendezvous,'ACCEPTED')" />
+                        <p-button icon="pi pi-fw pi-times" severity="danger" (onClick)="changeStatusApointment(rendezvous,'REJECTED')" />
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template #emptymessage>
+                <tr>
+                    <td colspan="8">No customers found.</td>
+                </tr>
+            </ng-template>
+            <ng-template #loadingbody>
+                <tr>
+                    <td colspan="8">Loading customers data. Please wait.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
 </div>
+
+
+<p-dialog header="rendez-vous" [modal]="true" [(visible)]="visibleUpateAppointement" *ngIf="appointement" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-8">Modifier la date rendez-vous de <strong> {{appointement.patient.firstname}}</strong> .</span>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="date" class="font-semibold w-24">date</label>
+        <p-datepicker [(ngModel)]="appointementDate" appendTo="body" />
+
+    </div>
+   
+    
+
+    <div class="flex justify-end gap-2">
+        <p-button label="Annuler" severity="secondary" (click)="visibleUpateAppointement= false" />
+        <p-button label="Enregistrer" (click)="updateAppointment()" />
+    </div>
+</p-dialog>

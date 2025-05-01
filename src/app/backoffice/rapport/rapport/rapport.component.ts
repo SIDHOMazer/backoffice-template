@@ -1,4 +1,4 @@
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -55,14 +55,32 @@ loading: boolean = true;
     { label: 'Desactive', value: false },
   
 ];
-  constructor(private rapportservice:RapportService) { }
+  constructor(private rapportservice:RapportService,
+    private route :ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    this.displayRapport();
+    const patientID=this.route.snapshot.params['id'];
+    console.log(patientID);
+    
+    if(patientID !='null'){
+      this.displayRapportByPatient(patientID);
+    
+    }else {
+      this.displayRapport();
+
+    }
   }
 
   displayRapport() {
     this.rapportservice.getAllRapports().subscribe((res:any)=>{
+      this.rapportList = res;
+      console.log(this.rapportList);
+      this.loading = false;
+    });
+  }
+  displayRapportByPatient(id:any) {
+    this.rapportservice.getAllRapportsByPatient(id).subscribe((res:any)=>{
       this.rapportList = res;
       console.log(this.rapportList);
       this.loading = false;

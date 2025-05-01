@@ -25,7 +25,7 @@ export class RendezvousService {
          return this.httpclient.post(this.baseUrl + '/rendezvous', rendezvous);
        }
      
-       updateRendezvous(id:any,rendezvous: Rendezvous) {
+       updateRendezvous(id:any,rendezvous: any) {
          return this.httpclient.put(this.baseUrl + '/rendezvous/'+id, rendezvous);
        }
 }

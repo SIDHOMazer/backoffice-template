@@ -3,27 +3,46 @@
       <div class="row">
         <div class="col-md-6 mb-3">
           <label>date</label>
-            <input type="text" class="form-control" formControlName="date" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>statut</label>
-            <input type="text" class="form-control" formControlName="statut" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>acceptDate</label>
-            <input type="text" class="form-control" formControlName="acceptDate" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>rejectDate</label>
-            <input type="text" class="form-control" formControlName="rejectDate" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>nameCompany</label>
-            <input type="text" class="form-control" formControlName="nameCompany" />
-         
-        </div>
+          <div>
+            <p-datepicker  formControlName="date" appendTo="body" [style]="{'width':'100%'}" />
+            
+          </div>
           
-      
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>patient</label>
+          <p-select id="state" formControlName="patientId" 
+          [options]="patientList"
+          filter="true" filterBy="firstname,lastname"
+          optionLabel="firstname"
+          optionValue="id"
+           placeholder="Select One" class="w-full">
+          
+           <ng-template let-patient #item>
+            <div class="flex items-center gap-2">
+                <div>{{ patient.firstname + ' '+ patient.lastname }}</div>
+            </div>
+        </ng-template>
+          </p-select>
+                  
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>docteur</label>
+          <p-select id="state" formControlName="docteurId" 
+          [options]="docteurList"
+          filter="true" filterBy="firstname,lastname"
+          optionLabel="firstname"
+          optionValue="id"
+           placeholder="Select One" class="w-full">
+          
+           <ng-template let-docteur #item>
+            <div class="flex items-center gap-2">
+                <div>{{ docteur.firstname + ' '+ docteur.lastname }}</div>
+            </div>
+        </ng-template>
+          </p-select>
+          
+        </div>
       </div>
   
       <button type="submit" class="btn btn-primary"

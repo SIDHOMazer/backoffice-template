@@ -6,11 +6,17 @@ import { AppTopbar } from './app.topbar';
 import { AppSidebar } from './app.sidebar';
 import { AppFooter } from './app.footer';
 import { LayoutService } from '../service/layout.service';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
     selector: 'app-layout',
     standalone: true,
-    imports: [CommonModule, AppTopbar, AppSidebar, RouterModule, AppFooter],
+    imports: [CommonModule, AppTopbar,
+         AppSidebar, RouterModule, AppFooter,
+         ToastModule,
+         ConfirmDialogModule
+    ],
     template: `<div class="layout-wrapper" [ngClass]="containerClass">
         <app-topbar></app-topbar>
         <app-sidebar></app-sidebar>
@@ -21,6 +27,7 @@ import { LayoutService } from '../service/layout.service';
             <app-footer></app-footer>
         </div>
         <div class="layout-mask animate-fadein"></div>
+        <p-toast/><p-confirmdialog />
     </div> `
 })
 export class AppLayout {
