@@ -8,4 +8,5 @@ export interface Medicamentplan {
     createdAt?: string;
     updatedAt?: string;
     status?:boolean;
+    checkbox?: string;
 }

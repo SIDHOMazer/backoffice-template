@@ -8,10 +8,8 @@ export interface Patient {
     codePostal?: string;
     email?: string;
     sexe?: string;
-    password?: string;
     dateNaissance?: string;
-    historiqueMedical?: string;
-    createdAt?: string;
+   createdAt?: string;
     updatedAt?: string;
     status?:boolean;
 }

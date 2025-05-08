@@ -31,7 +31,6 @@ export class DetailsDoctorComponent {
       email: ['', [Validators.required, Validators.email]],
       sexe: [''],
       password: [''],
-      localisation: [''],
       specialite: [''],
       contact: [''],
       

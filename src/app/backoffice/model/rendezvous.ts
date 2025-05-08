@@ -1,10 +1,10 @@
 export interface Rendezvous {
     id?: string;
-    date?: string;
-    statut?: string;
+    date?: Date;
     acceptDate?: string;
     rejectDate?: string;
-    nameCompany?: string;
     createdAt?: string;
     updatedAt?: string;
+    status?: boolean;
 }
+

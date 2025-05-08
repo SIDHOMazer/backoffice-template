@@ -3,7 +3,7 @@
       <div class="table-title">
           <div class="row p-3">
               <div class="col-sm-6">
-                  <h2>Gestion des <b>factures</b></h2>
+                  <h2>Management of <b>Bills</b></h2>
               </div>
               <div class="col-sm-6 d-flex justify-content-end">
                   <p-button label="Ajouter" icon="pi pi-plus"   [routerLink]="'/backoffice/details-facture/null'" />
@@ -37,16 +37,16 @@
           <ng-template #header>
               <tr>
                 <th scope="col">id</th>
-                <th scope="col">patientId</th>
+                <th scope="col">patient</th>
                 <th scope="col">date</th>
                 <th scope="col">description</th>
                 <th scope="col">price</th>
                 <th scope="col">invoice</th>
-                <th scope="col">subTotal</th>
+               
                 <th scope="col">paymentMethod</th>
-                <th scope="col">tax</th>
+                
                 <th scope="col">total</th>
-                <th scope="col">qty</th>
+               
                 <th scope="col">status</th>
                 <th scope="col">action</th>
               </tr>
@@ -59,9 +59,7 @@
                 <th></th>
                 <th></th>
                 <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+               
                 <th>
                     <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
                         <ng-template #filter let-value let-filter="filterCallback">
@@ -83,21 +81,19 @@
                         </ng-template>
                     </p-columnFilter>
                 </th>
+                <th></th>
               </tr>
           </ng-template>
           <ng-template #body let-Facture>
               <tr>
                 <td>{{ Facture.id }}</td>
-                <td>{{ Facture.patientId }}</td>
-                <td>{{ Facture.date }}</td>
+                <td>{{ Facture.patient.lastname+""+Facture.patient.firstname}}</td>
+                <td>{{ Facture.date | date }}</td>
                 <td>{{ Facture.description }}</td>
-                <td>{{ Facture.price }}</td>
+                <td>{{ Facture.price}}</td>
                 <td>{{ Facture.invoice }}</td>
-                <td>{{ Facture.subTotal }}</td>
                 <td>{{ Facture.paymentMethod }}</td>
-                <td>{{ Facture.tax }}</td>
                 <td>{{ Facture.total }}</td>
-                <td>{{ Facture.qty }}</td>
     
 
                   <td>

@@ -3,7 +3,7 @@
       <div class="table-title">
           <div class="row p-3">
               <div class="col-sm-6">
-                  <h2>Gestion des <b>exercices</b></h2>
+                  <h2>Management of <b>exercise</b></h2>
               </div>
               <div class="col-sm-6 d-flex justify-content-end">
                   <p-button label="Ajouter" icon="pi pi-plus"   [routerLink]="'/backoffice/details-exercice/null'" />
@@ -39,14 +39,12 @@
                 <th scope="col">id</th>
                 <th scope="col">description</th>
                 <th scope="col">file</th>
-                <th scope="col">nameExercice</th>
-                <th scope="col">nameDisease</th>
+                <th scope="col">nameExercise</th>
                 <th scope="col">date</th>
                 <th scope="col">status</th>
                 <th scope="col">action</th>
               </tr>
               <tr>
-                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -84,7 +82,6 @@
                 <td>{{ exercice.description }}</td>
                 <td>{{ exercice.file }}</td>
                 <td>{{ exercice.nameExercice }}</td>
-                <td>{{ exercice.nameDisease }}</td>
         
                 <td>{{ exercice.createdAt | date }}</td>
                 

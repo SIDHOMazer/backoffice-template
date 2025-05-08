@@ -7,12 +7,16 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { RippleModule } from 'primeng/ripple';
 import { AppFloatingConfigurator } from '../../layout/component/app.floatingconfigurator';
+import { AppConfigurator } from '../../layout/component/app.configurator';
+import { StyleClassModule } from 'primeng/styleclass';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-login',
     standalone: true,
     imports: [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, FormsModule, RouterModule, RippleModule, AppFloatingConfigurator],
     template: `
+    
         <app-floating-configurator />
         <div class="bg-surface-50 dark:bg-surface-950 flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
             <div class="flex flex-col items-center justify-center">
@@ -59,7 +63,10 @@ import { AppFloatingConfigurator } from '../../layout/component/app.floatingconf
                     </div>
                 </div>
             </div>
-        </div>
+       
+        
+        
+        
     `
 })
 export class Login {

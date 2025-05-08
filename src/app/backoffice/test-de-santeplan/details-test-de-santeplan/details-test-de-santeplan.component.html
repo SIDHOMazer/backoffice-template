@@ -2,12 +2,17 @@
     <form [formGroup]="testDeSanteplanForm" >
       <div class="row">
         <div class="col-md-6 mb-3">
-          <label>poids</label>
+          <label>weight</label>
             <input type="text" class="form-control" formControlName="poids" />
         </div>
         <div class="col-md-6 mb-3">
-          <label>taille</label>
+          <label>size</label>
             <input type="text" class="form-control" formControlName="taille" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>HealthTest</label>
+            <input type="text" class="form-control" formControlName="testDeSante" />
+
         </div>
        
           <div class="col-md-6 mb-3">

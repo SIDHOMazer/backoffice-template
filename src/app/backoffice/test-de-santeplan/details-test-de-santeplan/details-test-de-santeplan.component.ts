@@ -28,7 +28,6 @@ testDeSanteplanId: any;
        planDeTraitementId: [''],
        poids: [''],
         taille: [''],
-        sexe: [''],
         fumeur: [''],
         alcoolique: [''],
         sportif: [''],

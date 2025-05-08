@@ -3,7 +3,7 @@
         <div class="table-title">
             <div class="row p-3">
                 <div class="col-sm-6">
-                    <h2>Gestion des <b>docteurs</b></h2>
+                    <h2>Management of <b>doctor</b></h2>
                 </div>
                 <div class="col-sm-6 d-flex justify-content-end">
                     <p-button label="Ajouter" icon="pi pi-plus"   [routerLink]="'/backoffice/details-doctor/null'" />
@@ -40,13 +40,14 @@
 
                     <th scope="col">lastName</th>
                     <th scope="col">firstName</th>
-                    <th scope="col">specialite</th>
-                    <th scope="col">contact</th>
+                    <th scope="col">speciality</th>
+                    <th scope="col">town</th>
+
+
+                    <th scope="col">adress</th>
                     <th scope="col">email</th>
-                    <th scope="col">adresse</th>
-                    <th scope="col">ville</th>
                     <th scope="col">codePostal</th>
-                    <th scope="col">localisation</th>
+                    <th scope="col">contact</th>
                     <th scope="col">sexe</th>
                     <th scope="col">date</th>
                     <th scope="col">status</th>
@@ -56,15 +57,15 @@
                     <th></th>
                     <th> <p-columnFilter
                         type="text"
-                        field="lastName"
-                        placeholder="Search by lastName"
+                        field="lastname"
+                        placeholder="Search by lastname"
                         ariaLabel="Filter Name"
                     ></p-columnFilter></th>
                     <th> <p-columnFilter
                         type="text"
-                        field="firstName"
+                        field="firstname"
                         placeholder="Search by firstName"
-                        ariaLabel="Filter Name"
+                        ariaLabel="Filter name"
                     ></p-columnFilter></th>
                     <th> <p-columnFilter
                         type="text"
@@ -74,11 +75,8 @@
                     ></p-columnFilter></th>
                     <th></th>
                     <th> </th>
-                    <th></th>
     
-                    <th>
-                       
-                    </th>
+                    <th></th>
                    
                     <th></th>
                     <th></th>
@@ -108,6 +106,7 @@
                             </p-select>
                         </ng-template>
                     </p-columnFilter></th>
+                    <th></th>
     
                   </tr>
             </ng-template>
@@ -122,7 +121,6 @@
                     <td>{{ docteur.email }}</td>
                     <td>{{ docteur.codePostal }}</td>
                     <td>{{ docteur.contact }}</td>
-                    <td>{{ docteur.localisation }}</td>
                     <td>{{ docteur.sexe }}</td>
                     <td>{{ docteur.createdAt | date }}</td>
 

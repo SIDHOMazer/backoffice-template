@@ -56,7 +56,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 })
 export class RendezvousComponent implements OnInit {
     rendezvousList: Rendezvous[] = [];
-
+minDate=new Date()
     selectedRendezvous: any;
     loading: boolean = true;
     @ViewChild('filter') filter!: ElementRef;
@@ -66,8 +66,10 @@ export class RendezvousComponent implements OnInit {
     appointement:any=null
     appointementDate=new Date();
     statuses = [
-        { label: 'Active', value: true },
-        { label: 'Desactive', value: false }
+        { label: 'Accepter', value: true },
+        { label: 'Annule', value: false },
+        { label: 'En attente', value: false }
+
     ];
 
     constructor(

@@ -1,47 +1,103 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FactureService } from '../../service/facture.service';
+import { PatientService } from '../../service/patient.service';
 import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
   selector: 'app-details-facture',
   templateUrl: './details-facture.component.html',
-   standalone: true,
-    imports: [CommonModule,FormsModule, ReactiveFormsModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    InputTextModule,
+    InputNumberModule,
+    CalendarModule,
+    DropdownModule,
+    SelectButtonModule,RouterModule
+  ],
   styleUrls: ['./details-facture.component.css']
 })
 export class DetailsFactureComponent {
-factureForm: FormGroup;
-factureId: any;
+  factureForm: FormGroup;
+  factureId: any;
+  patients: any[] = [];
+  paymentMethods = [
+    { label: 'Cash', value: 'CASH' },
+    { label: 'Credit Card', value: 'CREDIT_CARD' },
+    { label: 'Bank Transfer', value: 'BANK_TRANSFER' }
+  ];
+  statusOptions = [
+    { label: 'Active', value: true },
+    { label: 'Inactive', value: false }
+  ];
+
   constructor(
     private fb: FormBuilder,
     private factureService: FactureService,
+    private patientService: PatientService,
     private router: Router,
     private route: ActivatedRoute
   ) {
-    
     this.factureForm = this.fb.group({
       id: [''],
-      patientId: [''],
-      date: [''],
-      description: [''],
-      price: [''],
-      invoice: [''],
+      patientId: ['', Validators.required],
+      date: [new Date(), Validators.required],
+      description: ['', Validators.required],
+      price: ['', [Validators.required, Validators.min(0)]],
+      invoice: ['', Validators.required],
       subTotal: [''],
-      paymentMethod: [''],
+      paymentMethod: ['', Validators.required],
       tax: [''],
       total: [''],
-      qty: [''],
-      status: [''], 
+      qty: ['1', [Validators.required, Validators.min(1)]],
+      status: [true]
     });
   }
 
   ngOnInit(): void {
+    this.loadPatients();
     this.factureId = this.route.snapshot.paramMap.get('id');
     if (this.factureId != 'null') {
       this.displayFacture(this.factureId);
     }
+    
+    // Calculate totals when price or qty changes
+    this.factureForm.get('price')?.valueChanges.subscribe(() => this.calculateTotals());
+    this.factureForm.get('qty')?.valueChanges.subscribe(() => this.calculateTotals());
+  }
+
+  loadPatients() {
+    this.patientService.getAllPatients().subscribe((res: any) => {
+      this.patients = res.map((patient: any) => ({
+        label: `${patient.firstname} ${patient.lastname}`,
+        value: patient.id
+      }));
+    });
+  }
+
+  calculateTotals() {
+    const price = this.factureForm.get('price')?.value || 0;
+    const qty = this.factureForm.get('qty')?.value || 1;
+    const subTotal = price * qty;
+    const tax = subTotal * 0.20; // 20% tax
+    const total = subTotal + tax;
+
+    this.factureForm.patchValue({
+      subTotal: subTotal,
+      tax: tax,
+      total: total
+    }, { emitEvent: false });
   }
 
   displayFacture(id: any) {

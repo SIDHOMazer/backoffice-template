@@ -28,7 +28,7 @@ interface MenuChangeEvent {
 export class LayoutService {
     _config: layoutConfig = {
         preset: 'Aura',
-        primary: 'emerald',
+        primary: 'blue',
         surface: null,
         darkTheme: false,
         menuMode: 'static'
@@ -41,7 +41,8 @@ export class LayoutService {
         staticMenuMobileActive: false,
         menuHoverActive: false
     };
-
+       
+    layoutService: LayoutService = this;
     layoutConfig = signal<layoutConfig>(this._config);
 
     layoutState = signal<LayoutState>(this._state);
@@ -73,6 +74,7 @@ export class LayoutService {
     getSurface = computed(() => this.layoutConfig().surface);
 
     isOverlay = computed(() => this.layoutConfig().menuMode === 'overlay');
+     
 
     transitionComplete = signal<boolean>(false);
 

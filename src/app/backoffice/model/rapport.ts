@@ -2,6 +2,7 @@ export interface Rapport {
     id?: number;
     file?: string;
     patientId?: number;
+    docteurId?: number;
     auteur?: string;
     description?: string;
     type?: string;
@@ -11,3 +12,4 @@ export interface Rapport {
     updatedAt?: string;
     status?:boolean;
 }
+

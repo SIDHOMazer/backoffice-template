@@ -3,7 +3,7 @@
       <div class="table-title">
           <div class="row p-3">
               <div class="col-sm-6">
-                  <h2>Gestion des <b>exercicePlans</b></h2>
+                  <h2>Management of <b>exercisePlan</b></h2>
               </div>
               <div class="col-sm-6 d-flex justify-content-end">
                   <p-button label="Ajouter" icon="pi pi-plus"   [routerLink]="'/backoffice/details-exercicePlan/null'" />
@@ -38,16 +38,15 @@
               <tr>
                 <th scope="col">id</th>
            
-                <th scope="col">exerciceId</th>
-                <th scope="col">planDeTraitementId</th>
-                <th scope="col">duree</th>
-                <th scope="col">jour</th>
+                <th scope="col">exercise</th>
+                <!-- <th scope="col">planDeTraitement</th> -->
+                <th scope="col">Runtime</th>
+                <th scope="col">day</th>
                 <th scope="col">type</th>
                 <th scope="col">seance</th>
                 <th scope="col">muscles</th>
                 <th scope="col">seriesAndRepetitions</th>
                 <th scope="col">date</th>
-                <th scope="col">checkbox</th>
     
                 <th scope="col">status</th>
                 <th scope="col">action</th>
@@ -57,8 +56,6 @@
                 <th></th>
                 <th></th>
                 <th></th>
-                <th></th>
-                
                 <th></th>
                
 
@@ -74,7 +71,6 @@
                 <th></th>
                 <th></th>
 
-                <th></th>
                 <th></th>
                 <th>
                     <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
@@ -104,15 +100,15 @@
           <ng-template #body let-exercicePlan>
               <tr>
                 <td>{{ exercicePlan?.id }}</td>
-                <td>{{ exercicePlan?.exerciceId }}</td>
-                <td>{{ exercicePlan?.planDeTraitementId }}</td>
+                <td>{{ exercicePlan?.exercice.nameExercice }}</td>
+                <!-- <td>{{ exercicePlan?.planDeTraitementId }}</td> -->
                 <td>{{ exercicePlan?.duree }}</td>
                 <td>{{ exercicePlan?.jour }}</td>
                 <td>{{ exercicePlan?.type }}</td>
                 <td>{{ exercicePlan?.seance }}</td>
                 <td>{{ exercicePlan?.muscles }}</td>
-                <td>{{ exercicePlan?.seriesAndRepetitions }}</td>
-                <td>{{ exercicePlan?.checkbok}}</td>
+                <td>{{ exercicePlan?.seriesAndRepetition }}</td>
+                <!-- <td>{{ exercicePlan?.checkbok}}</td> -->
 
                 <td>{{ exercicePlan?.createdAt | date }}</td>
                   <td>

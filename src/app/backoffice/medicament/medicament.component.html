@@ -3,7 +3,7 @@
         <div class="table-title">
             <div class="row p-3">
                 <div class="col-sm-6">
-                    <h2>Gestion des <b>medicaments</b></h2>
+                    <h2>Management of <b>Drug</b></h2>
                 </div>
                 <div class="col-sm-6 d-flex justify-content-end">
                     <p-button label="Ajouter" icon="pi pi-plus"   [routerLink]="'/backoffice/details-medicament/null'" />
@@ -37,7 +37,7 @@
             <ng-template #header>
                 <tr>
                   <th scope="col">id</th>
-                  <th scope="col">medicament</th>
+                  <th scope="col">Drug</th>
                   <th scope="col">file</th>
                   <th scope="col">note</th>
                   <th scope="col">date</th>
@@ -83,7 +83,7 @@
                     <td>{{ medicament.medicament }}</td>
                     <td>{{ medicament.file }}</td>
                     <td>{{ medicament.note }}</td>
-                    <td>{{ medicament.date | date }}</td>
+                    <td>{{ medicament.createdAt | date }}</td>
 
                   
   

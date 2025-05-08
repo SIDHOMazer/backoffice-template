@@ -3,7 +3,7 @@
       <div class="table-title">
           <div class="row p-3">
               <div class="col-sm-6">
-                  <h2>Gestion des <b>patients</b></h2>
+                  <h2>Management of <b>patient</b></h2>
               </div>
               <div class="col-sm-6 d-flex justify-content-end">
                   <p-button label="Ajouter" icon="pi pi-plus"   [routerLink]="'/backoffice/details-patient/null'" />
@@ -39,14 +39,13 @@
                 <th scope="col">id</th>
                 <th scope="col">lastName</th>
                 <th scope="col">firstName</th>
-                <th scope="col">adresse</th>
+                <th scope="col">adress</th>
                 <th scope="col">contact</th>
                 <th scope="col">codePostal</th>
-                <th scope="col">ville</th>
+                <th scope="col">twon</th>
                 <th scope="col">sexe</th>
                 <th scope="col">email</th>
-                <th scope="col">dateNaissance</th>
-                <th scope="col">historiqueMedical</th>
+                <th scope="col">date of birth</th>
                 <th scope="col">date</th>
                 <th scope="col">status</th>
                 
@@ -79,7 +78,6 @@
                         ></p-columnFilter>
                     </th>
                    
-                    <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -122,7 +120,6 @@
                 <td>{{ patient.sexe }}</td>
                 <td>{{ patient.email }}</td>
                 <td>{{ patient.dateNaissance }}</td>
-                <td>{{ patient.historiqueMedical}}</td>
             
                 <td>{{ patient.createdAt | date}}</td>
                   <td>

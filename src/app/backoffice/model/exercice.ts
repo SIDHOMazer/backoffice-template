@@ -4,7 +4,6 @@ export interface Exercice {
    description?: string;
    file?: string;
    nameExercice?: string;
-   nameDisease?: string;
    createdAt?: string;
    updatedAt?: string;
    status?:boolean;

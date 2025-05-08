@@ -27,7 +27,9 @@ import { TestDeSanteComponent } from './test-de-sante/test-de-sante.component';
 import { DetailsTestDeSanteComponent } from './test-de-sante/details-test-de-sante/details-test-de-sante.component';
 import { TestDeSanteplanComponent } from './test-de-santeplan/test-de-santeplan.component';
 import { DetailsTestDeSanteplanComponent } from './test-de-santeplan/details-test-de-santeplan/details-test-de-santeplan.component';
-import { Login } from './auth/login';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { authGuard } from './auth.guard';
+import { LoginComponent } from './login/login.component';
 
 
 export default [
@@ -74,6 +76,10 @@ export default [
     { path: 'testDeSanteplan', data: { breadcrumb: 'testDeSanteplan' }, component: TestDeSanteplanComponent },
     { path: 'details-testDeSanteplan/:id', data: { breadcrumb: 'details-testDeSanteplan/:id' }, component: DetailsTestDeSanteplanComponent },
 
+   // { path: '', redirectTo: '/login', pathMatch: 'full' },
+   // { path: 'login', component: LoginComponent },
+    { path: 'dashboard', component: DashboardComponent },
+    { path: '**', redirectTo: '/login' }
 
    
 ] as Routes;

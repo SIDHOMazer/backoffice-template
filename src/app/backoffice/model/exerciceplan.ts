@@ -8,6 +8,7 @@ export interface ExercicePlan {
     seance?: number;
     muscles?: string;
     seriesAndRepetitions?: string;
+    checkbok?: string;
     createdAt?: string;
     updatedAt?: string;
     status?:boolean;

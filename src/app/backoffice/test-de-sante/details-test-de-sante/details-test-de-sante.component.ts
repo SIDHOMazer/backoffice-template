@@ -24,8 +24,8 @@ export class DetailsTestDeSanteComponent {
       this.testDeSanteForm = this.fb.group({
        id: [''],
        testName: [''],
-       testDate: [''],
-        result: [''],
+       description: [''],
+        date: [''],
       
         
       });

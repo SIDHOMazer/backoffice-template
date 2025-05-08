@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ExerciceplanService } from '../../service/exerciceplan.service';
 import { CommonModule } from '@angular/common';
 import { Checkbox } from 'primeng/checkbox';
+import { ExerciceService } from '../../service/exercice.service';
 
 @Component({
   selector: 'app-details-exerciceplan',
@@ -15,9 +16,13 @@ import { Checkbox } from 'primeng/checkbox';
 export class DetailsExerciceplanComponent {
   exerciceplanForm: FormGroup;
   exerciceplanId: any;
+  exerciceList: any = [];
+  planDeTraitementList: any = [];
     constructor(
       private fb: FormBuilder,
       private exerciceplanService: ExerciceplanService,
+      private planDeTraitementservice: ExerciceplanService,
+      private exerciceservice: ExerciceService,
       private router: Router,
       private route: ActivatedRoute
     ) {
@@ -43,7 +48,18 @@ export class DetailsExerciceplanComponent {
         this.displayExerciceplan(this.exerciceplanId);
       }
     }
-  
+    displayExercice() {
+      this.exerciceservice.getAllExercices().subscribe((res)=>{
+        this.exerciceList = res;
+        console.log(this.exerciceList);
+      });
+    }
+    //displayPlanDeTraitement() {
+      //this.planDeTraitementservice.getAllPlanDeTraitements().subscribe((res)=>{
+        //this.planDeTraitementList = res;
+        //console.log(this.planDeTraitementList);
+      //});
+    //}
     displayExerciceplan(id: any) {
       this.exerciceplanService.getExerciceplanById(id).subscribe((res:any) => {
         this.exerciceplanForm.patchValue(res);

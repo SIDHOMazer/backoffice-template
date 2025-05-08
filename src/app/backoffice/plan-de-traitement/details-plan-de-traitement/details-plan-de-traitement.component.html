@@ -1,27 +1,249 @@
-<div class="container mt-4">
-    <form [formGroup]="planDeTraitementForm" >
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label>objectif</label>
-          <input type="text" class="form-control" formControlName="objectif" />
+<div class="card">
+    <form [formGroup]="planForm" (ngSubmit)="submit()" class="p-fluid">
+        <!-- Main Info -->
+        <p-panel header="Plan de Traitement Information" styleClass="mb-4">
+            <div class="grid">
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Patient</label>
+                        <p-select id="patient" formControlName="patientId" 
+                            [options]="patientList"
+                            filter="true" 
+                            filterBy="firstname,lastname"
+                            optionLabel="firstname"
+                            appendTo="body"
+                            optionValue="id"
+                            placeholder="Select a patient" 
+                            [style]="{'width':'100%'}"
+                        >
+                            <ng-template let-patient pTemplate="item">
+                                <div>{{ patient.firstname + ' '+ patient.lastname }}</div>
+                            </ng-template>
+                        </p-select>
+                    </div>
+                </div>
+
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Docteur</label>
+                        <p-select id="docteur" formControlName="docteurId" 
+                            [options]="docteurList"
+                            filter="true" 
+                            filterBy="firstname,lastname"
+                            optionLabel="firstname"
+                            appendTo="body"
+                            optionValue="id"
+                            placeholder="Select a doctor"
+                            [style]="{'width':'100%'}"
+                        >
+                            <ng-template let-docteur pTemplate="item">
+                                <div>{{ docteur.firstname + ' '+ docteur.lastname }}</div>
+                            </ng-template>
+                        </p-select>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Objectif</label>
+                        <input id="objectif" type="text" pInputText formControlName="objectif" />
+                    </div>
+                </div>
+
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Date Start</label>
+                        <input type="date" pInputText formControlName="dateDebut" class="w-full" />
+                    </div>
+                </div>
+
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Date End</label>
+                        <input type="date" pInputText formControlName="dateFin" class="w-full" />
+                    </div>
+                </div>
+            </div>
+        </p-panel>
+
+        <!-- Exercice Plans -->
+        <p-panel header="Exercise Plans" styleClass="mb-4">
+            <p-accordion [multiple]="true" styleClass="mb-3">
+                <p-accordionTab *ngFor="let ep of exercicePlans.controls; let i = index" [formGroup]="exercicePlansForm(i)" [header]="'Exercise Plan ' + (i + 1)">
+                    <div class="grid">
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Seance</label>
+                                <input pInputText formControlName="seance" class="w-full" />
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Series/Repetition</label>
+                                <input pInputText formControlName="seriesAndRepetition" class="w-full" />
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Muscles</label>
+                                <input pInputText formControlName="muscles" class="w-full" />
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Duree</label>
+                                <input pInputText formControlName="duree" class="w-full" />
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Jour</label>
+                                <input pInputText formControlName="jour" class="w-full" />
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Type</label>
+                                <input pInputText formControlName="type" class="w-full" />
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-6">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Exercise</label>
+                                <p-select formControlName="exerciceId" 
+                                    [options]="exerciceList"
+                                    filter="true" 
+                                    filterBy="nameExercice"
+                                    optionLabel="nameExercice"
+                                    appendTo="body"
+                                    optionValue="id"
+                                    placeholder="Select an exercise"
+                                    [style]="{'width':'100%'}"
+                                >
+                                    <ng-template let-exercice pTemplate="item">
+                                        <div>{{ exercice.nameExercice }}</div>
+                                    </ng-template>
+                                </p-select>
+                            </div>
+                        </div>
+                        <div class="col-12 flex justify-content-end">
+                            <p-button icon="pi pi-trash" severity="danger" (onClick)="removeExercicePlan(i)" [rounded]="true"></p-button>
+                        </div>
+                    </div>
+                </p-accordionTab>
+            </p-accordion>
+            <p-button type="button" label="Add Exercise Plan" icon="pi pi-plus" (onClick)="addExercicePlan()" styleClass="p-button-success"></p-button>
+        </p-panel>
+
+        <!-- Medicament Plans -->
+        <p-panel header="Medication Plans" styleClass="mb-4">
+            <p-accordion [multiple]="true" styleClass="mb-3">
+                <p-accordionTab *ngFor="let mp of medicamentPlans.controls; let i = index" [formGroup]="medicamentPlansForm(i)" [header]="'Medication Plan ' + (i + 1)">
+                    <div class="grid">
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Dosage</label>
+                                <input pInputText formControlName="dosage" class="w-full" />
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Frequency</label>
+                                <input pInputText formControlName="frequence" class="w-full" />
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Timing</label>
+                                <input pInputText formControlName="momentOfTaking" class="w-full" />
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Medication</label>
+                                <p-select formControlName="medicamentId" 
+                                    [options]="medicamentList"
+                                    filter="true" 
+                                    filterBy="medicament"
+                                    optionLabel="medicament"
+                                    optionValue="id"
+                                    appendTo="body"
+                                    placeholder="Select a medication"
+                                    [style]="{'width':'100%'}"
+                                >
+                                    <ng-template let-medicament pTemplate="item">
+                                        <div>{{ medicament.medicament }}</div>
+                                    </ng-template>
+                                </p-select>
+                            </div>
+                        </div>
+                        <div class="col-12 flex justify-content-end">
+                            <p-button icon="pi pi-trash" severity="danger" (onClick)="removeMedicamentPlan(i)" [rounded]="true"></p-button>
+                        </div>
+                    </div>
+                </p-accordionTab>
+            </p-accordion>
+            <p-button type="button" label="Add Medication Plan" icon="pi pi-plus" (onClick)="addMedicamentPlan()" styleClass="p-button-success"></p-button>
+        </p-panel>
+
+        <!-- Test De Santé Plans -->
+        <p-panel header="Health Test Plans" styleClass="mb-4">
+            <p-accordion [multiple]="true" styleClass="mb-3">
+                <p-accordionTab *ngFor="let tp of testDeSantePlans.controls; let i = index" [formGroup]="testDeSantePlansForm(i)" [header]="'Health Test ' + (i + 1)">
+                    <div class="grid">
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Weight</label>
+                                <input type="number" pInputText formControlName="poids" class="w-full" />
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Height</label>
+                                <input type="number" pInputText formControlName="taille" class="w-full" />
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Completed</label>
+                                <p-checkbox binary="true" formControlName="checkbok"></p-checkbox>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-3">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Health Test</label>
+                                <p-select formControlName="testDeSanteId" 
+                                    [options]="testDeSantList"
+                                    filter="true" 
+                                    filterBy="testName"
+                                    optionLabel="testName"
+                                    appendTo="body"
+                                    optionValue="id"
+                                    placeholder="Select a health test"
+                                    [style]="{'width':'100%'}"
+                                >
+                                    <ng-template let-testDeSante pTemplate="item">
+                                        <div>{{ testDeSante.testName }}</div>
+                                    </ng-template>
+                                </p-select>
+                            </div>
+                        </div>
+                        <div class="col-12 flex justify-content-end">
+                            <p-button icon="pi pi-trash" severity="danger" (onClick)="removeTestDeSantePlan(i)" [rounded]="true"></p-button>
+                        </div>
+                    </div>
+                </p-accordionTab>
+            </p-accordion>
+            <p-button type="button" label="Add Health Test" icon="pi pi-plus" (onClick)="addTestDeSantePlan()" styleClass="p-button-success"></p-button>
+        </p-panel>
+
+        <!-- Submit -->
+        <div class="flex justify-content-end gap-2 mt-4">
+            <p-button label="Cancel" severity="secondary" [routerLink]="['/backoffice/planDeTraitement']"></p-button>
+            <p-button type="submit" label="Save Treatment Plan" [disabled]="planForm.invalid"></p-button>
         </div>
-        <div class="col-md-6 mb-3">
-          <label>date Debut</label>
-          <input type="date" class="form-control" formControlName="dateDebut" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>date Fin</label>
-          <input type="date" class="form-control" formControlName="dateFin" />
-        </div>
-       
-      
-      </div>
-  
-      <button type="submit" class="btn btn-primary"
-       (click)="onSubmit()" 
-       [disabled]="planDeTraitementForm.invalid"
-       >
-        Save
-      </button>
     </form>
-  </div>
+
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    <p-toast></p-toast>
+</div>

@@ -7,8 +7,6 @@ export interface Docteur{
     codePostal?: string;
     email?: string;
     sexe?: string;
-    password?: string;
-    localisation?: string;
     specialite?: string;
     contact?: string;
     createdAt?: string;
