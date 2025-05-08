@@ -1,53 +1,91 @@
-<div class="container mt-4">
-    <form [formGroup]="patientForm" >
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label>First Name</label>
-          <input type="text" class="form-control" formControlName="firstname" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>Last Name</label>
-          <input type="text" class="form-control" formControlName="lastname" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>Address</label>
-          <input type="text" class="form-control" formControlName="adresse" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>City</label>
-          <input type="text" class="form-control" formControlName="ville" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>Postal Code</label>
-          <input type="text" class="form-control" formControlName="codePostal" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>Email</label>
-          <input type="email" class="form-control" formControlName="email" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>Sexe</label>
-          <input type="text" class="form-control" formControlName="sexe" />
-        </div>
-      
-        
-        <div class="col-md-6 mb-3">
-          <label>Contact</label>
-          <input type="text" class="form-control" formControlName="contact" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>date of birth </label>
-          <input type="date" class="form-control" formControlName="date" />
-        </div>
-        
-      
-      </div>
-  
-      <button type="submit" class="btn btn-primary"
-       (click)="onSubmit()" 
-       [disabled]="patientForm.invalid"
-       >
-        Save
-      </button>
-    </form>
-  </div>
+<div class="card">
+    <div class="p-4">
+        <h2 class="text-2xl font-bold mb-4">{{ patientId != 'null' ? 'Edit' : 'Create' }} Patient</h2>
+        <form [formGroup]="patientForm" class="p-fluid">
+            <div class="grid">
+                <div class="col-12 md:col-6 lg:col-4">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">First Name</label>
+                        <input pInputText type="text" formControlName="firstname" />
+                    </div>
+                </div>
+                <div class="col-12 md:col-6 lg:col-4">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Last Name</label>
+                        <input pInputText type="text" formControlName="lastname" />
+                    </div>
+                </div>
+                <div class="col-12 md:col-6 lg:col-4">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Email</label>
+                        <input pInputText type="email" formControlName="email" />
+                    </div>
+                </div>
+                <div class="col-12 md:col-6 lg:col-4">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Password</label>
+                        <input pInputText type="password" formControlName="password" />
+                    </div>
+                </div>
+                <div class="col-12 md:col-6 lg:col-4">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Gender</label>
+                        <p-dropdown 
+                            [options]="genderOptions" 
+                            formControlName="sexe"
+                            placeholder="Select gender"
+                            [style]="{'width':'100%'}"
+                        ></p-dropdown>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6 lg:col-4">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Contact</label>
+                        <input pInputText type="text" formControlName="contact" />
+                    </div>
+                </div>
+                <div class="col-12 md:col-6 lg:col-4">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Date of Birth</label>
+                        <p-calendar 
+                            formControlName="dateNaissance" 
+                            [showIcon]="true"
+                            dateFormat="yy-mm-dd"
+                            [style]="{'width':'100%'}"
+                        ></p-calendar>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6 lg:col-4">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Address</label>
+                        <input pInputText type="text" formControlName="adresse" />
+                    </div>
+                </div>
+                <div class="col-12 md:col-6 lg:col-4">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">City</label>
+                        <input pInputText type="text" formControlName="ville" />
+                    </div>
+                </div>
+                <div class="col-12 md:col-6 lg:col-4">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Postal Code</label>
+                        <input pInputText type="text" formControlName="codePostal" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-content-end gap-2 mt-4">
+                <p-button label="Cancel" severity="secondary" routerLink="/backoffice/patient"></p-button>
+                <p-button 
+                    [label]="patientId != 'null' ? 'Update' : 'Save'" 
+                    (onClick)="onSubmit()"
+                    [disabled]="patientForm.invalid"
+                ></p-button>
+            </div>
+        </form>
+    </div>
+    
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    <p-toast></p-toast>
+</div>

@@ -1,57 +1,89 @@
-<div class="container mt-4">
-  <form [formGroup]="detailsRapportForm" >
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label> Currenty</label>
-          <input type="text" class="form-control" formControlName="Currenty" />
-      </div>
-      <div class="col-md-6 mb-3">
-        <label>SurgicalHistory</label>
-          <input type="text" class="form-control" formControlName="SurgicalHistory" />
-      </div>
-      <div class="col-md-6 mb-3">
-        <label>TraumaHistory</label>
-          <input type="text" class="form-control" formControlName="TraumaHistory" />
-      </div>
-      <div class="col-md-6 mb-3">
-        <label>HealthHistory</label>
-          <input type="text" class="form-control" formControlName="HealthHistory" />
-      </div>
-      <div class="col-md-6 mb-3">
-          <label>FamilyHealthHistory</label>
-          <input type="text" class="form-control" formControlName="FamilyHealthHistory" />
-          </div>
-          <div class="col-md-6 mb-3">
-              <label>Autre</label>
-              <input type="text" class="form-control" formControlName="Autre" />
-              </div>
-      <div class="col-md-6 mb-3">
-        <label>sexe</label>
-          <input type="text" class="form-control" formControlName="sexe" />
-      </div>
-      <div class="col-md-6 mb-3">
-        <label>smoker</label>
-          <input type="text" class="form-control" formControlName="fumeur" />
-    </div>
-      <div class="col-md-6 mb-3">
-        <label>alcoholic</label>
-          <input type="text" class="form-control" formControlName="alcoolique" />
-      </div>
-      <div class="col-md-6 mb-3">
-        <label>sports</label>
-          <input type="text" class="form-control" formControlName="sportif" />
-      </div>
-      <div class="col-md-6 mb-3">
-        <label>symptoms</label>
-          <input type="text" class="form-control" formControlName="symptomes" />
-      </div>
-      </div>
+<div class="card">
+    <div class="p-4">
+        <h2 class="text-2xl font-bold mb-4">{{ detailsRapportId != 'null' ? 'Edit' : 'Create' }} Report Details</h2>
+        <form [formGroup]="detailsRapportForm" class="p-fluid">
+            <div class="grid">
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Blood Pressure</label>
+                        <p-inputNumber 
+                            formControlName="tension"
+                            [showButtons]="false"
+                            [min]="0"
+                            placeholder="Enter blood pressure"
+                        ></p-inputNumber>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Temperature (°C)</label>
+                        <p-inputNumber 
+                            formControlName="temperature"
+                            [showButtons]="false"
+                            [min]="0"
+                            placeholder="Enter temperature"
+                        ></p-inputNumber>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Weight (kg)</label>
+                        <p-inputNumber 
+                            formControlName="poids"
+                            [showButtons]="false"
+                            [min]="0"
+                            placeholder="Enter weight"
+                        ></p-inputNumber>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Height (cm)</label>
+                        <p-inputNumber 
+                            formControlName="taille"
+                            [showButtons]="false"
+                            [min]="0"
+                            placeholder="Enter height"
+                        ></p-inputNumber>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Sports Activity</label>
+                        <textarea 
+                            pTextarea 
+                            formControlName="sportif" 
+                            rows="2"
+                            [autoResize]="true"
+                            placeholder="Describe sports activities"
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Symptoms</label>
+                        <textarea 
+                            pTextarea 
+                            formControlName="symptomes" 
+                            rows="3"
+                            [autoResize]="true"
+                            placeholder="Describe symptoms"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
 
-    <button type="submit" class="btn btn-primary"
-     (click)="onSubmit()" 
-     [disabled]="detailsRapportForm.invalid"
-     >
-      Save
-    </button>
-  </form>
+            <div class="flex justify-content-end gap-2 mt-4">
+                <p-button label="Cancel" severity="secondary" routerLink="/backoffice/detailsRapport"></p-button>
+                <p-button 
+                    [label]="detailsRapportId != 'null' ? 'Update' : 'Save'" 
+                    (onClick)="onSubmit()"
+                    [disabled]="detailsRapportForm.invalid"
+                ></p-button>
+            </div>
+        </form>
+    </div>
+    
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    <p-toast></p-toast>
 </div>

@@ -3,25 +3,41 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocteurService } from '../../service/docteur.service';
 import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { FormConfirmationService } from '../../service/form-confirmation.service';
 
 @Component({
   selector: 'app-details-doctor',
   templateUrl: './details-doctor.component.html',
   standalone: true,
-  imports: [CommonModule,FormsModule, ReactiveFormsModule],
-  styleUrls: ['./details-doctor.component.css'],
+  imports: [
+    CommonModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    ButtonModule,
+    InputTextModule,
+    ConfirmDialogModule,
+    ToastModule
+  ],
+  providers: [ConfirmationService, MessageService],
+  styleUrls: ['./details-doctor.component.css']
 })
 export class DetailsDoctorComponent {
   docteurForm: FormGroup;
   doctorId: any;
-  doctorForm: any;
+
   constructor(
     private fb: FormBuilder,
     private docteurService: DocteurService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private formConfirmationService: FormConfirmationService,
+    private messageService: MessageService
   ) {
-    
     this.docteurForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -29,11 +45,10 @@ export class DetailsDoctorComponent {
       ville: [''],
       codePostal: [''],
       email: ['', [Validators.required, Validators.email]],
-      sexe: [''],
-      password: [''],
       specialite: [''],
-      contact: [''],
-      
+      password: [''],
+      localisation: [''],
+      contact: ['']
     });
   }
 
@@ -45,33 +60,32 @@ export class DetailsDoctorComponent {
   }
 
   displayDocteur(id: any) {
-    this.docteurService.getDocteurById(id).subscribe((res) => {
+    this.docteurService.getDocteurById(id).subscribe((res:any) => {
       this.docteurForm.patchValue(res);
-      console.log(this.docteurForm.value);
     });
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.docteurForm.valid) {
-      if (this.doctorId != 'null') {
-        this.updateDoctor()
-      }else{
-        this.docteurService
-          .addDoctor(this.docteurForm.value)
-          .subscribe((res) => {
-            console.log(res);
+      const confirmed = await this.formConfirmationService.confirmSubmit();
+      if (confirmed) {
+        if (this.doctorId != 'null') {
+          this.updateDoctor();
+        } else {
+          this.docteurService.addDoctor(this.docteurForm.value).subscribe((res) => {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Doctor saved successfully' });
             this.docteurForm.reset();
             this.router.navigate(['/backoffice/doctor']);
           });
+        }
       }
     }
   }
 
   updateDoctor() {
     if (this.docteurForm.valid) {
-      console.log(this.docteurForm.value);
-      this.docteurService.updateDoctor(this.doctorId,this.docteurForm.value).subscribe((res) => {
-        console.log(res);
+      this.docteurService.updateDoctor(this.doctorId, this.docteurForm.value).subscribe((res) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Doctor updated successfully' });
         this.docteurForm.reset();
         this.router.navigate(['/backoffice/doctor']);
       });

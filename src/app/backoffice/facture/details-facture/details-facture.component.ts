@@ -10,6 +10,10 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { FormConfirmationService } from '../../service/form-confirmation.service';
 
 @Component({
   selector: 'app-details-facture',
@@ -24,8 +28,12 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     InputNumberModule,
     CalendarModule,
     DropdownModule,
-    SelectButtonModule,RouterModule
+    SelectButtonModule,
+    RouterModule,
+    ConfirmDialogModule,
+    ToastModule
   ],
+  providers: [ConfirmationService, MessageService],
   styleUrls: ['./details-facture.component.css']
 })
 export class DetailsFactureComponent {
@@ -47,7 +55,9 @@ export class DetailsFactureComponent {
     private factureService: FactureService,
     private patientService: PatientService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private formConfirmationService: FormConfirmationService,
+    private messageService: MessageService
   ) {
     this.factureForm = this.fb.group({
       id: [''],
@@ -107,27 +117,27 @@ export class DetailsFactureComponent {
     });
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.factureForm.valid) {
-      if (this.factureId != 'null') {
-        this.updateFacture()
-      }else{
-        this.factureService
-          .addFacture(this.factureForm.value)
-          .subscribe((res:any) => {
-            console.log(res);
+      const confirmed = await this.formConfirmationService.confirmSubmit();
+      if (confirmed) {
+        if (this.factureId != 'null') {
+          this.updateFacture();
+        } else {
+          this.factureService.addFacture(this.factureForm.value).subscribe((res:any) => {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Bill saved successfully' });
             this.factureForm.reset();
             this.router.navigate(['/backoffice/facture']);
           });
+        }
       }
     }
   }
 
   updateFacture() {
     if (this.factureForm.valid) {
-      console.log(this.factureForm.value);
-      this.factureService.updateFacture(this.factureId,this.factureForm.value).subscribe((res:any) => {
-        console.log(res);
+      this.factureService.updateFacture(this.factureId, this.factureForm.value).subscribe((res:any) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Bill updated successfully' });
         this.factureForm.reset();
         this.router.navigate(['/backoffice/facture']);
       });

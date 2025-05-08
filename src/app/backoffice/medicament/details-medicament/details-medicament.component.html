@@ -1,28 +1,52 @@
-<div class="container mt-4">
-    <form [formGroup]="medicamentForm" >
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label>Drug</label>
-            <input type="text" class="form-control" formControlName="medicament" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>file</label>
-            <input type="text" class="form-control" formControlName="file" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>note</label>
-            <input type="text" class="form-control" formControlName="note" />
-        </div>
-       
-        
-      
-      </div>
-  
-      <button type="submit" class="btn btn-primary"
-       (click)="onSubmit()" 
-       [disabled]="medicamentForm.invalid"
-       >
-        Save
-      </button>
-    </form>
-  </div>
+<div class="card">
+    <div class="p-4">
+        <h2 class="text-2xl font-bold mb-4">{{ medicamentId != 'null' ? 'Edit' : 'Create' }} Medication</h2>
+        <form [formGroup]="medicamentForm" class="p-fluid">
+            <div class="grid">
+                <div class="col-12">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Medication Name</label>
+                        <input pInputText type="text" formControlName="medicament" />
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Notes</label>
+                        <textarea 
+                            pTextarea 
+                            formControlName="note" 
+                            rows="4"
+                            [autoResize]="true"
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">File</label>
+                        <p-fileUpload
+                            mode="basic"
+                            chooseLabel="Choose File"
+                            [showUploadButton]="false"
+                            [showCancelButton]="false"
+                            accept="image/*,application/pdf"
+                            (onSelect)="onFileSelect($event)"
+                            [maxFileSize]="1000000"
+                        ></p-fileUpload>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-content-end gap-2 mt-4">
+                <p-button label="Cancel" severity="secondary" routerLink="/backoffice/medicament"></p-button>
+                <p-button 
+                    [label]="medicamentId != 'null' ? 'Update' : 'Save'" 
+                    (onClick)="onSubmit()"
+                    [disabled]="medicamentForm.invalid"
+                ></p-button>
+            </div>
+        </form>
+    </div>
+    
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    <p-toast></p-toast>
+</div>

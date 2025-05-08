@@ -1,23 +1,38 @@
-<div class="container mt-4">
-    <form [formGroup]="testDeSanteForm" >
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label>testName</label>
-            <input type="text" class="form-control" formControlName="testName" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>Description</label>
-            <input type="text" class="form-control" formControlName="description" />
-        </div>
-       
-      
-      </div>
-  
-      <button type="submit" class="btn btn-primary"
-       (click)="onSubmit()" 
-       [disabled]="testDeSanteForm.invalid"
-       >
-        Save
-      </button>
-    </form>
-  </div>
+<div class="card">
+    <div class="p-4">
+        <h2 class="text-2xl font-bold mb-4">{{ testDeSanteId != 'null' ? 'Edit' : 'Create' }} Health Test</h2>
+        <form [formGroup]="testDeSanteForm" class="p-fluid">
+            <div class="grid">
+                <div class="col-12">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Test Name</label>
+                        <input pInputText type="text" formControlName="testName" />
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Description</label>
+                        <textarea 
+                            pTextarea 
+                            formControlName="description" 
+                            rows="4"
+                            [autoResize]="true"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-content-end gap-2 mt-4">
+                <p-button label="Cancel" severity="secondary" routerLink="/backoffice/testDeSante"></p-button>
+                <p-button 
+                    [label]="testDeSanteId != 'null' ? 'Update' : 'Save'" 
+                    (onClick)="onSubmit()"
+                    [disabled]="testDeSanteForm.invalid"
+                ></p-button>
+            </div>
+        </form>
+    </div>
+    
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    <p-toast></p-toast>
+</div>

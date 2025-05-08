@@ -1,29 +1,39 @@
-<div class="container mt-4">
-    <form [formGroup]="medicamentplanForm" >
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label>dosage</label>
-            <input type="text" class="form-control" formControlName="dosage" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>frequence</label>
-            <input type="text" class="form-control" formControlName="frequence" />
-        </div>
-     
-        <div class="col-md-6 mb-3">
-          <label>checkbok</label>
-          <input type="text" class="form-control" formControlName="checkbok" />
-        </div>
-     
-        
-      
-      </div>
-  
-      <button type="submit" class="btn btn-primary"
-       (click)="onSubmit()" 
-       [disabled]="medicamentplanForm.invalid"
-       >
-        Save
-      </button>
-    </form>
-  </div>
+<div class="card">
+    <div class="p-4">
+        <h2 class="text-2xl font-bold mb-4">{{ medicamentplanId != 'null' ? 'Edit' : 'Create' }} Medication Plan</h2>
+        <form [formGroup]="medicamentplanForm" class="p-fluid">
+            <div class="grid">
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Dosage</label>
+                        <input pInputText type="text" formControlName="dosage" placeholder="Enter dosage" />
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Frequency</label>
+                        <input pInputText type="text" formControlName="frequence" placeholder="Enter frequency" />
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="field-checkbox">
+                        <p-checkbox formControlName="checkbok" [binary]="true"></p-checkbox>
+                        <label class="ml-2">Completed</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-content-end gap-2 mt-4">
+                <p-button label="Cancel" severity="secondary" routerLink="/backoffice/medicamentplan"></p-button>
+                <p-button 
+                    [label]="medicamentplanId != 'null' ? 'Update' : 'Save'" 
+                    (onClick)="onSubmit()"
+                    [disabled]="medicamentplanForm.invalid"
+                ></p-button>
+            </div>
+        </form>
+    </div>
+    
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    <p-toast></p-toast>
+</div>

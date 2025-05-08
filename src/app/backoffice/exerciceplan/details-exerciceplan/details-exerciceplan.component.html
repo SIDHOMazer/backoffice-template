@@ -1,44 +1,68 @@
-<div class="container mt-4">
-    <form [formGroup]="exerciceplanForm" >
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label>Runtime</label>
-            <input type="text" class="form-control" formControlName="duree" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>day</label>
-            <input type="text" class="form-control" formControlName="jour" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>type</label>
-            <input type="text" class="form-control" formControlName="type" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>seance</label>
-            <input type="text" class="form-control" formControlName="seance" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>muscles</label>
-            <input type="text" class="form-control" formControlName="muscles" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>seriesAndRepetitions</label>
-          <input type="text" class="form-control" formControlName="seriesAndRepetitions" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>checkbok</label>
-          <input type="text" class="form-control" formControlName="checkbok" />
-        </div>
-       
-        
-      
-      </div>
-  
-      <button type="submit" class="btn btn-primary"
-       (click)="onSubmit()" 
-       [disabled]="exerciceplanForm.invalid"
-       >
-        Save
-      </button>
-    </form>
-  </div>
+<div class="card">
+    <div class="p-4">
+        <h2 class="text-2xl font-bold mb-4">{{ exerciceplanId != 'null' ? 'Edit' : 'Create' }} Exercise Plan</h2>
+        <form [formGroup]="exerciceplanForm" class="p-fluid">
+            <div class="grid">
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Session</label>
+                        <input pInputText type="text" formControlName="seance" placeholder="Enter session details" />
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Series and Repetitions</label>
+                        <input pInputText type="text" formControlName="seriesAndRepetition" placeholder="e.g., 3x12" />
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Target Muscles</label>
+                        <input pInputText type="text" formControlName="muscles" placeholder="Target muscle groups" />
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Duration (minutes)</label>
+                        <p-inputNumber 
+                            formControlName="duree"
+                            [showButtons]="false"
+                            [min]="0"
+                            placeholder="Enter duration"
+                        ></p-inputNumber>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Day</label>
+                        <input pInputText type="text" formControlName="jour" placeholder="Enter day of exercise" />
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Exercise Type</label>
+                        <p-dropdown
+                            formControlName="type" 
+                            [options]="exerciseTypes"
+                            placeholder="Select exercise type"
+                            [style]="{'width':'100%'}"
+                            appendTo="body"
+                        ></p-dropdown>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-content-end gap-2 mt-4">
+                <p-button label="Cancel" severity="secondary" routerLink="/backoffice/exerciceplan"></p-button>
+                <p-button 
+                    [label]="exerciceplanId != 'null' ? 'Update' : 'Save'" 
+                    (onClick)="onSubmit()"
+                    [disabled]="exerciceplanForm.invalid"
+                ></p-button>
+            </div>
+        </form>
+    </div>
+    
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    <p-toast></p-toast>
+</div>

@@ -19,6 +19,7 @@ import { RippleModule } from 'primeng/ripple';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { FormConfirmationService } from '../../service/form-confirmation.service';
 
 @Component({
     selector: 'app-details-plan-de-traitement',
@@ -134,7 +135,8 @@ export class DetailsPlanDeTraitementComponent implements OnInit {
         private docteurService:DocteurService,
         private patientservice:PatientService,
         private confirmationService: ConfirmationService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private formConfirmationService: FormConfirmationService
     ) {
         this.planForm = this.fb.group({
             patientId: ['', Validators.required],
@@ -272,20 +274,19 @@ export class DetailsPlanDeTraitementComponent implements OnInit {
         });
     }
 
-    submit() {
+    async submit() {
         if (this.planForm.valid) {
-            console.log(this.planForm.value);
-
-            this.planDeTraitementService.addPlanDeTraitement(this.planForm.value).subscribe((res: any) => { 
-                console.log(res);
-                this.planForm.reset();
-                this.router.navigate(['/backoffice/planDeTraitement']);
+            const confirmed = await this.formConfirmationService.confirmSubmit();
+            if (confirmed) {
+                this.planDeTraitementService.addPlanDeTraitement(this.planForm.value).subscribe((res: any) => { 
+                    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Treatment plan saved successfully' });
+                    this.planForm.reset();
+                    this.router.navigate(['/backoffice/planDeTraitement']);
+                });
             }
-            );
-
-            // send to backend...
         } else {
             this.planForm.markAllAsTouched();
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill all required fields' });
         }
     }
 }

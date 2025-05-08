@@ -1,80 +1,92 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MedicamentplanService } from '../../service/medicamentplan.service';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Checkbox } from 'primeng/checkbox';
+import { MedicamentplanService } from '../../service/medicamentplan.service';
+import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { TextareaModule } from 'primeng/textarea';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { FormConfirmationService } from '../../service/form-confirmation.service';
 
 @Component({
   selector: 'app-details-medicamentplan',
- standalone: true,
-    imports: [CommonModule,FormsModule, ReactiveFormsModule],
   templateUrl: './details-medicamentplan.component.html',
-  styleUrl: './details-medicamentplan.component.scss'
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule, 
+    ReactiveFormsModule,
+    ButtonModule,
+    InputTextModule,
+    TextareaModule,
+    InputNumberModule,
+    CheckboxModule,
+    ConfirmDialogModule,
+    ToastModule
+  ],
+  providers: [ConfirmationService, MessageService]
 })
 export class DetailsMedicamentplanComponent {
   medicamentplanForm: FormGroup;
   medicamentplanId: any;
-    constructor(
-      private fb: FormBuilder,
-      private medicamentplanService: MedicamentplanService,
-      private router: Router,
-      private route: ActivatedRoute
-    ) {
-      
-      this.medicamentplanForm = this.fb.group({
-       id: [''],
-       medicamentId: [''],
-       planDeTraitementId: [''],
-       medicament: [''],
-       note: [''],
-       file: [''],
-       Checkbox: [''],
 
-      
-        
-      });
+  constructor(
+    private fb: FormBuilder,
+    private medicamentplanService: MedicamentplanService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private formConfirmationService: FormConfirmationService,
+    private messageService: MessageService
+  ) {
+    this.medicamentplanForm = this.fb.group({
+      dosage: ['', Validators.required],
+      frequence: ['', Validators.required],
+      checkbok: [false]
+    });
+  }
+
+  ngOnInit(): void {
+    this.medicamentplanId = this.route.snapshot.paramMap.get('id');
+    if (this.medicamentplanId != 'null') {
+      this.displayMedicamentplan(this.medicamentplanId);
     }
-  
-    ngOnInit(): void {
-      this.medicamentplanId = this.route.snapshot.paramMap.get('id');
-      if (this.medicamentplanId != 'null') {
-        this.displayMedicamentplan(this.medicamentplanId);
-      }
-    }
-  
-    displayMedicamentplan(id: any) {
-      this.medicamentplanService.getMedicamentplanById(id).subscribe((res:any) => {
-        this.medicamentplanForm.patchValue(res);
-        console.log(this.medicamentplanForm.value);
-      });
-    }
-  
-    onSubmit(): void {
-      if (this.medicamentplanForm.valid) {
+  }
+
+  displayMedicamentplan(id: any) {
+    this.medicamentplanService.getMedicamentplanById(id).subscribe((res:any) => {
+      this.medicamentplanForm.patchValue(res);
+    });
+  }
+
+  async onSubmit(): Promise<void> {
+    if (this.medicamentplanForm.valid) {
+      const confirmed = await this.formConfirmationService.confirmSubmit();
+      if (confirmed) {
         if (this.medicamentplanId != 'null') {
-          this.updateMedicamentplan()
-        }else{
-          this.medicamentplanService
-            .addMedicamentplan(this.medicamentplanForm.value)
-            .subscribe((res:any) => {
-              console.log(res);
-              this.medicamentplanForm.reset();
-              this.router.navigate(['/backoffice/medicamentplan']);
-            });
+          this.updateMedicamentplan();
+        } else {
+          this.medicamentplanService.addMedicamentplan(this.medicamentplanForm.value).subscribe((res:any) => {
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication plan saved successfully' });
+            this.medicamentplanForm.reset();
+            this.router.navigate(['/backoffice/medicamentplan']);
+          });
         }
       }
     }
-  
-    updateMedicamentplan() {
-      if (this.medicamentplanForm.valid) {
-        console.log(this.medicamentplanForm.value);
-        this.medicamentplanService.updateMedicamentplan(this.medicamentplanId,this.medicamentplanForm.value).subscribe((res:any) => {
-          console.log(res);
-          this.medicamentplanForm.reset();
-          this.router.navigate(['/backoffice/medicamentplan']);
-        });
-      }
-    }
+  }
 
+  updateMedicamentplan() {
+    if (this.medicamentplanForm.valid) {
+      this.medicamentplanService.updateMedicamentplan(this.medicamentplanId, this.medicamentplanForm.value).subscribe((res:any) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication plan updated successfully' });
+        this.medicamentplanForm.reset();
+        this.router.navigate(['/backoffice/medicamentplan']);
+      });
+    }
+  }
 }

@@ -1,55 +1,62 @@
-<div class="container mt-4">
-    <form [formGroup]="rendezvousForm" >
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label>date</label>
-          <div>
-            <p-datepicker  formControlName="date" appendTo="body" [style]="{'width':'100%'}" />
-            
-          </div>
-          
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>patient</label>
-          <p-select id="state" formControlName="patientId" 
-          [options]="patientList"
-          filter="true" filterBy="firstname,lastname"
-          optionLabel="firstname"
-          optionValue="id"
-           placeholder="Select One" class="w-full">
-          
-           <ng-template let-patient #item>
-            <div class="flex items-center gap-2">
-                <div>{{ patient.firstname + ' '+ patient.lastname }}</div>
+<div class="card">
+    <div class="p-4">
+        <h2 class="text-2xl font-bold mb-4">{{ rendezvousId != 'null' ? 'Edit' : 'Create' }} Appointment</h2>
+        <form [formGroup]="rendezvousForm" class="p-fluid">
+            <div class="grid">
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Date</label>
+                        <p-calendar 
+                            formControlName="date" 
+                            [showTime]="true"
+                            [showIcon]="true"
+                            dateFormat="yy-mm-dd"
+                            [style]="{'width':'100%'}"
+                            appendTo="body"
+                        ></p-calendar>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Patient</label>
+                        <p-dropdown
+                            formControlName="patientId" 
+                            [options]="patientList"
+                            placeholder="Select Patient"
+                            [filter]="true"
+                            filterBy="label"
+                            [style]="{'width':'100%'}"
+                            appendTo="body"
+                        ></p-dropdown>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Doctor</label>
+                        <p-dropdown
+                            formControlName="docteurId" 
+                            [options]="docteurList"
+                            placeholder="Select Doctor"
+                            [filter]="true"
+                            filterBy="label"
+                            [style]="{'width':'100%'}"
+                            appendTo="body"
+                        ></p-dropdown>
+                    </div>
+                </div>
             </div>
-        </ng-template>
-          </p-select>
-                  
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>docteur</label>
-          <p-select id="state" formControlName="docteurId" 
-          [options]="docteurList"
-          filter="true" filterBy="firstname,lastname"
-          optionLabel="firstname"
-          optionValue="id"
-           placeholder="Select One" class="w-full">
-          
-           <ng-template let-docteur #item>
-            <div class="flex items-center gap-2">
-                <div>{{ docteur.firstname + ' '+ docteur.lastname }}</div>
+
+            <div class="flex justify-content-end gap-2 mt-4">
+                <p-button label="Cancel" severity="secondary" routerLink="/backoffice/rendezvous"></p-button>
+                <p-button 
+                    [label]="rendezvousId != 'null' ? 'Update' : 'Save'" 
+                    (onClick)="onSubmit()"
+                    [disabled]="rendezvousForm.invalid"
+                ></p-button>
             </div>
-        </ng-template>
-          </p-select>
-          
-        </div>
-      </div>
-  
-      <button type="submit" class="btn btn-primary"
-       (click)="onSubmit()" 
-       [disabled]="rendezvousForm.invalid"
-       >
-        Save
-      </button>
-    </form>
-  </div>
+        </form>
+    </div>
+    
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    <p-toast></p-toast>
+</div>

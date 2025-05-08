@@ -1,70 +1,60 @@
-<div class="container mt-4">
-    <form [formGroup]="rapportForm" >
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label>file</label>
-            <input type="text" class="form-control" formControlName="file" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>Type</label>
-            <input type="text" class="form-control" formControlName="type" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>patient</label>
-          <p-select id="state" formControlName="patientId" 
-          [options]="patientList"
-          filter="true" filterBy="firstname,lastname"
-          optionLabel="firstname"
-          optionValue="id"
-           placeholder="Select One" class="w-full">
-          
-           <ng-template let-patient #item>
-            <div class="flex items-center gap-2">
-                <div>{{ patient.firstname + ' '+ patient.lastname }}</div>
+<div class="card">
+    <div class="p-4">
+        <h2 class="text-2xl font-bold mb-4">{{ rapportId != 'null' ? 'Edit' : 'Create' }} Report</h2>
+        <form [formGroup]="rapportForm" class="p-fluid">
+            <div class="grid">
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Patient</label>
+                        <p-dropdown
+                            formControlName="patientId" 
+                            [options]="patientList"
+                            placeholder="Select Patient"
+                            [filter]="true"
+                            filterBy="label"
+                            [style]="{'width':'100%'}"
+                            appendTo="body"
+                        ></p-dropdown>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Doctor</label>
+                        <p-dropdown
+                            formControlName="docteurId" 
+                            [options]="docteurList"
+                            placeholder="Select Doctor"
+                            [filter]="true"
+                            filterBy="label"
+                            [style]="{'width':'100%'}"
+                            appendTo="body"
+                        ></p-dropdown>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="field">
+                        <label class="font-semibold block mb-2">Description</label>
+                        <textarea 
+                            pTextarea 
+                            formControlName="description" 
+                            rows="4"
+                            [autoResize]="true"
+                        ></textarea>
+                    </div>
+                </div>
             </div>
-        </ng-template>
-          </p-select>
-                  
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>doctor</label>
-          <p-select id="state" formControlName="docteurId" 
-          [options]="docteurList"
-          filter="true" filterBy="firstname,lastname"
-          optionLabel="firstname"
-          optionValue="id"
-           placeholder="Select One" class="w-full">
-          
-           <ng-template let-docteur #item>
-            <div class="flex items-center gap-2">
-                <div>{{ docteur.firstname + ' '+ docteur.lastname }}</div>
-            </div>
-        </ng-template>
-          </p-select>
-                  
-        </div>
 
-        
-        <div class="col-md-6 mb-3">
-          <label>Date</label>
-            <input type="date" class="form-control" formControlName="date" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>Hour</label>
-            <input type="time" class="form-control" formControlName="heure" />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label>description</label>
-            <input type="text" class="form-control" formControlName="description" />
-        </div>
-        
-        </div>
-  
-      <button type="submit" class="btn btn-primary"
-       (click)="onSubmit()" 
-       [disabled]="rapportForm.invalid"
-       >
-        Save
-      </button>
-    </form>
-  </div>
+            <div class="flex justify-content-end gap-2 mt-4">
+                <p-button label="Cancel" severity="secondary" routerLink="/backoffice/rapport"></p-button>
+                <p-button 
+                    [label]="rapportId != 'null' ? 'Update' : 'Save'" 
+                    (onClick)="onSubmit()"
+                    [disabled]="rapportForm.invalid"
+                ></p-button>
+            </div>
+        </form>
+    </div>
+    
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    <p-toast></p-toast>
+</div>
