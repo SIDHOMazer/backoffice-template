@@ -1,6 +1,6 @@
 import { ExerciceplanService } from '../service/exerciceplan.service';
 import { ExercicePlan } from '../model/exerciceplan';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -58,15 +58,19 @@ export class ExerciceplanComponent implements OnInit {
       { label: 'Desactive', value: false },
     
   ];
+  idPlan:any
 
-    constructor(private exerciceplanservice: ExerciceplanService) {}
+    constructor(private exerciceplanservice: ExerciceplanService,
+       private activatedRoute:ActivatedRoute,
+    ) {}
 
     ngOnInit(): void {
-        this.displayExerciceplan();
+        this.idPlan=this.activatedRoute.snapshot.paramMap.get('idPlan')
+        this.displayExerciceplan(this.idPlan);
     }
 
-    displayExerciceplan() {
-        this.exerciceplanservice.getAllExerciceplans().subscribe((res) => {
+    displayExerciceplan(idPlan:any) {
+        this.exerciceplanservice.getAllExerciceplans(idPlan).subscribe((res) => {
             this.exerciceplanList = res;
             console.log(this.exerciceplanList);
             this.loading = false;

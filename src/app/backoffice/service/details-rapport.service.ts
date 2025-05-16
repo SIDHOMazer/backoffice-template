@@ -13,7 +13,15 @@ export class DetailsRapportService {
      return this.httpclient.get<DetailsRapport[]>(
        this.baseUrl + '/detailReport'
      );
+
+     
  }
+
+  getAllDetailsRapportsByRapport(rapportId: any) {
+     return this.httpclient.get<DetailsRapport[]>(
+       this.baseUrl + '/detailReport'
+     );
+    }
  getDetailsRapportById(id : any) {
      return this.httpclient.get<DetailsRapport[]>(
        this.baseUrl+'/detailReport/'+id

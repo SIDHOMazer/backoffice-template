@@ -52,14 +52,14 @@ export default [
     { path: 'planDeTraitement', data: { breadcrumb: 'planDeTraitement' }, component: PlanDeTraitementComponent },
     { path: 'details-planDeTraitement/:id', data: { breadcrumb: 'details-planDeTraitement/:id' }, component: DetailsPlanDeTraitementComponent },
 
-    { path: 'rapport/detailsRapport/:report', data: { breadcrumb: 'detailsRapport/:report' }, component: DetailsRapportComponent },
-    { path: 'rapport/detailsRapport/details/:id', data: { breadcrumb: 'detailsRapport/:id' }, component: DetailsDetailsRapprotComponent },
+    { path: 'rapport/:idRapport/detailsRapport', data: { breadcrumb: 'detailsRapport/:report' }, component: DetailsRapportComponent },
+    { path: 'rapport/:idRapport/detailsRapport/details/:id', data: { breadcrumb: 'detailsRapport/:id' }, component: DetailsDetailsRapprotComponent },
     
     { path: 'exercice', data: { breadcrumb: 'exercice' }, component: ExerciceComponent },
     { path: 'details-exercice/:id', data: { breadcrumb: 'details-exercice/:id' }, component: DetailsExerciceComponent },
 
-    { path: 'exercicePlan', data: { breadcrumb: 'exercicePlan' }, component: ExerciceplanComponent },
-    { path: 'details-exercicePlan/:id', data: { breadcrumb: 'details-exercicePlan/:id' }, component: DetailsExerciceplanComponent },
+    { path: 'plan/:idPlan/exercicePlan', data: { breadcrumb: 'exercicePlan' }, component: ExerciceplanComponent },
+    { path: 'plan/:idPlan/exercicePlan/details-exercicePlan/:id', data: { breadcrumb: 'details-exercicePlan/:id' }, component: DetailsExerciceplanComponent },
 
     { path: 'facture', data: { breadcrumb: 'facture' }, component: FactureComponent },
     { path: 'details-facture/:id', data: { breadcrumb: 'details-facture/:id' }, component: DetailsFactureComponent },
@@ -67,14 +67,20 @@ export default [
     { path: 'medicament', data: { breadcrumb: 'medicament' }, component: MedicamentComponent },
     { path: 'details-medicament/:id', data: { breadcrumb: 'details-medicament/:id' }, component: DetailsMedicamentComponent },
 
-    { path: 'medicamentplan', data: { breadcrumb: 'medicamentplan' }, component: MedicamentplanComponent },
-    { path: 'details-medicamentplan/:id', data: { breadcrumb: 'details-medicamentplan/:id' }, component: DetailsMedicamentplanComponent },
+    //old
+   // { path: 'medicamentplan', data: { breadcrumb: 'medicamentplan' }, component: MedicamentplanComponent },
+   // { path: 'details-medicamentplan/:id', data: { breadcrumb: 'details-medicamentplan/:id' }, component: DetailsMedicamentplanComponent },
+    //new
+   { path: 'plan/:idPlan/medicamentplan', data: { breadcrumb: 'medicamentplan' }, component: MedicamentplanComponent },
+    { path: 'plan/:idPlan/medicamentplan/details-medicamentplan/:id', data: { breadcrumb: 'details-medicamentplan/:id' }, component: DetailsMedicamentplanComponent },
+
+
 
     { path: 'testDeSante', data: { breadcrumb: 'testDeSante' }, component: TestDeSanteComponent },
     { path: 'details-testDeSante/:id', data: { breadcrumb: 'details-testDeSante/:id' }, component: DetailsTestDeSanteComponent },
 
-    { path: 'testDeSanteplan', data: { breadcrumb: 'testDeSanteplan' }, component: TestDeSanteplanComponent },
-    { path: 'details-testDeSanteplan/:id', data: { breadcrumb: 'details-testDeSanteplan/:id' }, component: DetailsTestDeSanteplanComponent },
+     { path: 'plan/:idPlan/testDeSanteplan', data: { breadcrumb: 'testDeSanteplan' }, component: TestDeSanteplanComponent },
+     { path: 'plan/:idPlan/testDeSanteplan/details-testDeSanteplan/:id', data: { breadcrumb: 'details-testDeSanteplan/:id' }, component: DetailsTestDeSanteplanComponent },
 
    // { path: '', redirectTo: '/login', pathMatch: 'full' },
    // { path: 'login', component: LoginComponent },

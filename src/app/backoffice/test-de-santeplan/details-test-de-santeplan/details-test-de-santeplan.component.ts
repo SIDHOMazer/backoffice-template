@@ -32,6 +32,7 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
 export class DetailsTestDeSanteplanComponent {
   testDeSanteplanForm: FormGroup;
   testDeSanteplanId: any;
+  idPlan!: string | null;
 
   constructor(
     private fb: FormBuilder,
@@ -44,12 +45,18 @@ export class DetailsTestDeSanteplanComponent {
     this.testDeSanteplanForm = this.fb.group({
       date: ['', Validators.required],
       resultat: ['', Validators.required],
-      notes: ['']
+      notes: [''],
+      planId:['']
     });
   }
 
   ngOnInit(): void {
     this.testDeSanteplanId = this.route.snapshot.paramMap.get('id');
+    this.idPlan = this.route.snapshot.paramMap.get('idPlan');
+
+    if(this.idPlan){
+      this.testDeSanteplanForm.controls['planId'].setValue(this.idPlan)
+    }
     if (this.testDeSanteplanId != 'null') {
       this.displayTestDeSanteplan(this.testDeSanteplanId);
     }

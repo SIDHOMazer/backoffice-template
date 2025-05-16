@@ -10,9 +10,14 @@ baseUrl = 'http://localhost:8082/api/arsii';
 
 
   constructor(private httpclient:HttpClient) { }
-  getAllMedicamentplans(){
+  // getAllMedicamentplans(){
+  //   return this.httpclient.get<Medicamentplan[]>(
+  //     this.baseUrl + '/medicamentPlan'
+  //   );
+
+     getAllMedicamentplans(idPlan: any){
     return this.httpclient.get<Medicamentplan[]>(
-      this.baseUrl + '/medicamentPlan'
+      this.baseUrl + '/medicamentPlan/plan/'+idPlan
     );
 //sala7 l url kif swagger 
 

@@ -47,19 +47,21 @@
                 <th scope="col">alcolique</th>
                 <th scope="col">sports</th>
                 <th scope="col">symptoms</th>
+                <th scope="col">date</th>
                 <th scope="col">status</th>
                 <th scope="col">action</th>
               </tr>
+              
           </ng-template>
           <ng-template #body let-detailsRapport>
               <tr>
                 <td>{{ detailsRapport.id }}</td>
-                <td>{{ detailsRapport.Currenty }}</td>
-                <td>{{ detailsRapport.SurgicalHistory }}</td>
-                <td>{{ detailsRapport.TraumaHistory }}</td>
-                <td>{{ detailsRapport.HealthHistory }}</td>
-                <td>{{ detailsRapport.FamilyHealthHistory }}</td>
-                <td>{{ detailsRapport.Autre }}</td>
+                <td>{{ detailsRapport.currenty }}</td>
+                <td>{{ detailsRapport.surgicalHistory }}</td>
+                <td>{{ detailsRapport.traumaHistory }}</td>
+                <td>{{ detailsRapport.healthHistory }}</td>
+                <td>{{ detailsRapport.familyHealthHistory }}</td>
+                <td>{{ detailsRapport.autre }}</td>
                 <td>{{ detailsRapport.fumeur }}</td>
                 <td>{{ detailsRapport.alcoolique }}</td>
                 <td>{{ detailsRapport.sportif }}</td>

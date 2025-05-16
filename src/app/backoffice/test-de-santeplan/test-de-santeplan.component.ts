@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectModule } from 'primeng/select';
@@ -58,15 +58,20 @@ export class TestDeSanteplanComponent {
       { label: 'Desactive', value: false },
     
   ];
+  idPlan: any;
 
-    constructor(private testDeSanteplanservice: TestDeSanteplanService) {}
+    constructor(private testDeSanteplanservice: TestDeSanteplanService,
+         private activatedRoute: ActivatedRoute,
+    ) {}
+    
 
     ngOnInit(): void {
-        this.displayTestDeSanteplan();
+        this.idPlan = this.activatedRoute.snapshot.paramMap.get('idPlan');
+        this.displayTestDeSanteplan(this.idPlan);
     }
 
-    displayTestDeSanteplan() {
-        this.testDeSanteplanservice.getAllTestDeSanteplans().subscribe((res) => {
+    displayTestDeSanteplan(idPlan: any) {
+        this.testDeSanteplanservice.getAllTestDeSanteplans(idPlan).subscribe((res) => {
             this.testDeSanteplanList = res;
             console.log(this.testDeSanteplanList);
             this.loading = false;

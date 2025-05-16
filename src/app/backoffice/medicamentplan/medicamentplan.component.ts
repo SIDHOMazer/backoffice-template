@@ -1,5 +1,5 @@
 
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -61,14 +61,21 @@ export class MedicamentplanComponent {
     
   ];
 
-    constructor(private medicamentplanservice: MedicamentplanService) {}
+  idPlan :any
+    constructor(private medicamentplanservice: MedicamentplanService,
+      //new
+      private activatedRoute: ActivatedRoute,
+    ) {}
 
     ngOnInit(): void {
-        this.displayMedicamentplan();
+      //new
+      this.idPlan= this.activatedRoute.snapshot.paramMap.get('idPlan');
+      
+        this.displayMedicamentplan(this.idPlan);
     }
 
-    displayMedicamentplan() {
-        this.medicamentplanservice.getAllMedicamentplans().subscribe((res) => {
+    displayMedicamentplan(idPlan: any) {
+        this.medicamentplanservice.getAllMedicamentplans(idPlan).subscribe((res) => {
             this.medicamentplanList = res;
             console.log(this.medicamentplanList);
             this.loading = false;

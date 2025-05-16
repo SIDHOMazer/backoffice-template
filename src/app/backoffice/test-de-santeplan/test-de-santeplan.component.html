@@ -6,7 +6,8 @@
                     <h2>Management of <b>healthTestplan</b></h2>
                 </div>
                 <div class="col-sm-6 d-flex justify-content-end">
-                    <p-button label="Ajouter" icon="pi pi-plus"   [routerLink]="'/backoffice/details-testDeSanteplan/null'" />
+                    <p-button label="Ajouter" icon="pi pi-plus"
+                    [routerLink]="'details-testDeSanteplan/null'" />
                 </div>
             </div>
         </div>
@@ -100,7 +101,7 @@
                     </td>
                     <td style="width: 200px">
                         <p-button icon="pi pi-trash" severity="danger" />
-                        <p-button icon="pi pi-pen-to-square" severity="warn" [routerLink]="'/backoffice/details-testDeSanteplan/' + testDeSanteplan.id" />
+                        <p-button icon="pi pi-pen-to-square" severity="warn" [routerLink]="'details-testDeSanteplan/' + testDeSanteplan.id" />
                     </td>
                 </tr>
             </ng-template>

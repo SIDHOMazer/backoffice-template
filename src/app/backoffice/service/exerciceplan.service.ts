@@ -9,10 +9,10 @@ export class ExerciceplanService {
  baseUrl = 'http://localhost:8082/api/arsii';
 
   constructor(private httpclient:HttpClient) { }
-  getAllExerciceplans(){
+  getAllExerciceplans(idPlan:any){
     return this.httpclient.get<ExercicePlan[]>(
-      this.baseUrl + '/exercicePlan'
-    );
+       this.baseUrl + '/exercicePlan/plan/'+idPlan
+     );
 }
 getExerciceplanById(id : any) {
     return this.httpclient.get<ExercicePlan[]>(

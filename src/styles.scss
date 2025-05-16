@@ -4,7 +4,7 @@
 @use 'primeicons/primeicons.css';
 @use './assets/demo/demo.scss';
 @use 'primeflex/primeflex.css';
-
+@import 'primeicons/primeicons.css';
 /* Global form grid styles */
 .form-grid {
     @apply grid;

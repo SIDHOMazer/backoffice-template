@@ -97,7 +97,9 @@
                  styleClass="dark:!bg-surface-900" />
                   </td>
                   <td style="width: 200px" class="d-flex justify-content-center gap-2">
-                      <p-button icon="pi pi-fw pi-file-check" severity="info" [routerLink]="'/backoffice/rapport/detailsRapport/' + report.id" />
+                      <p-button icon="pi pi-fw pi-file-check" severity="info" 
+                    
+                      [routerLink]="'/backoffice/rapport/'+report.id+'/detailsRapport'" />
                       <p-button icon="pi pi-trash" severity="danger" />
                       <p-button icon="pi pi-pen-to-square" severity="warn" [routerLink]="'/backoffice/details-report/' + report.id" />
                   </td>

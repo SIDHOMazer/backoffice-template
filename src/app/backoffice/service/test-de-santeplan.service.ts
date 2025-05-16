@@ -9,11 +9,14 @@ export class TestDeSanteplanService {
 baseUrl = 'http://localhost:8082/api/arsii';
         
           constructor(private httpclient:HttpClient) { }
-          getAllTestDeSanteplans(){
+          getAllTestDeSanteplans(idPlan:any){
             return this.httpclient.get<testDeSanteplan[]>(
-              this.baseUrl + '/testDeSantePlan'
+              this.baseUrl + '/testDeSantePlan/plan/'+idPlan
             );
-        }
+         
+          }
+
+        
         getTestDeSanteplanById(id : any) {
             return this.httpclient.get<testDeSanteplan[]>(
               this.baseUrl+'/testDeSantePlan/'+id

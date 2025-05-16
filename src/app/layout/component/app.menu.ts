@@ -54,9 +54,9 @@ export class AppMenu implements OnInit {
                 label: 'PLAN',
                 items: [
                     { label: 'planDeTraitement', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/planDeTraitement'] },
-                    { label: 'exercicePlan', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/exercicePlan'] },
-                    { label: 'medicamentplan', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/medicamentplan'] },
-                    { label: 'testDeSanteplan', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/testDeSanteplan'] },
+                    // { label: 'exercicePlan', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/exercicePlan'] },
+                    // { label: 'medicamentplan', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/medicamentplan'] },
+                    // { label: 'testDeSanteplan', icon: 'pi pi-fw pi-clipboard', routerLink: ['/backoffice/testDeSanteplan'] },
                 ]
             }
         ];

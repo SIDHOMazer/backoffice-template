@@ -16,7 +16,7 @@ import { RippleModule } from 'primeng/ripple';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DetailsRapport } from '../../model/detailsRaport';
 
 @Component({
@@ -47,14 +47,18 @@ export class DetailsRapportComponent {
    selectedDetailsRapport: any;
    loading: boolean = true;
   @ViewChild('filter') filter!: ElementRef;
-   constructor(private  detailsRapportservice:  DetailsRapportService) { }
+statusValue: any;
+statuses: any[]|undefined;
+idRapport: any;
+   constructor(private  detailsRapportservice:  DetailsRapportService,private activatedRoute :ActivatedRoute) { }
  
    ngOnInit(): void {
-     this.displayDetailsRapport();
+    this.idRapport = this.activatedRoute.snapshot.paramMap.get('idRapport');
+     this.displayDetailsRapport(this.idRapport);
    }
  
-   displayDetailsRapport() {
-     this. detailsRapportservice.getAllDetailsRapports().subscribe((res:any)=>{
+   displayDetailsRapport(rapportId: any) {
+     this. detailsRapportservice.getAllDetailsRapportsByRapport(rapportId).subscribe((res:any)=>{
       this. detailsRapportist = res;
      console.log(this. detailsRapportist);
         this.loading = false; 
