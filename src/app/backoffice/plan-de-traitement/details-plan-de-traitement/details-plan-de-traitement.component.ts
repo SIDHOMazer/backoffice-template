@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { PlanDeTraitementService } from '../../service/plan-de-traitement.service';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
@@ -20,6 +20,10 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
     selector: 'app-details-plan-de-traitement',
@@ -38,6 +42,11 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
         RippleModule,
         ConfirmDialogModule,
         ToastModule,
+         InputNumberModule,
+                CalendarModule,
+                DropdownModule,
+                SelectButtonModule,
+                RouterModule,
         RouterLink
     ],
     providers: [ConfirmationService, MessageService],
@@ -54,6 +63,10 @@ export class DetailsPlanDeTraitementComponent implements OnInit {
     exerciceList: any = [];
   patientList :any;
   docteurList: any;
+  statusOptions = [
+    { label: 'Active', value: true },
+    { label: 'Inactive', value: false }
+  ];
     //   exerciceplanservice: any;
 
     //    constructor(
@@ -147,6 +160,7 @@ export class DetailsPlanDeTraitementComponent implements OnInit {
             exercicePlans: this.fb.array([]),
             medicamentPlans: this.fb.array([]),
             testDeSantePlans: this.fb.array([]),
+               status: ['true']
         });
       
         this.addExercicePlan(); // Add one by default

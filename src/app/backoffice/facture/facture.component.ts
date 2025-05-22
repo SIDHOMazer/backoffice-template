@@ -19,6 +19,7 @@ import { RippleModule } from 'primeng/ripple';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-facture',
@@ -57,7 +58,10 @@ export class FactureComponent implements OnInit {
   
 ];
 
-   constructor(private  factureservice:FactureService) { }
+   constructor(private  factureservice:FactureService,
+                  private messageService: MessageService
+    
+   ) { }
  
    ngOnInit(): void {
      this.displayFacture();
@@ -84,6 +88,15 @@ clear(table: Table) {
   this.filter.nativeElement.value = '';
 }
 
-
+updateFacture(md: any) {
+        this.factureservice
+            .updateFacture(md.id, {
+                status: false
+            })
+            .subscribe((res: any) => {
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication deleted successfully' });
+                this.displayFacture();
+            });
+    }
 
 }

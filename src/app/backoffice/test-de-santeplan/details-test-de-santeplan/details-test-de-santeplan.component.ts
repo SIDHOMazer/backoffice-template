@@ -11,6 +11,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
+import { DropdownModule } from 'primeng/dropdown';
+import { TestDeSanteService } from '../../service/test-de-sante.service';
 
 @Component({
   selector: 'app-details-test-de-santeplan',
@@ -25,7 +27,7 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
     TextareaModule,
     CalendarModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,DropdownModule
   ],
   providers: [ConfirmationService, MessageService]
 })
@@ -33,6 +35,7 @@ export class DetailsTestDeSanteplanComponent {
   testDeSanteplanForm: FormGroup;
   testDeSanteplanId: any;
   idPlan!: string | null;
+ testDeSantList: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -40,13 +43,17 @@ export class DetailsTestDeSanteplanComponent {
     private router: Router,
     private route: ActivatedRoute,
     private formConfirmationService: FormConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private testDeSanteservice:TestDeSanteService
+
   ) {
     this.testDeSanteplanForm = this.fb.group({
       date: ['', Validators.required],
       resultat: ['', Validators.required],
       notes: [''],
-      planId:['']
+      planId:[''],
+      testDeSanteId: ['',Validators.required],
+
     });
   }
 
@@ -60,7 +67,18 @@ export class DetailsTestDeSanteplanComponent {
     if (this.testDeSanteplanId != 'null') {
       this.displayTestDeSanteplan(this.testDeSanteplanId);
     }
+      this.displayTestDeSante()
+    if (this.testDeSanteplanId != 'null') {
+      this.displayTestDeSanteplan(this.testDeSanteplanId);
+    }
   }
+   displayTestDeSante() {
+        this.testDeSanteservice.getAllTestDeSantes().subscribe((res: any) => {
+            this.testDeSantList = res;
+            console.log(this.testDeSantList);
+        });
+    }
+
 
   displayTestDeSanteplan(id: any) {
     this.testDeSanteplanService.getTestDeSanteplanById(id).subscribe((res:any) => {

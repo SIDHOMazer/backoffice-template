@@ -92,7 +92,7 @@
                  styleClass="dark:!bg-surface-900" />
                   </td>
                   <td style="width: 200px">
-                      <p-button icon="pi pi-trash" severity="danger" />
+                      <p-button icon="pi pi-trash" (onClick)="updateExercice(exercice)" severity="danger" />
                       <p-button icon="pi pi-pen-to-square" severity="warn" [routerLink]="'/backoffice/details-exercice/' + exercice.id" />
                   </td>
               </tr>

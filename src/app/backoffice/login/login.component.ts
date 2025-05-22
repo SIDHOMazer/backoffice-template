@@ -32,6 +32,8 @@ import { AppFloatingConfigurator } from '../../layout/component/app.floatingconf
           next: (res) => {
 
             localStorage.setItem('currentUser', JSON.stringify(res));
+            localStorage.setItem('role', res.role);
+            localStorage.setItem('id', res.id);
             this.router.navigate(['/backoffice/patient']);
           },
           error: (err) => {

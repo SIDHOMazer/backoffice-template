@@ -15,6 +15,8 @@
                         <input pInputText type="text" formControlName="seriesAndRepetition" placeholder="e.g., 3x12" />
                     </div>
                 </div>
+
+         
                 <div class="col-12 md:col-6">
                     <div class="field">
                         <label class="font-semibold block mb-2">Target Muscles</label>
@@ -38,19 +40,30 @@
                         <input pInputText type="text" formControlName="jour" placeholder="Enter day of exercise" />
                     </div>
                 </div>
-                <div class="col-12 md:col-6">
+               
+          
+   
+                <div class="col-12 md:col-4">
                     <div class="field">
-                        <label class="font-semibold block mb-2">Exercise Type</label>
-                        <p-dropdown
-                            formControlName="type" 
-                            [options]="exerciseTypes"
-                            placeholder="Select exercise type"
-                            [style]="{'width':'100%'}"
+                        <label class="font-semibold block mb-2">Exercise</label>
+                        <p-dropdown formControlName="exerciceId" 
+                            [options]="exerciceList"
+                            filter="true" 
+                            filterBy="nameExercice"
+                            optionLabel="nameExercice"
                             appendTo="body"
-                        ></p-dropdown>
+                            optionValue="id"
+                            placeholder="Select an exercise"
+                            [style]="{'width':'100%'}"
+                        >
+                            <ng-template let-exercice pTemplate="item">
+                                <div>{{ exercice.nameExercice }}</div>
+                            </ng-template>
+                        </p-dropdown>
                     </div>
                 </div>
-            </div>
+  
+  </div>
 
             <div class="flex justify-content-end gap-2 mt-4">
                 <p-button label="Cancel" severity="secondary" routerLink="/backoffice/exerciceplan"></p-button>

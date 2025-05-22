@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExerciceplanService } from '../../service/exerciceplan.service';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,9 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
+import { ExerciceService } from '../../service/exercice.service';
+import { PanelModule } from 'primeng/panel';
+import { AccordionModule } from 'primeng/accordion';
 
 @Component({
   selector: 'app-details-exerciceplan',
@@ -27,19 +30,16 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
     InputNumberModule,
     DropdownModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,  PanelModule,
+    AccordionModule
   ],
   providers: [ConfirmationService, MessageService]
 })
 export class DetailsExerciceplanComponent {
   exerciceplanForm: FormGroup;
   exerciceplanId: any;
-  exerciseTypes = [
-    { label: 'Cardio', value: 'CARDIO' },
-    { label: 'Strength', value: 'STRENGTH' },
-    { label: 'Flexibility', value: 'FLEXIBILITY' },
-    { label: 'Balance', value: 'BALANCE' }
-  ];
+  exerciceList: any[] = [];
+
 
   constructor(
     private fb: FormBuilder,
@@ -47,7 +47,8 @@ export class DetailsExerciceplanComponent {
     private router: Router,
     private route: ActivatedRoute,
     private formConfirmationService: FormConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+     private exerciceService: ExerciceService     
   ) {
     this.exerciceplanForm = this.fb.group({
       seance: ['', Validators.required],
@@ -55,22 +56,45 @@ export class DetailsExerciceplanComponent {
       muscles: ['', Validators.required],
       duree: ['', [Validators.required, Validators.min(0)]],
       jour: ['', Validators.required],
-      type: ['', Validators.required]
+      type: ['', Validators.required],
+      exercicePlans: this.fb.array([]),
+      exerciceId: ['',Validators.required],
+
     });
   }
+   get exercicePlans(): FormArray {
+    return this.exerciceplanForm.get('exercicePlans') as FormArray;
+  }
+
+  exercicePlansForm(index: number): FormGroup {
+    return this.exercicePlans.at(index) as FormGroup;
+  }
+
+ 
+
 
   ngOnInit(): void {
     this.exerciceplanId = this.route.snapshot.paramMap.get('id');
+
+     this.displayExercice()
     if (this.exerciceplanId != 'null') {
       this.displayExerciceplan(this.exerciceplanId);
     }
   }
+   
 
   displayExerciceplan(id: any) {
     this.exerciceplanService.getExerciceplanById(id).subscribe((res:any) => {
       this.exerciceplanForm.patchValue(res);
     });
   }
+
+   displayExercice() {
+        this.exerciceService.getAllExercices().subscribe((res: any) => {
+            this.exerciceList = res;
+            console.log(this.exerciceList);
+        });
+    }
 
   async onSubmit(): Promise<void> {
     if (this.exerciceplanForm.valid) {

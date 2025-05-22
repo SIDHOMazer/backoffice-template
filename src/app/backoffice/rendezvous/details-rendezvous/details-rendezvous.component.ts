@@ -36,6 +36,8 @@ export class DetailsRendezvousComponent {
   rendezvousId: any;
   patientList: any[] = [];
   docteurList: any[] = [];
+  roleUser!: string | null;
+  id!: string | null;
 
   constructor(
     private fb: FormBuilder,
@@ -58,6 +60,12 @@ export class DetailsRendezvousComponent {
     this.loadPatients();
     this.loadDocteurs();
     this.rendezvousId = this.route.snapshot.paramMap.get('id');
+
+      this.roleUser = localStorage.getItem('role');
+        this.id = localStorage.getItem('id');
+        if(this.roleUser =='DOCTEUR'){
+          this.rendezvousForm.controls['docteurId'].setValue(this.id)
+        }
     if (this.rendezvousId != 'null') {
       this.displayRendezvous(this.rendezvousId);
     }

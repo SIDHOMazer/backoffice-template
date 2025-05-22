@@ -18,68 +18,84 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
 import { MedicamentService } from '../service/medicament.service';
 import { Medicament } from '../model/medicament';
+import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-medicament',
-  standalone: true,
-  imports: [CommonModule,RouterModule
-  ,TableModule,
-          MultiSelectModule,
-          SelectModule,
-          InputIconModule,
-          TagModule,
-          InputTextModule,
-          SliderModule,
-          ProgressBarModule,
-          ToggleButtonModule,
-          ToastModule,
-          CommonModule,
-          FormsModule,
-          ButtonModule,
-          RatingModule,
-          RippleModule,
-          IconFieldModule],
-  templateUrl: './medicament.component.html',
-  styleUrl: './medicament.component.scss'
+    selector: 'app-medicament',
+    standalone: true,
+    imports: [
+        CommonModule,
+        RouterModule,
+        TableModule,
+        MultiSelectModule,
+        SelectModule,
+        InputIconModule,
+        TagModule,
+        InputTextModule,
+        SliderModule,
+        ProgressBarModule,
+        ToggleButtonModule,
+        ToastModule,
+        CommonModule,
+        FormsModule,
+        ButtonModule,
+        RatingModule,
+        RippleModule,
+        IconFieldModule
+    ],
+    templateUrl: './medicament.component.html',
+    styleUrl: './medicament.component.scss'
 })
 export class MedicamentComponent {
-  medicamentList: Medicament[] = [];
+    medicamentList: Medicament[] = [];
     selectedMedicament: any;
     medicament: any;
-loading: boolean = true;
-  @ViewChild('filter') filter!: ElementRef;
-  statusValue!: null | boolean;
+    loading: boolean = true;
+    @ViewChild('filter') filter!: ElementRef;
+    statusValue!: null | boolean;
 
-
-      statuses = [
+    statuses = [
         { label: 'Active', value: true },
-        { label: 'Desactive', value: false },
-      
+        { label: 'Desactive', value: false }
     ];
-  
-    constructor(private medicamentservice:MedicamentService) { }
-  
+
+    constructor(
+        private medicamentservice: MedicamentService,
+        private messageService: MessageService
+    ) {}
+
     ngOnInit(): void {
-      this.displayMedicament();
+        this.displayMedicament();
     }
-    
+
     displayMedicament() {
-      this.medicamentservice.getAllMedicaments().subscribe((res)=>{
-        this.medicamentList = res;
-        console.log(this.medicamentList);
-        this.loading = false;
-      });
+        this.medicamentservice.getAllMedicaments().subscribe((res) => {
+            this.medicamentList = res;
+            console.log(this.medicamentList);
+            this.loading = false;
+        });
     }
-  
-    selectMedicament(medicament:any){
-      this.selectedMedicament=medicament;
-   }
-   onGlobalFilter(table: Table, event: Event) {
-    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
-  }
-  
-  clear(table: Table) {
-    table.clear();
-    this.filter.nativeElement.value = '';
-  }
+
+    selectMedicament(medicament: any) {
+        this.selectedMedicament = medicament;
+    }
+    onGlobalFilter(table: Table, event: Event) {
+        table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+    }
+
+    clear(table: Table) {
+        table.clear();
+        this.filter.nativeElement.value = '';
+    }
+
+    updateMedicament(md: any) {
+        this.medicamentservice
+            .updateMedicament(md.id, {
+                status: false
+            })
+            .subscribe((res: any) => {
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication deleted successfully' });
+                this.displayMedicament();
+            });
+    }
 }

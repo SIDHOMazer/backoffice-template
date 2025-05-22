@@ -20,6 +20,16 @@
                         ></textarea>
                     </div>
                 </div>
+                          <div class="field">
+                <label for="status" class="block text-sm font-medium mb-2">Status</label>
+                <p-selectButton 
+                    id="status"
+                    [options]="statusOptions" 
+                    formControlName="status"
+                    optionLabel="label"
+                    optionValue="value"
+                ></p-selectButton>
+            </div>
                 <div class="col-12">
                     <div class="field">
                         <label class="font-semibold block mb-2">File</label>
@@ -34,6 +44,7 @@
                         ></p-fileUpload>
                     </div>
                 </div>
+       
             </div>
 
             <div class="flex justify-content-end gap-2 mt-4">

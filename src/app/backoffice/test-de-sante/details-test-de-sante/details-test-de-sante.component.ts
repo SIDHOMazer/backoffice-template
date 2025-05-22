@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TestDeSanteService } from '../../service/test-de-sante.service';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
@@ -11,6 +11,10 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
   selector: 'app-details-test-de-sante',
@@ -25,6 +29,12 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
     InputTextModule,
     TextareaModule,
     ConfirmDialogModule,
+     InputNumberModule,
+            CalendarModule,
+            DropdownModule,
+            SelectButtonModule,
+            RouterModule,
+      
     ToastModule
   ],
   providers: [ConfirmationService, MessageService]
@@ -32,6 +42,10 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
 export class DetailsTestDeSanteComponent {
   testDeSanteForm: FormGroup;
   testDeSanteId: any;
+     statusOptions = [
+    { label: 'Active', value: true },
+    { label: 'Inactive', value: false }
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -43,7 +57,9 @@ export class DetailsTestDeSanteComponent {
   ) {
     this.testDeSanteForm = this.fb.group({
       testName: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+            status: ['true']
+
     });
   }
 

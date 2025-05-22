@@ -30,7 +30,7 @@
                         ></p-dropdown>
                     </div>
                 </div>
-                <div class="col-12 md:col-6">
+                <div class="col-12 md:col-6" *ngIf="roleUser !='DOCTEUR'">
                     <div class="field">
                         <label class="font-semibold block mb-2">Doctor</label>
                         <p-dropdown

@@ -18,6 +18,7 @@ import { RippleModule } from 'primeng/ripple';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-exercice',
@@ -57,7 +58,10 @@ loading: boolean = true;
       
     ];
   
-    constructor(private exerciceservice:ExerciceService) { }
+    constructor(private exerciceservice:ExerciceService,
+                    private messageService: MessageService
+      
+    ) { }
   
     ngOnInit(): void {
       this.displayExercice();
@@ -82,5 +86,14 @@ loading: boolean = true;
     table.clear();
     this.filter.nativeElement.value = '';
   }
-
+ updateExercice(md: any) {
+        this.exerciceservice
+            .updateExercice(md.id, {
+                status: false
+            })
+            .subscribe((res: any) => {
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication deleted successfully' });
+                this.displayExercice();
+            });
+    }
 }

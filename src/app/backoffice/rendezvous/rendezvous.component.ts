@@ -71,6 +71,8 @@ minDate=new Date()
         { label: 'En attente', value: false }
 
     ];
+    roleUser!: string | null;
+    id!: string | null;
 
     constructor(
         private rendezvousservice: RendezvousService,
@@ -79,7 +81,13 @@ minDate=new Date()
     ) {}
 
     ngOnInit(): void {
+         this.roleUser = localStorage.getItem('role');
+        this.id = localStorage.getItem('id');
+        if (this.roleUser == 'DOCTEUR') {
+            this.getRendezvousByIdDoctor(this.id);
+        } else {
         this.displayRendezvous();
+        }
     }
 
     displayRendezvous() {
@@ -194,6 +202,13 @@ minDate=new Date()
                 });
             });
     }
-    
+      getRendezvousByIdDoctor(id: any) {
+        this.rendezvousservice.getRendezvousByIdDoctor(id).subscribe((res) => {
+            this.rendezvousList = res;
+            console.log(this.rendezvousList);
+            this.loading = false;
+        });
+    }
+      
 }
 

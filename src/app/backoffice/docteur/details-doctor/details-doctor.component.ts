@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DocteurService } from '../../service/docteur.service';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
@@ -9,19 +9,31 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
   selector: 'app-details-doctor',
   templateUrl: './details-doctor.component.html',
   standalone: true,
   imports: [
-    CommonModule,
+  CommonModule,
     FormsModule, 
     ReactiveFormsModule,
     ButtonModule,
     InputTextModule,
     ConfirmDialogModule,
-    ToastModule
+      
+    InputNumberModule,
+        CalendarModule,
+        DropdownModule,
+        SelectButtonModule,
+        RouterModule,
+  
+        ToastModule
+    
   ],
   providers: [ConfirmationService, MessageService],
   styleUrls: ['./details-doctor.component.css']
@@ -29,7 +41,10 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
 export class DetailsDoctorComponent {
   docteurForm: FormGroup;
   doctorId: any;
-
+   statusOptions = [
+    { label: 'Active', value: true },
+    { label: 'Inactive', value: false }
+  ];
   constructor(
     private fb: FormBuilder,
     private docteurService: DocteurService,
@@ -48,7 +63,9 @@ export class DetailsDoctorComponent {
       specialite: [''],
       password: [''],
       localisation: [''],
-      contact: ['']
+      contact: [''],
+     status: ['true']
+
     });
   }
 

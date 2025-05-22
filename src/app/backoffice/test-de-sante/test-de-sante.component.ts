@@ -19,6 +19,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
 import { TestDeSanteService } from '../service/test-de-sante.service';
 import { testDeSante } from '../model/testDeSante';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-test-de-sante',
@@ -60,7 +61,9 @@ export class TestDeSanteComponent {
     
   ];
 
-    constructor(private testDeSanteservice: TestDeSanteService) {}
+    constructor(private testDeSanteservice: TestDeSanteService,
+              private messageService: MessageService
+    ) {}
 
     ngOnInit(): void {
         this.displayTestDeSante();
@@ -84,5 +87,16 @@ export class TestDeSanteComponent {
     clear(table: Table) {
         table.clear();
         this.filter.nativeElement.value = '';
+    }
+    
+    updateTestDeSante(md: any) {
+        this.testDeSanteservice
+            .updateTestDeSante(md.id, {
+                status: false
+            })
+            .subscribe((res: any) => {
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication deleted successfully' });
+                this.displayTestDeSante();
+            });
     }
 }

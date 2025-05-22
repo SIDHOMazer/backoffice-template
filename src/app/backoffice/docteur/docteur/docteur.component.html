@@ -130,7 +130,7 @@
                    styleClass="dark:!bg-surface-900" />
                     </td>
                     <td style="width: 200px">
-                        <p-button icon="pi pi-trash" severity="danger" />
+                        <p-button icon="pi pi-trash" (onClick)="updateDocteur(docteur)"  severity="danger" />
                         <p-button icon="pi pi-pen-to-square" severity="warn" [routerLink]="'/backoffice/details-doctor/' + docteur.id" />
                     </td>
                 </tr>

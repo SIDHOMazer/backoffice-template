@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PatientService } from '../../service/patient.service';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
@@ -11,6 +11,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
   selector: 'app-details-patient',
@@ -25,7 +27,18 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
     CalendarModule,
     DropdownModule,
     ConfirmDialogModule,
-    ToastModule
+      CommonModule,
+        FormsModule, 
+        ReactiveFormsModule,
+        ButtonModule,
+        InputTextModule,
+        ConfirmDialogModule,
+          
+        InputNumberModule,
+            SelectButtonModule,
+            RouterModule,
+      
+            ToastModule
   ],
   providers: [ConfirmationService, MessageService],
   styleUrls: ['./details-patient.component.css']
@@ -33,6 +46,10 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
 export class DetailsPatientComponent {
   patientForm: FormGroup;
   patientId: any;
+   statusOptions = [
+    { label: 'Active', value: true },
+    { label: 'Inactive', value: false }
+  ];
   genderOptions = [
     { label: 'Male', value: 'MALE' },
     { label: 'Female', value: 'FEMALE' }
@@ -56,7 +73,8 @@ export class DetailsPatientComponent {
       sexe: [''],
       password: [''],
       contact: [''],
-      dateNaissance: ['']
+      dateNaissance: [''],
+      status: [true],
     });
   }
 

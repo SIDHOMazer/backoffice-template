@@ -85,7 +85,7 @@ export default [
    // { path: '', redirectTo: '/login', pathMatch: 'full' },
    // { path: 'login', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
-    { path: '**', redirectTo: '/login' }
+   // { path: '**', redirectTo: '/login' }
 
    
 ] as Routes;

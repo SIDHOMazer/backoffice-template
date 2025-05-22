@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MedicamentService } from '../../service/medicament.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
@@ -11,6 +11,10 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
   selector: 'app-details-medicament',
@@ -26,6 +30,12 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
     TextareaModule,
     FileUploadModule,
     ConfirmDialogModule,
+     InputNumberModule,
+            CalendarModule,
+            DropdownModule,
+            SelectButtonModule,
+            RouterModule,
+      
     ToastModule
   ],
   providers: [ConfirmationService, MessageService]
@@ -33,6 +43,10 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
 export class DetailsMedicamentComponent {
   medicamentForm: FormGroup;
   medicamentId: any;
+   statusOptions = [
+    { label: 'Active', value: true },
+    { label: 'Inactive', value: false }
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -46,7 +60,8 @@ export class DetailsMedicamentComponent {
       id: [''],
       medicament: ['', Validators.required],
       note: [''],
-      file: ['']
+      file: [''],
+      status: ['true']
     });
   }
 

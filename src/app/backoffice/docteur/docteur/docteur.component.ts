@@ -18,6 +18,7 @@ import { RippleModule } from 'primeng/ripple';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-docteur',
   standalone: true,
@@ -53,7 +54,10 @@ export class DocteurComponent implements OnInit {
     { label: 'Active', value: true },
     { label: 'Desactive', value: false },
   ];
-  constructor(private docteurservice:DocteurService) { }
+  constructor(private docteurservice:DocteurService,
+                  private messageService: MessageService
+    
+  ) { }
 
   ngOnInit(): void {
     this.displayDocteur();
@@ -80,7 +84,16 @@ clear(table: Table) {
   table.clear();
   this.filter.nativeElement.value = '';
 }
-
+ updateDocteur(md: any) {
+        this.docteurservice
+            .updateDoctor(md.id, {
+                status: false
+            })
+            .subscribe((res: any) => {
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication deleted successfully' });
+                this.displayDocteur();
+            });
+    }
   } 
 
 

@@ -12,6 +12,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
+import { DropdownModule } from 'primeng/dropdown';
+import { MedicamentService } from '../../service/medicament.service';
 
 @Component({
   selector: 'app-details-medicamentplan',
@@ -27,13 +29,15 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
     InputNumberModule,
     CheckboxModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,DropdownModule
   ],
   providers: [ConfirmationService, MessageService]
 })
 export class DetailsMedicamentplanComponent {
   medicamentplanForm: FormGroup;
   medicamentplanId: any;
+  medicamentList: any[] = [];
+  idPlan: any;
 
   constructor(
     private fb: FormBuilder,
@@ -41,21 +45,31 @@ export class DetailsMedicamentplanComponent {
     private router: Router,
     private route: ActivatedRoute,
     private formConfirmationService: FormConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private medicamentservice:MedicamentService
   ) {
     this.medicamentplanForm = this.fb.group({
       dosage: ['', Validators.required],
       frequence: ['', Validators.required],
+      medicamentId: ['',Validators.required],
       checkbok: [false]
     });
   }
 
   ngOnInit(): void {
     this.medicamentplanId = this.route.snapshot.paramMap.get('id');
+
+     this.displayMedicament()
     if (this.medicamentplanId != 'null') {
       this.displayMedicamentplan(this.medicamentplanId);
     }
   }
+   displayMedicament() {
+        this.medicamentservice.getAllMedicaments().subscribe((res: any) => {
+            this.medicamentList = res;
+            console.log(this.medicamentList);
+        });
+    }
 
   displayMedicamentplan(id: any) {
     this.medicamentplanService.getMedicamentplanById(id).subscribe((res:any) => {

@@ -100,7 +100,7 @@
                       <p-button icon="pi pi-fw pi-file-check" severity="info" 
                     
                       [routerLink]="'/backoffice/rapport/'+report.id+'/detailsRapport'" />
-                      <p-button icon="pi pi-trash" severity="danger" />
+                      <p-button icon="pi pi-trash"  (onClick)="updateRapport(report)"  severity="danger" />
                       <p-button icon="pi pi-pen-to-square" severity="warn" [routerLink]="'/backoffice/details-report/' + report.id" />
                   </td>
               </tr>

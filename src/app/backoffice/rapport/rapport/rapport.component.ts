@@ -17,6 +17,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
 import { RapportService } from '../../service/rapport.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-rapport',
@@ -56,7 +57,9 @@ loading: boolean = true;
   
 ];
   constructor(private rapportservice:RapportService,
-    private route :ActivatedRoute
+    private route :ActivatedRoute,
+                  private messageService: MessageService
+    
   ) { }
 
   ngOnInit(): void {
@@ -98,5 +101,14 @@ clear(table: Table) {
   table.clear();
   this.filter.nativeElement.value = '';
 }
-  
+  updateRapport(md: any) {
+        this.rapportservice
+            .updateRapport(md.id, {
+                status: false
+            })
+            .subscribe((res: any) => {
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication deleted successfully' });
+                this.displayRapport();
+            });
+    }
 }

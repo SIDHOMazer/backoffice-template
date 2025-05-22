@@ -106,7 +106,7 @@
                         <p-button icon="pi pi-plus-circle " styleClass="p-button-sm" severity="info" [routerLink]="'/backoffice/plan/'+ planDeTraitement.id+'/medicamentplan'" />
                           <p-button icon="pi pi-heart" styleClass="p-button-sm" severity="info" [routerLink]="'/backoffice/plan/'+ planDeTraitement.id+'/testDeSanteplan'" />
                            <p-button icon="pi pi-directions " styleClass="p-button-sm" severity="info" [routerLink]="'/backoffice/plan/'+ planDeTraitement.id+'/exercicePlan'" />
-                      <p-button icon="pi pi-trash" styleClass="p-button-sm" severity="danger" />
+                      <p-button icon="pi pi-trash" styleClass="p-button-sm" (onClick)="updatePlanDeTraitement(planDeTraitement)" severity="danger" />
                       <p-button icon="pi pi-pen-to-square" styleClass="p-button-sm" severity="warn" [routerLink]="'/backoffice/details-planDeTraitement/' + planDeTraitement.id" />
 
                   </td>

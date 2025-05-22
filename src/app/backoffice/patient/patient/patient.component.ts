@@ -18,6 +18,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
 import { Patient } from '../../model/patient';
 import { PatientService } from '../../service/patient.service';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-patient',
   standalone: true,
@@ -55,7 +56,10 @@ export class PatientComponent implements OnInit {
       { label: 'Desactive', value: false },
     
   ];
-    constructor(private patientservice:PatientService) { }
+    constructor(private patientservice:PatientService,
+                    private messageService: MessageService
+      
+    ) { }
   
     ngOnInit(): void {
       
@@ -81,5 +85,14 @@ export class PatientComponent implements OnInit {
     table.clear();
     this.filter.nativeElement.value = '';
   }
-    
+      updatePatient(md: any) {
+        this.patientservice
+            .updatePatient(md.id, {
+                status: false
+            })
+            .subscribe((res: any) => {
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication deleted successfully' });
+                this.displayPatient();
+            });
+    }
 }

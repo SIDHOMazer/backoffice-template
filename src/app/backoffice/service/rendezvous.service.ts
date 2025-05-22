@@ -24,6 +24,9 @@ export class RendezvousService {
        addRendezvous(rendezvous: Rendezvous) {
          return this.httpclient.post(this.baseUrl + '/rendezvous', rendezvous);
        }
+        getRendezvousByIdDoctor(id: any) {
+               return this.httpclient.get<Rendezvous[]>(this.baseUrl + '/rendezvous/docteur/' + id);
+           }
      
        updateRendezvous(id:any,rendezvous: any) {
          return this.httpclient.put(this.baseUrl + '/rendezvous/'+id, rendezvous);

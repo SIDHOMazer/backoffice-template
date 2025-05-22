@@ -130,7 +130,7 @@
                   <td style="width: 200px">
                     <p-button icon="pi pi-fw  pi-file-check" severity="info" [routerLink]="'/backoffice/rapport/' + patient.id" />
                   
-                      <p-button icon="pi pi-trash" severity="danger" />
+                      <p-button icon="pi pi-trash" (onClick)="updatePatient(patient)" severity="danger" />
                       <p-button icon="pi pi-pen-to-square" severity="warn" [routerLink]="'/backoffice/details-patient/' + patient.id" />
                   </td>
               </tr>

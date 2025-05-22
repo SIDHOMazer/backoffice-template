@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { RapportService } from '../../service/rapport.service';
 import { PatientService } from '../../service/patient.service';
 import { DocteurService } from '../../service/docteur.service';
@@ -14,6 +14,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
 import { SelectModule } from 'primeng/select';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CalendarModule } from 'primeng/calendar';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
   selector: 'app-details-report',
@@ -29,6 +32,12 @@ import { SelectModule } from 'primeng/select';
     DropdownModule,
     SelectModule,
     ConfirmDialogModule,
+     InputNumberModule,
+            CalendarModule,
+            
+            SelectButtonModule,
+            RouterModule,
+      
     ToastModule
   ],
   providers: [ConfirmationService, MessageService]
@@ -38,6 +47,10 @@ export class DetailsReportComponent {
   rapportId: any;
   patientList: any[] = [];
   docteurList: any[] = [];
+    statusOptions = [
+    { label: 'Active', value: true },
+    { label: 'Inactive', value: false }
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -52,7 +65,8 @@ export class DetailsReportComponent {
     this.rapportForm = this.fb.group({
       patientId: ['', Validators.required],
       docteurId: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+       status: ['true']
     });
   }
 
@@ -99,7 +113,7 @@ export class DetailsReportComponent {
           this.rapportService.addRapport(this.rapportForm.value).subscribe((res:any) => {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Report saved successfully' });
             this.rapportForm.reset();
-            this.router.navigate(['/backoffice/rapport']);
+            this.router.navigate(['/backoffice/rapport/null']);
           });
         }
       }
@@ -111,7 +125,7 @@ export class DetailsReportComponent {
       this.rapportService.updateRapport(this.rapportId, this.rapportForm.value).subscribe((res:any) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Report updated successfully' });
         this.rapportForm.reset();
-        this.router.navigate(['/backoffice/rapport']);
+        this.router.navigate(['/backoffice/rapport/null']);
       });
     }
   }

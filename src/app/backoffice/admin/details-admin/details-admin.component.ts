@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { AdminService } from '../../service/admin.service';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -9,6 +9,10 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-details-admin',
@@ -21,7 +25,14 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
     ButtonModule,
     InputTextModule,
     ConfirmDialogModule,
-    ToastModule
+      
+    InputNumberModule,
+        CalendarModule,
+        DropdownModule,
+        SelectButtonModule,
+        RouterModule,
+  
+        ToastModule
   ],
   providers: [ConfirmationService, MessageService],
   styleUrls: ['./details-admin.component.css']
@@ -29,6 +40,11 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
 export class DetailsAdminComponent {
   adminForm: FormGroup;
   adminId: any;
+   statusOptions = [
+    { label: 'Active', value: true },
+    { label: 'Inactive', value: false }
+  ];
+
 
   constructor(
     private fb: FormBuilder,
@@ -48,7 +64,7 @@ export class DetailsAdminComponent {
       adresse: [''],
       ville: [''],
       codePostal: [''],
-      status: [''],
+      status: ['true']
     });
   }
 
