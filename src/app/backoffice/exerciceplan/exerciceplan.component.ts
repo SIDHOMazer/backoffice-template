@@ -18,6 +18,7 @@ import { RippleModule } from 'primeng/ripple';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-exerciceplan',
@@ -62,6 +63,8 @@ export class ExerciceplanComponent implements OnInit {
 
     constructor(private exerciceplanservice: ExerciceplanService,
        private activatedRoute:ActivatedRoute,
+              private messageService: MessageService
+       
     ) {}
 
     ngOnInit(): void {
@@ -87,5 +90,15 @@ export class ExerciceplanComponent implements OnInit {
     clear(table: Table) {
         table.clear();
         this.filter.nativeElement.value = '';
+    }
+     updateExerciceplan(md: any) {
+        this.exerciceplanservice
+            .updateExerciceplan(md.id, {
+                status: false
+            })
+            .subscribe((res: any) => {
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication deleted successfully' });
+               this.displayExerciceplan(this.idPlan);
+            });
     }
 }

@@ -21,6 +21,8 @@
         "@angular/router": "^19.0.0",
         "@primeng/themes": "^19.0.5",
         "chart.js": "4.4.2",
+        "html2pdf.js": "^0.10.3",
+        "jspdf-autotable": "^5.0.2",
         "leaflet": "^1.9.4",
         "primeclt": "^0.1.5",
         "primeflex": "^4.0.0",

@@ -1,15 +1,25 @@
 <div class="container">
   <div class="table-wrapper">
       <div class="table-title">
-          <div class="row p-3">
-              <div class="col-sm-6">
-                  <h2>Management of <b>exercisePlan</b></h2>
-              </div>
-              <div class="col-sm-6 d-flex justify-content-end">
-                  <p-button label="Ajouter" icon="pi pi-plus"   [routerLink]="'details-exercicePlan/null'" />
-              </div>
-          </div>
-      </div>
+          <div class="row p-3 align-items-center" style="background: linear-gradient(90deg, #e3f2fd 0%, #ffffff 100%); border-radius: 18px; box-shadow: 0 2px 8px rgba(33,150,243,0.07);">
+    <div class="col-sm-6 d-flex align-items-center">
+        <button 
+            pButton 
+            type="button" 
+            class="mr-3 p-button-rounded p-button-text p-button-lg" 
+            icon="pi pi-arrow-left" 
+            [routerLink]="'/backoffice/planDeTraitement'"
+            style="background: #2196f3; color: #fff; margin-right: 18px;"
+            aria-label="Retour Plan de Traitement">
+        </button>
+        <h2 class="mb-0" style="font-weight:600; color:#1976d2; letter-spacing:1px;">
+            Management of <b>exercisePlan</b>
+        </h2>
+    </div>
+    <div class="col-sm-6 d-flex justify-content-end">
+        <p-button label="Ajouter" icon="pi pi-plus" styleClass="p-button-success" [routerLink]="'details-exercicePlan/null'" />
+    </div>
+</div>
 
       <p-table
           #dt1
@@ -117,7 +127,7 @@
                  styleClass="dark:!bg-surface-900" />
                   </td>
                   <td style="width: 200px">
-                      <p-button icon="pi pi-trash" severity="danger" />
+                      <p-button icon="pi pi-trash" (onClick)="updateExerciceplan(exercicePlan)"  severity="danger" />
                       <p-button icon="pi pi-pen-to-square" severity="warn" [routerLink]="'details-exercicePlan/' + exercicePlan.id" />
                   </td>
               </tr>

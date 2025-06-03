@@ -13,6 +13,7 @@ import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { TestDeSanteService } from '../../service/test-de-sante.service';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
   selector: 'app-details-test-de-santeplan',
@@ -27,15 +28,21 @@ import { TestDeSanteService } from '../../service/test-de-sante.service';
     TextareaModule,
     CalendarModule,
     ConfirmDialogModule,
-    ToastModule,DropdownModule
+    ToastModule,DropdownModule,
+    SelectButtonModule
   ],
   providers: [ConfirmationService, MessageService]
 })
 export class DetailsTestDeSanteplanComponent {
   testDeSanteplanForm: FormGroup;
   testDeSanteplanId: any;
-  idPlan!: string | null;
+     idPlan: any;
+
  testDeSantList: any[] = [];
+    statusOptions = [
+    { label: 'Active', value: true },
+    { label: 'Inactive', value: false }
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -53,6 +60,10 @@ export class DetailsTestDeSanteplanComponent {
       notes: [''],
       planId:[''],
       testDeSanteId: ['',Validators.required],
+       poids: [''],
+       taille: [''],
+      status: ['true']
+
 
     });
   }
@@ -96,10 +107,13 @@ export class DetailsTestDeSanteplanComponent {
         if (this.testDeSanteplanId != 'null') {
           this.updateTestDeSanteplan();
         } else {
-          this.testDeSanteplanService.addTestDeSanteplan(this.testDeSanteplanForm.value).subscribe((res:any) => {
+        this.testDeSanteplanService.addTestDeSanteplan({...this.testDeSanteplanForm.value,plandeTraitementId:this.idPlan}).subscribe((res:any) => {
+
+         // this.testDeSanteplanService.addTestDeSanteplan(this.testDeSanteplanForm.value).subscribe((res:any) => {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Health test plan saved successfully' });
             this.testDeSanteplanForm.reset();
-            this.router.navigate(['/backoffice/testDeSanteplan']);
+             this.router.navigate(['/backoffice/plan/'+this.idPlan+'/testDeSanteplan']);
+    
           });
         }
       }
@@ -109,10 +123,12 @@ export class DetailsTestDeSanteplanComponent {
   updateTestDeSanteplan() {
     if (this.testDeSanteplanForm.valid) {
       this.testDeSanteplanService.updateTestDeSanteplan(this.testDeSanteplanId, this.testDeSanteplanForm.value).subscribe((res:any) => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Health test plan updated successfully' });
+       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Health test plan updated successfully' });
         this.testDeSanteplanForm.reset();
-        this.router.navigate(['/backoffice/testDeSanteplan']);
+         this.router.navigate(['/backoffice/plan/'+this.idPlan+'/testDeSanteplan']);
+        //this.router.navigate(['/backoffice/testDeSanteplan']);
       });
     }
   }
+   
 }

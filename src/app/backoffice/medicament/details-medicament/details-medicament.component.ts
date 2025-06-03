@@ -47,6 +47,7 @@ export class DetailsMedicamentComponent {
     { label: 'Active', value: true },
     { label: 'Inactive', value: false }
   ];
+  selectedImage: any;
 
   constructor(
     private fb: FormBuilder,
@@ -86,7 +87,7 @@ export class DetailsMedicamentComponent {
         if (this.medicamentId != 'null') {
           this.updateMedicament();
         } else {
-          this.medicamentService.addMedicament(this.medicamentForm.value).subscribe((res:any) => {
+          this.medicamentService.addMedicament({... this.medicamentForm.value,file:this.selectedImage}).subscribe((res: any) => {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication saved successfully' });
             this.medicamentForm.reset();
             this.router.navigate(['/backoffice/medicament']);
@@ -98,7 +99,7 @@ export class DetailsMedicamentComponent {
 
   updateMedicament() {
     if (this.medicamentForm.valid) {
-      this.medicamentService.updateMedicament(this.medicamentId, this.medicamentForm.value).subscribe((res:any) => {
+      this.medicamentService.updateMedicament(this.medicamentId,{... this.medicamentForm.value,file:this.selectedImage}).subscribe((res: any) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication updated successfully' });
         this.medicamentForm.reset();
         this.router.navigate(['/backoffice/medicament']);
@@ -106,12 +107,11 @@ export class DetailsMedicamentComponent {
     }
   }
 
-  onFileSelect(event: any) {
-    if (event.files && event.files.length) {
-      const file = event.files[0];
-      this.medicamentForm.patchValue({
-        file: file.name
-      });
+ 
+    onFileSelect(event: any) {
+      if (event.files && event.files.length) {
+        const file = event.files[0];
+       this.selectedImage = file;
+      }
     }
-  }
 }

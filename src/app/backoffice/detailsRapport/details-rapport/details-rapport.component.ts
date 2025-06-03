@@ -18,6 +18,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DetailsRapport } from '../../model/detailsRaport';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-details-rapport',
@@ -50,10 +51,17 @@ export class DetailsRapportComponent {
 statusValue: any;
 statuses: any[]|undefined;
 idRapport: any;
-   constructor(private  detailsRapportservice:  DetailsRapportService,private activatedRoute :ActivatedRoute) { }
+idPlan: any;
+  idPatient!: string | null;
+   constructor(private  detailsRapportservice:  DetailsRapportService,
+    private activatedRoute :ActivatedRoute,
+                    private messageService: MessageService
+    
+  ) { }
  
    ngOnInit(): void {
     this.idRapport = this.activatedRoute.snapshot.paramMap.get('idRapport');
+    this.idPatient = this.activatedRoute.snapshot.paramMap.get('id');
      this.displayDetailsRapport(this.idRapport);
    }
  
@@ -77,4 +85,14 @@ idRapport: any;
     table.clear();
     this.filter.nativeElement.value = '';
   }
+   updateDetailsRapport(md: any) {
+        this.detailsRapportservice
+            .updateDetailsRapport(md.id, {
+                status: false
+            })
+            .subscribe((res: any) => {
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication deleted successfully' });
+               this.displayDetailsRapport(this.idPlan);
+            });
+    }
 }

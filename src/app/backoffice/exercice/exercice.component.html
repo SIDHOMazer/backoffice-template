@@ -80,7 +80,7 @@
               <tr>
                 <td>{{ exercice.id }}</td>
                 <td>{{ exercice.description }}</td>
-                <td>{{ exercice.file }}</td>
+                <td> <a href="http://localhost:8082/api/arsii/upload/image/{{exercice.file}}" target="_blank">{{ exercice.file }}</a> </td>
                 <td>{{ exercice.nameExercice }}</td>
         
                 <td>{{ exercice.createdAt | date }}</td>

@@ -20,6 +20,18 @@
                         <label class="font-semibold block mb-2">Result</label>
                         <input pInputText type="text" formControlName="resultat" placeholder="Enter test result" />
                     </div>
+                   <div class="col-12 md:col-4">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Weight</label>
+                                <input type="number" pInputText formControlName="poids" class="w-full" />
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-4">
+                            <div class="field">
+                                <label class="font-semibold block mb-2">Height</label>
+                                <input type="number" pInputText formControlName="taille" class="w-full" />
+                            </div>
+                        </div>
                 </div>
                 <div class="col-12">
                     <div class="field">
@@ -33,6 +45,16 @@
                         ></textarea>
                     </div>
                 </div>
+                  <div class="field">
+                <label for="status" class="block text-sm font-medium mb-2">Status</label>
+                <p-selectButton 
+                    id="status"
+                    [options]="statusOptions" 
+                    formControlName="status"
+                    optionLabel="label"
+                    optionValue="value"
+                ></p-selectButton>
+            </div>
    
            
              <div class="col-12 md:col-4">

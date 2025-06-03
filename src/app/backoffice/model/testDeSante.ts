@@ -1,4 +1,6 @@
 export interface testDeSante {
+        file?: any;
+
     id?: number; 
     testName?: string;
     Description?: string;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { RendezvousService } from '../../service/rendezvous.service';
 import { PatientService } from '../../service/patient.service';
 import { DocteurService } from '../../service/docteur.service';
@@ -13,7 +13,6 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
-
 @Component({
   selector: 'app-details-rendezvous',
   templateUrl: './details-rendezvous.component.html',
@@ -27,7 +26,7 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
     CalendarModule,
     DropdownModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,RouterModule
   ],
   providers: [ConfirmationService, MessageService]
 })
@@ -124,4 +123,5 @@ export class DetailsRendezvousComponent {
       });
     }
   }
+  
 }

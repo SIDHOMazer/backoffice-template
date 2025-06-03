@@ -42,6 +42,18 @@
                         ></textarea>
                     </div>
                 </div>
+               
+        
+
+
+                <div class="col-12 md:col-6">
+    <div class="field">
+        <label class="font-semibold block mb-2">Type</label>
+        <input pInputText type="text" formControlName="type" placeholder="Enter ra type" />
+    </div>
+</div>
+
+
                  <div class="field">
                 <label for="status" class="block text-sm font-medium mb-2">Status</label>
                 <p-selectButton 
@@ -53,9 +65,34 @@
                 ></p-selectButton>
             </div>
             </div>
+          <div class="col-12 md:col-6">
+    <div class="field">
+        <label class="font-semibold block mb-2">Date</label>
+        <input 
+            pInputText 
+            type="date" 
+            formControlName="date" 
+            placeholder="Enter date" 
+            [style]="{'width':'100%'}"
+        />
+    </div>
+</div>
 
-            <div class="flex justify-content-end gap-2 mt-4">
-                <p-button label="Cancel" severity="secondary" routerLink="/backoffice/rapport"></p-button>
+<div class="col-12 md:col-6">
+    <div class="field">
+        <label class="font-semibold block mb-2">heure</label>
+        <input 
+            pInputText 
+            type="time" 
+            formControlName="heure" 
+            placeholder="Enter heure" 
+            [style]="{'width':'100%'}"
+        />
+    </div>
+</div>
+            
+         <div class="flex justify-content-end gap-2 mt-4">
+                <p-button label="Cancel" severity="secondary" routerLink="/backoffice/rendezvous"></p-button>
                 <p-button 
                     [label]="rapportId != 'null' ? 'Update' : 'Save'" 
                     (onClick)="onSubmit()"
@@ -64,6 +101,7 @@
             </div>
         </form>
     </div>
+    
     
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
     <p-toast></p-toast>

@@ -19,6 +19,8 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
 import { MedicamentplanService } from '../service/medicamentplan.service';
 import { Medicamentplan } from '../model/medicamentplan';
+import { MessageService } from 'primeng/api';
+
 
 
 @Component({
@@ -47,24 +49,31 @@ import { Medicamentplan } from '../model/medicamentplan';
   styleUrl: './medicamentplan.component.scss'
 })
 export class MedicamentplanComponent {
+  
+goToPlanDeTraitement() {
+throw new Error('Method not implemented.');
+}
+
+
   medicamentplanList: Medicamentplan[] = [];
     selectedMedicamentplan: any;
     medicamentplan: any;
     loading: boolean = true;
     @ViewChild('filter') filter!: ElementRef;
     statusValue!: null | boolean;
-
+    idPlan: any;
 
     statuses = [
       { label: 'Active', value: true },
       { label: 'Desactive', value: false },
     
-  ];
+  ]
 
-  idPlan :any
+  
     constructor(private medicamentplanservice: MedicamentplanService,
       //new
       private activatedRoute: ActivatedRoute,
+       private messageService: MessageService
     ) {}
 
     ngOnInit(): void {
@@ -92,5 +101,15 @@ export class MedicamentplanComponent {
     clear(table: Table) {
         table.clear();
         this.filter.nativeElement.value = '';
+    }
+       updateMedicamentplan(md: any) {
+        this.medicamentplanservice
+            .updateMedicamentplan(md.id, {
+                status: false
+            })
+            .subscribe((res: any) => {
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication deleted successfully' });
+               this.displayMedicamentplan(this.idPlan);
+            });
     }
 }

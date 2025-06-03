@@ -95,8 +95,8 @@
                         }
                     </td>
                     <td class="d-flex gap-2" style="width: 200px">
-                        <p-button icon="pi pi-pen-to-square" severity="warn"  (onClick)="reportDate(rendezvous)"/>
-                        <p-button icon="pi pi-fw pi-check" severity="success" (onClick)="changeStatusApointment(rendezvous,'ACCEPTED')" />
+                        <p-button icon="pi pi-pen-to-square" severity="warn" *ngIf="!rendezvous.rejectDate && !rendezvous.acceptDate"  (onClick)="reportDate(rendezvous)"/>
+                        <p-button icon="pi pi-fw pi-check" severity="success"  *ngIf="!rendezvous.rejectDate && !rendezvous.acceptDate" (onClick)="changeStatusApointment(rendezvous,'ACCEPTED')" />
                         <p-button icon="pi pi-fw pi-times" severity="danger" (onClick)="changeStatusApointment(rendezvous,'REJECTED')" />
                     </td>
                 </tr>

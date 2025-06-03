@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { mergeMap } from 'rxjs';
 import { testDeSante } from '../model/testDeSante';
 
 @Injectable({
@@ -21,11 +22,58 @@ export class TestDeSanteService {
             );
           }
         
-          addTestDeSante(testDeSante: testDeSante) {
-            return this.httpclient.post(this.baseUrl + '/testDeSante', testDeSante);
-          }
+          // addTestDeSante(testDeSante: testDeSante) {
+          //   return this.httpclient.post(this.baseUrl + '/testDeSante', testDeSante);
+          // }
         
+          // updateTestDeSante(id:any,testDeSante: testDeSante) {
+          //   return this.httpclient.put(this.baseUrl + '/testDeSante/'+id, testDeSante);
+          // }
+           addTestDeSante(testDeSante: testDeSante) {
+                if (testDeSante.file && testDeSante.file.length != 0) {
+                  return this.uploadFile(testDeSante.file).pipe(
+                    mergeMap((result: any) => {
+                      const reqData = {
+                        ...testDeSante,
+                     file: result.filename,
+                      };
+                       return this.httpclient.post(this.baseUrl + '/testDeSante',
+                        reqData
+                      );
+                    })
+                  );
+                } else {
+                  return this.httpclient.post(this.baseUrl + '/testDeSante', testDeSante);
+                }
+              }
           updateTestDeSante(id:any,testDeSante: testDeSante) {
-            return this.httpclient.put(this.baseUrl + '/testDeSante/'+id, testDeSante);
-          }
+                if (testDeSante.file && testDeSante.file.length != 0) {
+                  return this.uploadFile(testDeSante.file).pipe(
+                    mergeMap((result: any) => {
+                      const reqData = {
+                        ...testDeSante,
+                        file: result.filename,
+                      };
+                      return this.httpclient.put(
+                        this.baseUrl + '/testDeSante/'+id,
+                        reqData
+                      );
+                    })
+                  );
+                } else {
+                  return this.httpclient.put(
+                        this.baseUrl + '/testDeSante/'+id,
+                    testDeSante
+                  );
+                }
+              }
+            
+                 uploadFile(file: File) {
+                const formData = new FormData();
+                formData.append('file', file);
+                return this.httpclient.post(
+                  this.baseUrl + '/upload/image',
+                  formData
+                );
+              }
 }

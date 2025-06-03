@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DetailsRapportService } from '../../service/details-rapport.service';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
@@ -11,6 +11,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
   selector: 'app-details-details-rapprot',
@@ -25,13 +26,19 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
     TextareaModule,
     InputNumberModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    SelectButtonModule,RouterModule
   ],
   providers: [ConfirmationService, MessageService]
 })
 export class DetailsDetailsRapprotComponent {
   detailsRapportForm: FormGroup;
   detailsRapportId: any;
+    statusOptions = [
+    { label: 'Active', value: true },
+    { label: 'Inactive', value: false }
+  ];
+  idRapport: any;
 
   constructor(
     private fb: FormBuilder,
@@ -47,12 +54,15 @@ export class DetailsDetailsRapprotComponent {
       poids: ['', [Validators.required, Validators.min(0)]],
       taille: ['', [Validators.required, Validators.min(0)]],
       sportif: ['', Validators.required],
-      symptomes: ['', Validators.required]
+      symptomes: ['', Validators.required],
+      status: ['true']
     });
   }
 
   ngOnInit(): void {
     this.detailsRapportId = this.route.snapshot.paramMap.get('id');
+    this.idRapport = this.route.snapshot.paramMap.get('idRapport');
+
     if (this.detailsRapportId != 'null') {
       this.displayDetailsRapport(this.detailsRapportId);
     }
@@ -64,14 +74,19 @@ export class DetailsDetailsRapprotComponent {
     });
   }
 
+
+
   async onSubmit(): Promise<void> {
+
+
+
     if (this.detailsRapportForm.valid) {
       const confirmed = await this.formConfirmationService.confirmSubmit();
       if (confirmed) {
         if (this.detailsRapportId != 'null') {
           this.updateDetailsRapport();
         } else {
-          this.detailsRapportService.addDetailsRapport(this.detailsRapportForm.value).subscribe((res: any) => {
+          this.detailsRapportService.addDetailsRapport({...this.detailsRapportForm.value,reportId:this.idRapport}).subscribe((res: any) => {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Report details saved successfully' });
             this.detailsRapportForm.reset();
             this.router.navigate(['/backoffice/detailsRapport']);

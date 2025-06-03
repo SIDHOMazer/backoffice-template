@@ -5,8 +5,10 @@ import { Documentation } from './app/pages/documentation/documentation';
 import { Landing } from './app/pages/landing/landing';
 import { Notfound } from './app/pages/notfound/notfound';
 import { LoginComponent } from './app/backoffice/login/login.component';
+// import { HomeComponent } from './app/backoffice/home/home.component';
 
 export const appRoutes: Routes = [
+    // { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: '', redirectTo: 'login' , pathMatch: 'full' },
 
@@ -14,12 +16,12 @@ export const appRoutes: Routes = [
         path: '',
         component: AppLayout,
         children: [
-         //   { path: '', component: Dashboard },
-            { path: 'backoffice', loadChildren: () => import('./app/backoffice/backoffice.routes') },
+         //  { path: '', component: Dashboard },
+         { path: 'backoffice', loadChildren: () => import('./app/backoffice/backoffice.routes') },
           
-         // { path: 'uikit', loadChildren: () => import('./app/pages/uikit/uikit.routes') },
-         //  { path: 'documentation', component: Documentation },
-         // { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') }
+        //  { path: 'uikit', loadChildren: () => import('./app/pages/uikit/uikit.routes') },
+        //   { path: 'documentation', component: Documentation },
+        //  { path: 'pages', loadChildren: () => import('./app/pages/pages.routes') }
         ]
     },
    // { path: 'landing', component: Landing },

@@ -1,6 +1,6 @@
 import { FactureService } from '../service/facture.service';
 import { Facture } from '../model/facture';
-
+import * as html2pdf from 'html2pdf.js';
 import { RouterModule } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
@@ -20,6 +20,9 @@ import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
 import { MessageService } from 'primeng/api';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+
 
 @Component({
   selector: 'app-facture',
@@ -99,4 +102,54 @@ updateFacture(md: any) {
             });
     }
 
+downloadFacture() {
+  const element = document.getElementById('facture-content');
+  if (element) {
+    const opt = {
+      margin:       0.5,
+      filename:     'facture.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().from(element).set(opt).save();
+  }
 }
+
+printFacture() {
+  const printContents = document.getElementById('facture-content')?.innerHTML;
+  if (printContents) {
+    const originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+    window.location.reload();
+  }
+}
+
+generatePDF() {
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text('My Angular PDF Generator', 10, 10);
+    doc.setFontSize(12);
+    doc.text(
+      'This is a comprehensive guide on generating PDFs with Angular.',
+      10,
+      20,
+    );
+    const headers = [['Name', 'Email', 'Country']];
+    const data = [
+      ['David', 'david@example.com', 'Sweden'],
+      ['Castille', 'castille@example.com', 'Spain'],
+    ];
+    autoTable(doc, {
+      head: headers,
+      body: data,
+      startY: 30,
+    });
+    doc.save('table.pdf');
+  }
+  
+}
+
+

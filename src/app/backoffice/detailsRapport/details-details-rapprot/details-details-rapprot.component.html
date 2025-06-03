@@ -71,10 +71,21 @@
                         ></textarea>
                     </div>
                 </div>
+                
+                <div class="field">
+                <label for="status" class="block text-sm font-medium mb-2">Status</label>
+                <p-selectButton 
+                    id="status"
+                    [options]="statusOptions" 
+                    formControlName="status"
+                    optionLabel="label"
+                    optionValue="value"
+                ></p-selectButton>
+            </div> 
             </div>
 
             <div class="flex justify-content-end gap-2 mt-4">
-                <p-button label="Cancel" severity="secondary" routerLink="/backoffice/detailsRapport"></p-button>
+                <p-button label="Cancel" severity="secondary" [routerLink]="'/backoffice/rapport/'+idRapport+'/detailsRapport'"></p-button>
                 <p-button 
                     [label]="detailsRapportId != 'null' ? 'Update' : 'Save'" 
                     (onClick)="onSubmit()"

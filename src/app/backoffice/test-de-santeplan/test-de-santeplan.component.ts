@@ -18,6 +18,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { TagModule } from 'primeng/tag';
 import { testDeSanteplan } from '../model/testDeSanteplan';
 import { TestDeSanteplanService } from '../service/test-de-santeplan.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-test-de-santeplan',
@@ -62,6 +63,8 @@ export class TestDeSanteplanComponent {
 
     constructor(private testDeSanteplanservice: TestDeSanteplanService,
          private activatedRoute: ActivatedRoute,
+                private messageService: MessageService
+         
     ) {}
     
 
@@ -88,5 +91,15 @@ export class TestDeSanteplanComponent {
     clear(table: Table) {
         table.clear();
         this.filter.nativeElement.value = '';
+    }
+    updateTestDeSanteplan(md: any) {
+        this.testDeSanteplanservice
+            .updateTestDeSanteplan(md.id, {
+                status: false
+            })
+            .subscribe((res: any) => {
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication deleted successfully' });
+               this.displayTestDeSanteplan(this.idPlan);
+            });
     }
 }

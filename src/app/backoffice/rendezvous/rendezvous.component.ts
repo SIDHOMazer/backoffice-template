@@ -61,7 +61,6 @@ minDate=new Date()
     loading: boolean = true;
     @ViewChild('filter') filter!: ElementRef;
     statusValue!: null | boolean;
-
     visibleUpateAppointement: boolean = false;
     appointement:any=null
     appointementDate=new Date();
@@ -168,7 +167,11 @@ minDate=new Date()
 
     reportDate(appointment: any) {
         this.appointement = appointment;
+        console.log(appointment.date);
+        
         this.appointementDate = new Date(appointment.date);
+        console.log(this.appointementDate);
+        
         this.visibleUpateAppointement = true;
     }
     

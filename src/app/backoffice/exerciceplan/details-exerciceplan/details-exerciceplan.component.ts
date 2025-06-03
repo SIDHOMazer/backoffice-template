@@ -15,6 +15,7 @@ import { FormConfirmationService } from '../../service/form-confirmation.service
 import { ExerciceService } from '../../service/exercice.service';
 import { PanelModule } from 'primeng/panel';
 import { AccordionModule } from 'primeng/accordion';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
   selector: 'app-details-exerciceplan',
@@ -31,7 +32,8 @@ import { AccordionModule } from 'primeng/accordion';
     DropdownModule,
     ConfirmDialogModule,
     ToastModule,  PanelModule,
-    AccordionModule
+    AccordionModule,
+    SelectButtonModule
   ],
   providers: [ConfirmationService, MessageService]
 })
@@ -39,6 +41,12 @@ export class DetailsExerciceplanComponent {
   exerciceplanForm: FormGroup;
   exerciceplanId: any;
   exerciceList: any[] = [];
+   idPlan: any;
+  selectedImage: any;
+      statusOptions = [
+    { label: 'Active', value: true },
+    { label: 'Inactive', value: false }
+  ];
 
 
   constructor(
@@ -57,9 +65,9 @@ export class DetailsExerciceplanComponent {
       duree: ['', [Validators.required, Validators.min(0)]],
       jour: ['', Validators.required],
       type: ['', Validators.required],
-      exercicePlans: this.fb.array([]),
+    //  exercicePlans: this.fb.array([]),
       exerciceId: ['',Validators.required],
-
+      status: ['true']
     });
   }
    get exercicePlans(): FormArray {
@@ -75,6 +83,7 @@ export class DetailsExerciceplanComponent {
 
   ngOnInit(): void {
     this.exerciceplanId = this.route.snapshot.paramMap.get('id');
+          this.idPlan= this.route.snapshot.paramMap.get('idPlan');
 
      this.displayExercice()
     if (this.exerciceplanId != 'null') {
@@ -103,22 +112,26 @@ export class DetailsExerciceplanComponent {
         if (this.exerciceplanId != 'null') {
           this.updateExerciceplan();
         } else {
-          this.exerciceplanService.addExerciceplan(this.exerciceplanForm.value).subscribe((res:any) => {
+          this.exerciceplanService.addExerciceplan({...this.exerciceplanForm.value,plandeTraitementId:this.idPlan}).subscribe((res:any) => {
+
+        //  this.exerciceplanService.addExerciceplan(this.exerciceplanForm.value).subscribe((res:any) => {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Exercise plan saved successfully' });
             this.exerciceplanForm.reset();
-            this.router.navigate(['/backoffice/exerciceplan']);
-          });
+           this.router.navigate(['/backoffice/plan/'+this.idPlan+'/exercicePlan']);
+       });
         }
       }
     }
   }
+
+
 
   updateExerciceplan() {
     if (this.exerciceplanForm.valid) {
       this.exerciceplanService.updateExerciceplan(this.exerciceplanId, this.exerciceplanForm.value).subscribe((res:any) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Exercise plan updated successfully' });
         this.exerciceplanForm.reset();
-        this.router.navigate(['/backoffice/exerciceplan']);
+        this.router.navigate(['/backoffice/plan/'+this.idPlan+'/exercicePlan']);
       });
     }
   }

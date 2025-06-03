@@ -20,6 +20,7 @@ import { TagModule } from 'primeng/tag';
 import { TestDeSanteService } from '../service/test-de-sante.service';
 import { testDeSante } from '../model/testDeSante';
 import { MessageService } from 'primeng/api';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-test-de-sante',
@@ -41,7 +42,9 @@ import { MessageService } from 'primeng/api';
     ButtonModule,
     RatingModule,
     RippleModule,
-    IconFieldModule
+    IconFieldModule,
+        FileUploadModule
+
 ],
   templateUrl: './test-de-sante.component.html',
   styleUrl: './test-de-sante.component.scss'

@@ -81,11 +81,14 @@ export default [
 
      { path: 'plan/:idPlan/testDeSanteplan', data: { breadcrumb: 'testDeSanteplan' }, component: TestDeSanteplanComponent },
      { path: 'plan/:idPlan/testDeSanteplan/details-testDeSanteplan/:id', data: { breadcrumb: 'details-testDeSanteplan/:id' }, component: DetailsTestDeSanteplanComponent },
+ 
 
-   // { path: '', redirectTo: '/login', pathMatch: 'full' },
-   // { path: 'login', component: LoginComponent },
+
+  //  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  //  { path: 'login', component: LoginComponent },
     { path: 'dashboard', component: DashboardComponent },
-   // { path: '**', redirectTo: '/login' }
+  //  { path: '**', redirectTo: '/login' }
 
+  
    
 ] as Routes;

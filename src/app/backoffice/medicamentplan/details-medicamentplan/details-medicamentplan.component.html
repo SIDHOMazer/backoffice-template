@@ -21,7 +21,16 @@
                         <label class="ml-2">Completed</label>
                     </div>
                 </div>
-
+                     <div class="field">
+                <label for="status" class="block text-sm font-medium mb-2">Status</label>
+                <p-selectButton 
+                    id="status"
+                    [options]="statusOptions" 
+                    formControlName="status"
+                    optionLabel="label"
+                    optionValue="value"
+                ></p-selectButton>
+            </div>
                 
             
     <div class="col-12 md:col-4">

@@ -39,9 +39,13 @@
                   <th scope="col">id</th>
                   <th scope="col">Drug</th>
                   <th scope="col">file</th>
-                  <th scope="col">note</th>
-                  <th scope="col">date</th>
-                  <th scope="col">status</th>
+
+                  
+                 <th scope="col">note</th>
+
+                 <th scope="col">date</th>
+
+                    <th scope="col">status</th>
                   <th scope="col">action</th>
                 </tr>
                 <tr>
@@ -50,7 +54,7 @@
                   <th></th>
                   <th></th>
                   <th></th>
-                 
+
                   
                   <th>
                       <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
@@ -74,6 +78,7 @@
                       </p-columnFilter>
                   </th>
                   <th></th>
+
   
                 </tr>
             </ng-template>
@@ -81,7 +86,7 @@
                 <tr>
                     <td>{{ medicament.id }}</td>
                     <td>{{ medicament.medicament }}</td>
-                    <td>{{ medicament.file }}</td>
+                      <td> <a href="http://localhost:8082/api/arsii/upload/image/{{medicament.file}}" target="_blank">{{ medicament.file }}</a> </td>
                     <td>{{ medicament.note }}</td>
                     <td>{{ medicament.createdAt | date }}</td>
 

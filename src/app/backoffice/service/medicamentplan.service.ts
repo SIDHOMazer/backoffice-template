@@ -6,6 +6,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class MedicamentplanService {
+  updateMedicament(id: any, arg1: { status: boolean; }) {
+    throw new Error('Method not implemented.');
+  }
 baseUrl = 'http://localhost:8082/api/arsii';
 
 

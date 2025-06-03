@@ -10,7 +10,14 @@
               </div>
           </div>
       </div>
+<div class="facture-actions" style="margin-bottom: 1.5rem;">
+  <button pButton type="button" icon="pi pi-download" label="Télécharger" (click)="downloadFacture()"></button>
+  <button pButton type="button" icon="pi pi-print" label="Imprimer" class="ml-2" (click)="printFacture()"></button>
+</div>
 
+<div id="facture-content">
+  <!-- Ton contenu de facture ici -->
+</div>
       <p-table
           #dt1
           [value]="factureList"
@@ -34,6 +41,8 @@
                   </p-iconfield>
               </div>
           </ng-template>
+
+
           <ng-template #header>
               <tr>
                 <th scope="col">id</th>
@@ -119,4 +128,5 @@
           </ng-template>
       </p-table>
   </div>
+
 </div>

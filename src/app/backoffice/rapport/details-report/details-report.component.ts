@@ -66,6 +66,10 @@ export class DetailsReportComponent {
       patientId: ['', Validators.required],
       docteurId: ['', Validators.required],
       description: ['', Validators.required],
+      date: ['', Validators.required],
+      type: ['', Validators.required],
+      file: [''],
+     heure: ['', Validators.required],
        status: ['true']
     });
   }

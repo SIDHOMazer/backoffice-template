@@ -14,6 +14,7 @@ import { ToastModule } from 'primeng/toast';
 import { FormConfirmationService } from '../../service/form-confirmation.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { MedicamentService } from '../../service/medicament.service';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
   selector: 'app-details-medicamentplan',
@@ -29,7 +30,11 @@ import { MedicamentService } from '../../service/medicament.service';
     InputNumberModule,
     CheckboxModule,
     ConfirmDialogModule,
-    ToastModule,DropdownModule
+    ToastModule,DropdownModule,
+   
+   
+
+    SelectButtonModule
   ],
   providers: [ConfirmationService, MessageService]
 })
@@ -38,6 +43,10 @@ export class DetailsMedicamentplanComponent {
   medicamentplanId: any;
   medicamentList: any[] = [];
   idPlan: any;
+     statusOptions = [
+    { label: 'Active', value: true },
+    { label: 'Inactive', value: false }
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -52,12 +61,15 @@ export class DetailsMedicamentplanComponent {
       dosage: ['', Validators.required],
       frequence: ['', Validators.required],
       medicamentId: ['',Validators.required],
-      checkbok: [false]
+      checkbok: [false],
+       status: ['true']
+     
     });
   }
 
   ngOnInit(): void {
     this.medicamentplanId = this.route.snapshot.paramMap.get('id');
+          this.idPlan= this.route.snapshot.paramMap.get('idPlan');
 
      this.displayMedicament()
     if (this.medicamentplanId != 'null') {
@@ -84,7 +96,7 @@ export class DetailsMedicamentplanComponent {
         if (this.medicamentplanId != 'null') {
           this.updateMedicamentplan();
         } else {
-          this.medicamentplanService.addMedicamentplan(this.medicamentplanForm.value).subscribe((res:any) => {
+          this.medicamentplanService.addMedicamentplan({...this.medicamentplanForm.value,plandeTraitementId:this.idPlan}).subscribe((res:any) => {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication plan saved successfully' });
             this.medicamentplanForm.reset();
             this.router.navigate(['/backoffice/medicamentplan']);
@@ -94,12 +106,15 @@ export class DetailsMedicamentplanComponent {
     }
   }
 
+  
+
   updateMedicamentplan() {
     if (this.medicamentplanForm.valid) {
       this.medicamentplanService.updateMedicamentplan(this.medicamentplanId, this.medicamentplanForm.value).subscribe((res:any) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Medication plan updated successfully' });
         this.medicamentplanForm.reset();
-        this.router.navigate(['/backoffice/medicamentplan']);
+        this.router.navigate(['/backoffice/plan/'+this.idPlan+'/medicamentplan']);
+        //this.router.navigate(['/backoffice/medicamentplan']);
       });
     }
   }

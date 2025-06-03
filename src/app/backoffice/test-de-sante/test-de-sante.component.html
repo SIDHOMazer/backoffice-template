@@ -39,12 +39,15 @@
                   <th scope="col">id</th>
                   <th scope="col">testName</th>
                     <th scope="col">Description</th>
+                    <th scope="col">file</th>
                     <th scope="col">date</th>
+                    
                   <th scope="col">status</th>
                   <th scope="col">action</th>
                 </tr>
                 <tr>
                 
+                  <th></th>
                   <th></th>
                   <th></th>
 
@@ -81,7 +84,9 @@
                  <td>{{ testDeSante.id }}</td>
                     <td>{{ testDeSante.testName}}</td>
                     <td>{{ testDeSante.description }}</td>
+                     <td> <a href="http://localhost:8082/api/arsii/upload/image/{{testDeSante.file}}" target="_blank">{{ testDeSante.file }}</a> </td>
                     <td>{{ testDeSante.createdAt | date }}</td>
+               
 
                   
                     <td>
